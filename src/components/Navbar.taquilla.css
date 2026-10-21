@@ -1,0 +1,73 @@
+/* Sobrescribe los colores y detalles del Navbar de Héroes (azul) para taquilla (negro).
+   Se importa después de Navbar.css, así que gana por orden y por especificidad. */
+
+.navbar {
+  --tq-tinta: #111827;
+  --tq-gris: #4b5563;
+  --tq-fondo-input: #f3f4f6;
+}
+
+/* Logo: cuadro oscuro con el ticket */
+.navbar .navbar-simbolo {
+  background: var(--tq-tinta);
+  color: #fff;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+}
+
+.navbar .navbar-marca {
+  color: var(--tq-tinta);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Enlace activo: negro en vez de azul */
+.navbar .navbar-enlaces a[aria-current="page"] {
+  color: var(--tq-tinta);
+  border-bottom-color: var(--tq-tinta);
+  text-decoration-color: var(--tq-tinta);
+}
+
+.navbar .navbar-enlaces a[aria-current="page"]::after {
+  background: var(--tq-tinta);
+}
+
+/* Buscador: píldora gris sin borde, pegada a la derecha */
+.navbar .navbar-buscador {
+  background: var(--tq-fondo-input);
+  border-color: transparent;
+  border-radius: 999px;
+  margin-left: auto;
+}
+
+/* "Vende tus eventos" */
+.navbar .navbar-vender {
+  font-size: 0.85rem;
+  color: var(--tq-tinta);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.navbar .navbar-vender:hover {
+  text-decoration: underline;
+}
+
+/* Botón "Ingresar": oscuro en vez de azul */
+.navbar .navbar-accion {
+  background: var(--tq-tinta);
+  border-color: var(--tq-tinta);
+  color: #fff;
+}
+
+.navbar .navbar-accion:hover {
+  background: #000;
+  border-color: #000;
+}
+
+/* Botón de texto grande activo */
+.navbar .navbar-accesibilidad[aria-pressed="true"] {
+  background: var(--tq-tinta);
+  border-color: var(--tq-tinta);
+  color: #fff;
+}
