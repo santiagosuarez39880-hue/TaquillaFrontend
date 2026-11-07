@@ -1,0 +1,42 @@
+@import "../styles/tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: var(--espacio-0);
+  background: var(--color-fondo-pagina);
+  color: var(--color-texto);
+  font-family: var(--fuente-base);
+  font-size: var(--texto-md);
+  line-height: var(--interlineado-normal);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: var(--espacio-0);
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}

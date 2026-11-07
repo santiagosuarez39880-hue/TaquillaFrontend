@@ -1,0 +1,22 @@
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  padding: var(--espacio-5);
+  border: var(--borde-ancho) solid var(--color-borde);
+  border-radius: var(--radio-lg);
+  background: var(--color-fondo);
+  box-shadow: var(--sombra-sm);
+  transition:
+    box-shadow var(--transicion),
+    border-color var(--transicion);
+}
+
+.interactiva:hover {
+  border-color: var(--color-borde-fuerte);
+  box-shadow: var(--sombra-md);
+}
+
+.interactiva:focus-within {
+  border-color: var(--color-foco);
+}
