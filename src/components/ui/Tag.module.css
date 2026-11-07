@@ -1,0 +1,35 @@
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--espacio-1) var(--espacio-2);
+  border-radius: var(--radio-completo);
+  font-size: var(--texto-xs);
+  font-weight: var(--peso-semibold);
+  line-height: var(--interlineado-ajustado);
+  white-space: nowrap;
+}
+
+.neutro {
+  background: var(--color-fondo-suave);
+  color: var(--color-texto);
+}
+
+.exito {
+  background: var(--color-exito-fondo);
+  color: var(--color-exito);
+}
+
+.aviso {
+  background: var(--color-aviso-fondo);
+  color: var(--color-aviso);
+}
+
+.peligro {
+  background: var(--color-peligro-fondo);
+  color: var(--color-peligro);
+}
+
+.info {
+  background: var(--color-info-fondo);
+  color: var(--color-info);
+}

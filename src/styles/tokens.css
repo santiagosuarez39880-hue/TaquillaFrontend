@@ -1,0 +1,110 @@
+/*
+ * Tokens de diseño de Taquilla.
+ *
+ * ÚNICA fuente de valores visuales: los componentes solo usan var(--token).
+ * `npm run check:tokens` falla si un .module.css escribe colores, tamaños o
+ * tiempos a mano.
+ *
+ * IMPORTANTE: estos valores salen de la captura del navbar de Taquilla y de
+ * escalas estándar. No tuve acceso al archivo de Figma: compara cada token con
+ * Figma (Variables / Styles) y corrige aquí; no hace falta tocar componentes.
+ */
+
+:root {
+  /* ---------- Color: marca y texto ---------- */
+  --color-tinta: #111827;
+  --color-tinta-hover: #030712;
+  --color-texto: #111827;
+  --color-texto-suave: #4b5563;
+  --color-texto-inverso: #ffffff;
+
+  /* ---------- Color: superficies y bordes ---------- */
+  --color-fondo: #ffffff;
+  --color-fondo-suave: #f3f4f6;
+  --color-fondo-pagina: #f9fafb;
+  --color-borde: #e5e7eb;
+  --color-borde-fuerte: #9ca3af;
+  --color-foco: #111827;
+
+  /* ---------- Color: estados ---------- */
+  --color-exito: #166534;
+  --color-exito-fondo: #dcfce7;
+  --color-aviso: #92400e;
+  --color-aviso-fondo: #fef3c7;
+  --color-peligro: #b91c1c;
+  --color-peligro-fondo: #fee2e2;
+  --color-info: #1e40af;
+  --color-info-fondo: #dbeafe;
+
+  /* ---------- Tipografía ---------- */
+  --fuente-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --texto-xs: 0.75rem;
+  --texto-sm: 0.875rem;
+  --texto-md: 1rem;
+  --texto-lg: 1.125rem;
+  --texto-xl: 1.25rem;
+  --texto-2xl: 1.5rem;
+  --texto-3xl: 2rem;
+
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-semibold: 600;
+  --peso-negrita: 700;
+
+  --interlineado-ajustado: 1.25;
+  --interlineado-normal: 1.5;
+  --tracking-ajustado: -0.01em;
+
+  /* ---------- Espaciado (base 4 px) ---------- */
+  --espacio-0: 0;
+  --espacio-1: 0.25rem;
+  --espacio-2: 0.5rem;
+  --espacio-3: 0.75rem;
+  --espacio-4: 1rem;
+  --espacio-5: 1.25rem;
+  --espacio-6: 1.5rem;
+  --espacio-8: 2rem;
+  --espacio-10: 2.5rem;
+  --espacio-12: 3rem;
+
+  /* ---------- Radios ---------- */
+  --radio-sm: 0.5rem;
+  --radio-md: 0.625rem;
+  --radio-lg: 1rem;
+  --radio-completo: 999px;
+
+  /* ---------- Bordes, foco y controles ---------- */
+  --borde-ancho: 1px;
+  --foco-ancho: 2px;
+  --foco-separacion: 2px;
+  --altura-control-sm: 2rem;
+  --altura-control-md: 2.25rem;
+  --altura-control-lg: 2.75rem;
+
+  /* ---------- Sombras ---------- */
+  --sombra-sm: 0 1px 2px rgb(17 24 39 / 8%);
+  --sombra-md: 0 4px 12px rgb(17 24 39 / 12%);
+
+  /* ---------- Movimiento, opacidad y capas ---------- */
+  --transicion: 150ms ease;
+  --opacidad-deshabilitado: 0.5;
+  --capa-navbar: 50;
+  --capa-aviso: 100;
+
+  /* ---------- Anchos y tamaños de layout ---------- */
+  --ancho-contenido: 72rem;
+  --ancho-aviso: 40rem;
+  --ancho-buscador: 16.25rem;
+  --altura-navbar: 4rem;
+  --tamano-logo: 1.75rem;
+  --tamano-icono-sm: 1rem;
+  --tamano-icono: 1.125rem;
+}
+
+/* Quien pide menos movimiento no ve transiciones. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transicion: 0ms;
+  }
+}
