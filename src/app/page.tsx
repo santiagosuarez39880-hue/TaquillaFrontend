@@ -1,7 +1,11 @@
-/**
- * Página de inicio provisional. Aquí irá la vista real de «Explorar»; mientras
- * tanto el muestrario del sistema de diseño está en /diseno.
- */
+import PaginaPendiente from "@/components/PaginaPendiente";
+
+/** Inicio provisional. El muestrario del sistema de diseño está en /diseno. */
 export default function Inicio() {
-  return null;
+  return (
+    <PaginaPendiente
+      titulo="Tu próxima noche empieza aquí"
+      texto="Conciertos, teatro, deportes y festivales. Elige tu asiento en el mapa y recibe tu entrada con código QR."
+    />
+  );
 }

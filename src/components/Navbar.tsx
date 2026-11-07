@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { ChangeEvent, FormEvent } from "react";
 import { cx } from "@/lib/cx";
 import { CLAVES_MENU } from "@/types/textos";
@@ -10,14 +12,19 @@ import { LanguageSelector } from "./ui/LanguageSelector";
 import styles from "./Navbar.module.css";
 
 const DESTINOS: Record<ClaveMenu, string> = {
-  explorar: "#explorar",
-  conciertos: "#conciertos",
-  teatro: "#teatro",
-  deportes: "#deportes",
-  festivales: "#festivales",
+  explorar: "/explorar",
+  conciertos: "/conciertos",
+  teatro: "/teatro",
+  deportes: "/deportes",
+  festivales: "/festivales",
 };
-const DESTINO_VENDER = "#vender";
-const DESTINO_INGRESAR = "#ingresar";
+const DESTINO_VENDER = "/vender";
+const DESTINO_INGRESAR = "/ingresar";
+
+/** Una sección está activa en su ruta y en las rutas que cuelgan de ella (/teatro/obra-1). */
+function estaActiva(pathname: string, destino: string): boolean {
+  return pathname === destino || pathname.startsWith(`${destino}/`);
+}
 
 function IconoTicket() {
   return (
@@ -54,8 +61,6 @@ export interface NavbarProps {
   recargar: () => void;
   idioma: Idioma;
   cambiarIdioma: (idioma: string) => void;
-  /** Sección activa (lo que hay después del # en la URL). */
-  activo: string;
   onBuscar: (consulta: string) => void;
   textoGrande: boolean;
   alternarTexto: () => void;
@@ -68,13 +73,13 @@ export default function Navbar({
   recargar,
   idioma,
   cambiarIdioma,
-  activo,
   onBuscar,
   textoGrande,
   alternarTexto,
 }: NavbarProps) {
   const [abierto, setAbierto] = useState(false);
   const [busqueda, setBusqueda] = useState("");
+  const pathname = usePathname() ?? "";
   const botonMenu = useRef<HTMLButtonElement>(null);
   const campoBusqueda = useRef<HTMLInputElement>(null);
 
@@ -113,9 +118,9 @@ export default function Navbar({
         className={styles.interior}
         aria-label={ingles ? "Main navigation" : "Navegación principal"}
       >
-        <a
+        <Link
           className={styles.marca}
-          href="#explorar"
+          href="/"
           aria-label={nav?.logo.aria ?? "Taquilla"}
           onClick={() => setAbierto(false)}
         >
@@ -123,7 +128,7 @@ export default function Navbar({
             <IconoTicket />
           </span>
           <span>{nav?.logo.texto ?? "taquilla"}</span>
-        </a>
+        </Link>
 
         <div className={styles.movilAcciones}>
           <button
@@ -171,14 +176,14 @@ export default function Navbar({
               <ul className={styles.enlaces}>
                 {CLAVES_MENU.map((clave) => (
                   <li key={clave}>
-                    <a
+                    <Link
                       className={styles.enlace}
                       href={DESTINOS[clave]}
-                      aria-current={activo === clave ? "page" : undefined}
+                      aria-current={estaActiva(pathname, DESTINOS[clave]) ? "page" : undefined}
                       onClick={() => setAbierto(false)}
                     >
                       {nav.enlaces[clave]}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -208,9 +213,13 @@ export default function Navbar({
           )}
           <div className={styles.utilidades}>
             {nav && (
-              <a className={styles.vender} href={DESTINO_VENDER} onClick={() => setAbierto(false)}>
+              <Link
+                className={styles.vender}
+                href={DESTINO_VENDER}
+                onClick={() => setAbierto(false)}
+              >
                 {nav.enlaces.venderEventos}
-              </a>
+              </Link>
             )}
             <LanguageSelector
               idioma={idioma}
@@ -227,13 +236,13 @@ export default function Navbar({
               <Icono nombre="accesibilidad" />
             </button>
             {nav && (
-              <a
+              <Link
                 className={styles.accion}
                 href={DESTINO_INGRESAR}
                 onClick={() => setAbierto(false)}
               >
                 {nav.botones.ingresar}
-              </a>
+              </Link>
             )}
           </div>
         </div>
