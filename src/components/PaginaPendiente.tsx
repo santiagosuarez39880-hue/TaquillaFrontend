@@ -11,9 +11,9 @@ interface PaginaPendienteProps {
  */
 export default function PaginaPendiente({ titulo, texto }: PaginaPendienteProps) {
   return (
-    <main className={styles.pagina}>
+    <div className={styles.pagina}>
       <h1 className={styles.titulo}>{titulo}</h1>
       {texto && <p className={styles.texto}>{texto}</p>}
-    </main>
+    </div>
   );
 }

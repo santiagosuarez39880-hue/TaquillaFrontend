@@ -7,7 +7,8 @@
   color: var(--color-texto);
 }
 
-.navbar a {
+/* :where() deja esta regla con especificidad cero: cualquier clase de enlace la supera. */
+:where(.navbar a) {
   color: inherit;
   text-decoration: none;
 }
@@ -92,7 +93,8 @@
   display: flex;
   align-items: center;
   gap: var(--espacio-2);
-  width: var(--ancho-buscador);
+  flex: 0 1 var(--ancho-buscador);
+  min-width: var(--ancho-buscador-min);
   height: var(--altura-control-md);
   margin-left: auto;
   padding-inline: var(--espacio-3);
@@ -136,6 +138,13 @@
   display: flex;
   align-items: center;
   gap: var(--espacio-3);
+}
+
+.preferencias,
+.cuenta {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
 }
 
 .vender {
@@ -207,6 +216,28 @@
   background: var(--color-tinta-hover);
 }
 
+.accionSecundaria {
+  display: inline-flex;
+  align-items: center;
+  height: var(--altura-control-md);
+  padding-inline: var(--espacio-4);
+  border: var(--borde-ancho) solid var(--color-borde);
+  border-radius: var(--radio-md);
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-semibold);
+  white-space: nowrap;
+  transition:
+    background-color var(--transicion),
+    border-color var(--transicion);
+}
+
+.navbar .accionSecundaria:hover {
+  border-color: var(--color-borde-fuerte);
+  background: var(--color-fondo-suave);
+}
+
 /* ---------- Carga y error ---------- */
 .estado {
   display: flex;
@@ -239,7 +270,7 @@
 }
 
 /* ---------- Móvil y tablet ---------- */
-@media (max-width: 900px) {
+@media (max-width: 1280px) {
   .interior {
     flex-wrap: wrap;
     gap: var(--espacio-0) var(--espacio-3);
@@ -274,18 +305,34 @@
     font-size: var(--texto-md);
   }
 
+  .enlace[aria-current="page"] {
+    border-bottom-color: transparent;
+  }
+
   .buscador {
+    flex: none;
     width: 100%;
     margin-left: 0;
   }
 
   .utilidades {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--espacio-4);
   }
 
   .vender {
-    flex: 0 0 100%;
     padding-block: var(--espacio-2);
     font-size: var(--texto-md);
+  }
+
+  .preferencias {
+    justify-content: space-between;
+  }
+
+  .cuenta > * {
+    flex: 1;
+    justify-content: center;
+    height: var(--altura-control-lg);
   }
 }

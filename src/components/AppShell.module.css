@@ -1,0 +1,16 @@
+/* El pie queda al final de la pantalla aunque la vista tenga poco contenido. */
+.estructura {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--altura-pantalla);
+}
+
+.contenido {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Recibe foco por programa desde el enlace de salto; no necesita contorno. */
+.contenido:focus {
+  outline: none;
+}

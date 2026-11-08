@@ -8,13 +8,22 @@ export interface TextosNavbar {
   logo: { texto: string; aria: string };
   enlaces: Record<ClaveMenu, string> & { venderEventos: string };
   buscador: { placeholder: string; aria: string };
-  botones: { ingresar: string };
+  botones: { ingresar: string; crearCuenta: string };
   aria: { idioma: string; accesibilidad: string };
 }
 
 export interface TextosMenuMovil {
   abrir: string;
   cerrar: string;
+}
+
+export const CLAVES_COLUMNAS_PIE = ["descubre", "organiza", "ayuda"] as const;
+export type ClaveColumnaPie = (typeof CLAVES_COLUMNAS_PIE)[number];
+
+export interface TextosPie {
+  lema: string;
+  columnas: Record<ClaveColumnaPie, { titulo: string; enlaces: Record<string, string> }>;
+  legal: { derechos: string; aviso: string };
 }
 
 export interface TextosCookiesBanner {
@@ -29,5 +38,8 @@ export interface TextosCookiesBanner {
 export interface Textos {
   navbar: TextosNavbar;
   menuMovil: TextosMenuMovil;
+  /** Si la API lo omite o viene incompleto, el pie muestra solo marca y derechos. */
+  footer?: TextosPie;
+  general?: { aria?: { saltarAlContenido?: string } };
   cookies?: { banner: TextosCookiesBanner };
 }

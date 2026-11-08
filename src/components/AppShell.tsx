@@ -5,16 +5,20 @@ import { useEffect, useState } from "react";
 import type { ReactNode } from "react";
 import { useTextos } from "@/hooks/useTextos";
 import type { Idioma } from "@/types/textos";
+import Footer from "./Footer";
 import Navbar from "./Navbar";
+import SkipLink, { ID_CONTENIDO } from "./SkipLink";
+import styles from "./AppShell.module.css";
 
 function aIdioma(valor: string): Idioma {
   return valor === "en" ? "en" : "es";
 }
 
 /**
- * Lo que antes era App.jsx: estado global de la interfaz y el Navbar.
- * Es un componente cliente porque usa estado, efectos y `document`.
- * La sección activa ya no se guarda aquí: el Navbar la deduce de la ruta.
+ * Estructura común de todas las vistas:
+ *   enlace de salto → <header> con <nav> → <main> → <footer>
+ * Es un componente cliente porque guarda el idioma y el tamaño del texto.
+ * La sección activa la deduce el Navbar de la ruta.
  */
 export default function AppShell({ children }: Readonly<{ children: ReactNode }>) {
   const router = useRouter();
@@ -22,6 +26,9 @@ export default function AppShell({ children }: Readonly<{ children: ReactNode }>
   const [textoGrande, setTextoGrande] = useState(false);
 
   const datos = useTextos(idioma);
+  const textoSalto =
+    datos.textos?.general?.aria?.saltarAlContenido ??
+    (idioma === "en" ? "Skip to main content" : "Saltar al contenido principal");
 
   useEffect(() => {
     document.documentElement.lang = idioma;
@@ -40,7 +47,8 @@ export default function AppShell({ children }: Readonly<{ children: ReactNode }>
   }
 
   return (
-    <>
+    <div className={styles.estructura}>
+      <SkipLink texto={textoSalto} />
       <Navbar
         {...datos}
         idioma={idioma}
@@ -49,7 +57,10 @@ export default function AppShell({ children }: Readonly<{ children: ReactNode }>
         textoGrande={textoGrande}
         alternarTexto={() => setTextoGrande((valor) => !valor)}
       />
-      {children}
-    </>
+      <main id={ID_CONTENIDO} className={styles.contenido} tabIndex={-1}>
+        {children}
+      </main>
+      <Footer textos={datos.textos} idioma={idioma} />
+    </div>
   );
 }
