@@ -1,0 +1,109 @@
+.pie {
+  border-top: var(--borde-ancho) solid var(--color-borde);
+  background: var(--color-fondo);
+  color: var(--color-texto-suave);
+  font-size: var(--texto-sm);
+}
+
+.interior {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espacio-8);
+  max-width: var(--ancho-contenido);
+  margin-inline: auto;
+  padding: var(--espacio-10) var(--espacio-6);
+}
+
+.marca {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  max-width: var(--ancho-aviso);
+}
+
+.logo {
+  align-self: flex-start;
+  border-radius: var(--radio-sm);
+  color: var(--color-texto);
+  font-size: var(--texto-lg);
+  font-weight: var(--peso-negrita);
+  letter-spacing: var(--tracking-ajustado);
+  text-decoration: none;
+}
+
+.lema {
+  margin: var(--espacio-0);
+}
+
+.columnas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-8) var(--espacio-12);
+}
+
+.columna {
+  min-width: 0;
+}
+
+.titulo {
+  margin: var(--espacio-0) var(--espacio-0) var(--espacio-3);
+  color: var(--color-texto);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-semibold);
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: var(--espacio-0);
+  padding: var(--espacio-0);
+  list-style: none;
+}
+
+.enlace {
+  border-radius: var(--radio-sm);
+  color: inherit;
+  text-decoration: none;
+}
+
+.enlace:hover {
+  color: var(--color-texto);
+  text-decoration: underline;
+}
+
+.pie a:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espacio-2) var(--espacio-6);
+  max-width: var(--ancho-contenido);
+  margin-inline: auto;
+  padding: var(--espacio-5) var(--espacio-6);
+  border-top: var(--borde-ancho) solid var(--color-borde);
+  font-size: var(--texto-xs);
+}
+
+.legal p {
+  margin: var(--espacio-0);
+}
+
+@media (max-width: 600px) {
+  .interior {
+    padding-inline: var(--espacio-4);
+  }
+
+  .legal {
+    padding-inline: var(--espacio-4);
+  }
+
+  .columnas {
+    gap: var(--espacio-6) var(--espacio-8);
+  }
+}

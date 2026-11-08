@@ -20,6 +20,7 @@ const DESTINOS: Record<ClaveMenu, string> = {
 };
 const DESTINO_VENDER = "/vender";
 const DESTINO_INGRESAR = "/ingresar";
+const DESTINO_REGISTRO = "/registro";
 
 /** Una sección está activa en su ruta y en las rutas que cuelgan de ella (/teatro/obra-1). */
 function estaActiva(pathname: string, destino: string): boolean {
@@ -80,6 +81,12 @@ export default function Navbar({
   const [abierto, setAbierto] = useState(false);
   const [busqueda, setBusqueda] = useState("");
   const pathname = usePathname() ?? "";
+  // Cierra el menú móvil cuando cambia la ruta (enlaces o botones atrás/adelante del navegador).
+  const [rutaVista, setRutaVista] = useState(pathname);
+  if (pathname !== rutaVista) {
+    setRutaVista(pathname);
+    setAbierto(false);
+  }
   const botonMenu = useRef<HTMLButtonElement>(null);
   const campoBusqueda = useRef<HTMLInputElement>(null);
 
@@ -221,28 +228,39 @@ export default function Navbar({
                 {nav.enlaces.venderEventos}
               </Link>
             )}
-            <LanguageSelector
-              idioma={idioma}
-              onCambiar={cambiarIdioma}
-              ariaLabel={nav?.aria.idioma ?? (ingles ? "Change language" : "Cambiar idioma")}
-            />
-            <button
-              type="button"
-              className={cx(styles.icono, styles.accesibilidad)}
-              aria-label={nav?.aria.accesibilidad ?? (ingles ? "Enlarge text" : "Aumentar texto")}
-              aria-pressed={textoGrande}
-              onClick={alternarTexto}
-            >
-              <Icono nombre="accesibilidad" />
-            </button>
-            {nav && (
-              <Link
-                className={styles.accion}
-                href={DESTINO_INGRESAR}
-                onClick={() => setAbierto(false)}
+            <div className={styles.preferencias}>
+              <LanguageSelector
+                idioma={idioma}
+                onCambiar={cambiarIdioma}
+                ariaLabel={nav?.aria.idioma ?? (ingles ? "Change language" : "Cambiar idioma")}
+              />
+              <button
+                type="button"
+                className={cx(styles.icono, styles.accesibilidad)}
+                aria-label={nav?.aria.accesibilidad ?? (ingles ? "Enlarge text" : "Aumentar texto")}
+                aria-pressed={textoGrande}
+                onClick={alternarTexto}
               >
-                {nav.botones.ingresar}
-              </Link>
+                <Icono nombre="accesibilidad" />
+              </button>
+            </div>
+            {nav && (
+              <div className={styles.cuenta}>
+                <Link
+                  className={styles.accionSecundaria}
+                  href={DESTINO_REGISTRO}
+                  onClick={() => setAbierto(false)}
+                >
+                  {nav.botones.crearCuenta}
+                </Link>
+                <Link
+                  className={styles.accion}
+                  href={DESTINO_INGRESAR}
+                  onClick={() => setAbierto(false)}
+                >
+                  {nav.botones.ingresar}
+                </Link>
+              </div>
             )}
           </div>
         </div>

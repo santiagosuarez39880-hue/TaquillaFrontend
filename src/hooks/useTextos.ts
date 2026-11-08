@@ -2,13 +2,23 @@
 
 import { useEffect, useState } from "react";
 import { getApiUrl } from "@/lib/env";
-import { CLAVES_MENU } from "@/types/textos";
-import type { Idioma, Textos } from "@/types/textos";
+import { CLAVES_COLUMNAS_PIE, CLAVES_MENU } from "@/types/textos";
+import type { Idioma, Textos, TextosPie } from "@/types/textos";
 
 const LIMITE_MS = 12_000;
 
 function esTexto(valor: unknown): valor is string {
   return typeof valor === "string" && valor.trim().length > 0;
+}
+
+/** El pie es opcional: si viene incompleto se ignora y el sitio sigue funcionando. */
+function pieValido(pie: TextosPie | undefined): pie is TextosPie {
+  return (
+    esTexto(pie?.lema) &&
+    esTexto(pie?.legal?.derechos) &&
+    esTexto(pie?.legal?.aviso) &&
+    CLAVES_COLUMNAS_PIE.every((clave) => esTexto(pie?.columnas?.[clave]?.titulo))
+  );
 }
 
 /** Comprueba que la respuesta trae los textos que el navbar necesita. */
@@ -24,6 +34,7 @@ function validarTextos(datos: unknown): Textos {
     nav?.buscador?.placeholder,
     nav?.buscador?.aria,
     nav?.botones?.ingresar,
+    nav?.botones?.crearCuenta,
     nav?.aria?.idioma,
     nav?.aria?.accesibilidad,
     textos?.menuMovil?.abrir,
@@ -33,7 +44,7 @@ function validarTextos(datos: unknown): Textos {
   if (!textos || !etiquetas.every(esTexto)) {
     throw new Error("La respuesta no contiene los textos del navbar.");
   }
-  return textos;
+  return { ...textos, footer: pieValido(textos.footer) ? textos.footer : undefined };
 }
 
 export interface EstadoTextos {

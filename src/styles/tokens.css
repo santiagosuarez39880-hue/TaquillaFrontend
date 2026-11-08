@@ -93,10 +93,12 @@
   --capa-aviso: 100;
 
   /* ---------- Anchos y tamaños de layout ---------- */
-  --ancho-contenido: 72rem;
+  --ancho-contenido: 90rem;
   --ancho-aviso: 40rem;
   --ancho-buscador: 16.25rem;
+  --ancho-buscador-min: 11rem;
   --altura-navbar: 4rem;
+  --altura-pantalla: 100dvh;
   --tamano-logo: 1.75rem;
   --tamano-icono-sm: 1rem;
   --tamano-icono: 1.125rem;

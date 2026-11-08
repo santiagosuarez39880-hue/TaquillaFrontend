@@ -1,0 +1,21 @@
+/* Fuera de pantalla hasta que recibe foco con el teclado. */
+.salto {
+  position: absolute;
+  top: var(--espacio-2);
+  left: var(--espacio-2);
+  z-index: var(--capa-aviso);
+  padding: var(--espacio-2) var(--espacio-4);
+  border-radius: var(--radio-md);
+  background: var(--color-tinta);
+  color: var(--color-texto-inverso);
+  font-size: var(--texto-sm);
+  font-weight: var(--peso-semibold);
+  text-decoration: none;
+  transform: translateY(-200%);
+}
+
+.salto:focus-visible {
+  transform: none;
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}

@@ -25,7 +25,7 @@ export default function Muestrario() {
   const [idioma, setIdioma] = useState("es");
 
   return (
-    <main className={styles.pagina}>
+    <div className={styles.pagina}>
       <h1 className={styles.titulo}>Sistema de diseño · Taquilla</h1>
 
       <section className={styles.seccion} aria-labelledby="botones">
@@ -108,6 +108,6 @@ export default function Muestrario() {
       </section>
 
       <CookieBanner textos={TEXTOS_COOKIES} hrefPolitica="#cookies" />
-    </main>
+    </div>
   );
 }
