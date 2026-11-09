@@ -70,7 +70,7 @@ export default function Muestrario() {
           <Tag variante="exito">Publicado</Tag>
           <Tag variante="aviso">Últimas entradas</Tag>
           <Tag variante="peligro">Agotado</Tag>
-          <Tag variante="info">Borrador</Tag>
+          <Tag variante="aviso">Borrador</Tag>
         </div>
       </section>
 

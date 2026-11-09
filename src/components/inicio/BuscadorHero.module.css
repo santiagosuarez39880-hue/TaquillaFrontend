@@ -1,0 +1,134 @@
+.buscador {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.3fr auto;
+  align-items: center;
+  gap: var(--espacio-0);
+  max-width: calc(var(--ancho-texto) + var(--espacio-12));
+  padding: var(--espacio-2);
+  border-radius: var(--radio-xl);
+  background: var(--fondo-superficie);
+  box-shadow: var(--sombra-flotante);
+  color: var(--texto-principal);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  min-width: 0;
+  padding: var(--espacio-2) var(--espacio-4);
+  cursor: pointer;
+}
+
+.campoSecundario {
+  border-left: var(--borde-ancho) solid var(--borde-sutil);
+}
+
+.etiqueta {
+  color: var(--texto-terciario);
+  font-size: var(--nota-tamano);
+  font-weight: var(--peso-medio);
+  line-height: var(--nota-alto);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  color: var(--texto-terciario);
+}
+
+.entrada {
+  flex: 1;
+  min-width: 0;
+  padding: var(--espacio-0);
+  border: none;
+  background: transparent;
+  color: var(--texto-principal);
+  font: inherit;
+  font-size: var(--cuerpo-p-tamano);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.entrada:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+  border-radius: var(--radio-sm);
+}
+
+.entrada::placeholder {
+  color: var(--texto-terciario);
+}
+
+.boton {
+  margin-left: var(--espacio-2);
+}
+
+.resumenMovil,
+.filtrosMovil {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .buscador {
+    grid-template-columns: 1fr auto;
+    max-width: none;
+    padding: var(--espacio-2) var(--espacio-2) var(--espacio-2) var(--espacio-4);
+    border-radius: var(--radio-lg);
+  }
+
+  .campo {
+    grid-column: 1;
+    padding: var(--espacio-0);
+  }
+
+  /* En móvil, ciudad y fecha se resumen en una línea; los selects siguen en el DOM para teclado y lectores. */
+  .campoSecundario {
+    position: absolute;
+    width: var(--tamano-solo-lector);
+    height: var(--tamano-solo-lector);
+    overflow: hidden;
+    clip-path: inset(50%);
+    border: none;
+  }
+
+  .etiqueta {
+    position: absolute;
+    width: var(--tamano-solo-lector);
+    height: var(--tamano-solo-lector);
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .buscador .boton {
+    display: none;
+  }
+
+  .resumenMovil {
+    display: block;
+    grid-column: 1;
+    overflow: hidden;
+    color: var(--texto-terciario);
+    font-size: var(--nota-tamano);
+    line-height: var(--nota-alto);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .filtrosMovil {
+    display: grid;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    place-items: center;
+    width: var(--altura-control-lg);
+    height: var(--altura-control-lg);
+    border-radius: var(--radio-md);
+    background: var(--marca-primario);
+    color: var(--texto-inverso);
+  }
+
+  .filtrosMovil:focus-visible {
+    outline: var(--foco-ancho) solid var(--color-foco);
+    outline-offset: var(--foco-separacion);
+  }
+}

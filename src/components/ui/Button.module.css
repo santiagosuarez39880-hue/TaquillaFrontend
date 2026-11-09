@@ -6,9 +6,10 @@
   border: var(--borde-ancho) solid transparent;
   border-radius: var(--radio-md);
   font-family: inherit;
-  font-weight: var(--peso-semibold);
-  line-height: var(--interlineado-ajustado);
+  font-weight: var(--peso-medio);
+  line-height: var(--cuerpo-p-alto);
   white-space: nowrap;
+  text-decoration: none;
   cursor: pointer;
   transition:
     background-color var(--transicion),
@@ -30,47 +31,58 @@
 .sm {
   height: var(--altura-control-sm);
   padding-inline: var(--espacio-3);
-  font-size: var(--texto-xs);
+  font-size: var(--nota-tamano);
 }
 
 .md {
   height: var(--altura-control-md);
   padding-inline: var(--espacio-4);
-  font-size: var(--texto-sm);
+  font-size: var(--cuerpo-p-tamano);
 }
 
 .lg {
   height: var(--altura-control-lg);
   padding-inline: var(--espacio-6);
-  font-size: var(--texto-md);
+  font-size: var(--cuerpo-m-tamano);
 }
 
 /* Variantes */
 .primario {
-  background: var(--color-tinta);
-  color: var(--color-texto-inverso);
+  background: var(--marca-primario);
+  color: var(--texto-inverso);
 }
 
 .primario:hover:not(:disabled) {
-  background: var(--color-tinta-hover);
+  background: var(--marca-primario-hover);
+}
+
+.primario:active:not(:disabled) {
+  background: var(--marca-primario-presionado);
 }
 
 .secundario {
-  background: var(--color-fondo);
-  border-color: var(--color-borde);
-  color: var(--color-texto);
+  background: var(--fondo-superficie);
+  border-color: var(--borde-fuerte);
+  color: var(--texto-principal);
 }
 
 .secundario:hover:not(:disabled) {
-  background: var(--color-fondo-suave);
-  border-color: var(--color-borde-fuerte);
+  background: var(--fondo-sutil);
+}
+
+.secundario:active:not(:disabled) {
+  background: var(--fondo-presionado);
 }
 
 .fantasma {
   background: transparent;
-  color: var(--color-texto);
+  color: var(--texto-principal);
 }
 
 .fantasma:hover:not(:disabled) {
-  background: var(--color-fondo-suave);
+  background: var(--fondo-sutil);
+}
+
+.fantasma:active:not(:disabled) {
+  background: var(--fondo-presionado);
 }

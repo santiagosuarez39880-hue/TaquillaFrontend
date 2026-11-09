@@ -8,11 +8,11 @@
   gap: var(--espacio-4);
   max-width: var(--ancho-aviso);
   margin-inline: auto;
-  padding: var(--espacio-5);
-  border: var(--borde-ancho) solid var(--color-borde);
+  padding: var(--espacio-6);
+  border: var(--borde-ancho) solid var(--borde-sutil);
   border-radius: var(--radio-lg);
-  background: var(--color-fondo);
-  box-shadow: var(--sombra-md);
+  background: var(--fondo-superficie);
+  box-shadow: var(--sombra-flotante);
 }
 
 .contenido {
@@ -22,29 +22,29 @@
 }
 
 .titulo {
-  font-size: var(--texto-md);
+  font-size: var(--cuerpo-m-tamano);
   font-weight: var(--peso-semibold);
 }
 
 .texto {
-  font-size: var(--texto-sm);
-  color: var(--color-texto-suave);
+  font-size: var(--cuerpo-p-tamano);
+  color: var(--texto-secundario);
 }
 
 .enlace {
-  color: var(--color-texto);
+  color: var(--texto-principal);
   font-weight: var(--peso-medio);
   text-underline-offset: var(--espacio-1);
 }
 
 .enlace:hover {
-  color: var(--color-tinta-hover);
+  color: var(--marca-primario-hover);
 }
 
 .enlace:focus-visible {
   outline: var(--foco-ancho) solid var(--color-foco);
   outline-offset: var(--foco-separacion);
-  border-radius: var(--radio-sm);
+  border-radius: var(--radio-md);
 }
 
 .acciones {

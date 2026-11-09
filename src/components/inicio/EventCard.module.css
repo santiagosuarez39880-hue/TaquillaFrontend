@@ -1,0 +1,86 @@
+.tarjeta {
+  height: 100%;
+}
+
+.afiche {
+  aspect-ratio: 5 / 3;
+}
+
+.cuerpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  padding: var(--espacio-4);
+}
+
+.categoria {
+  flex: none;
+}
+
+.titulo {
+  margin: var(--espacio-0);
+  font-size: var(--h4-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h4-alto);
+  letter-spacing: var(--h4-tracking);
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  margin: var(--espacio-0);
+  padding: var(--espacio-0);
+  list-style: none;
+  color: var(--texto-secundario);
+  font-size: var(--cuerpo-p-tamano);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.datos li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+}
+
+.datos svg {
+  margin-top: var(--espacio-1);
+  color: var(--texto-terciario);
+}
+
+.pie {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espacio-3);
+  width: 100%;
+  margin-top: auto;
+  padding-top: var(--espacio-1);
+}
+
+.precio {
+  display: flex;
+  flex-direction: column;
+  margin: var(--espacio-0);
+}
+
+.desde {
+  color: var(--texto-terciario);
+  font-size: var(--nota-tamano);
+  line-height: var(--nota-alto);
+}
+
+.valor {
+  font-size: var(--h4-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h4-alto);
+}
+
+/* Móvil: el afiche es más ancho que alto (carrusel). */
+@media (max-width: 900px) {
+  .afiche {
+    aspect-ratio: 2 / 1;
+  }
+}

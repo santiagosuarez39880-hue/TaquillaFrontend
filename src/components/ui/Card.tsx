@@ -8,12 +8,19 @@ export interface CardProps extends HTMLAttributes<HTMLElement> {
    * Úsala cuando contiene un enlace o botón principal.
    */
   interactiva?: boolean;
+  /** «ninguno» deja el contenido a sangre (por ejemplo, un afiche arriba). */
+  relleno?: "normal" | "ninguno";
 }
 
-export function Card({ interactiva = false, className, ...resto }: CardProps) {
+export function Card({ interactiva = false, relleno = "normal", className, ...resto }: CardProps) {
   return (
     <article
-      className={cx(styles.tarjeta, interactiva && styles.interactiva, className)}
+      className={cx(
+        styles.tarjeta,
+        relleno === "ninguno" && styles.sinRelleno,
+        interactiva && styles.interactiva,
+        className,
+      )}
       {...resto}
     />
   );

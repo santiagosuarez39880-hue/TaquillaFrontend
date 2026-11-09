@@ -1,0 +1,23 @@
+/* [project]/src/components/SkipLink.module.css [app-client] (css) */
+.SkipLink-module__Ir2r-G__salto {
+  top: var(--espacio-2);
+  left: var(--espacio-2);
+  z-index: var(--capa-aviso);
+  padding: var(--espacio-2) var(--espacio-4);
+  border-radius: var(--radio-md);
+  background: var(--marca-primario);
+  color: var(--texto-inverso);
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-semibold);
+  text-decoration: none;
+  position: absolute;
+  transform: translateY(-200%);
+}
+
+.SkipLink-module__Ir2r-G__salto:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+  transform: none;
+}
+
+/*# sourceMappingURL=src_components_SkipLink_module_css_1igg3k2-ikub5._.single.css.map*/

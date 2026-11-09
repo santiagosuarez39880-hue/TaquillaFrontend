@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/cuent/OneDrive/Documentos/Frontend/TaquillaSantiagoSuarez/src/app/page.tsx"],"sourcesContent":["/**\n * Página de inicio provisional. Aquí irá la vista real de «Explorar»; mientras\n * tanto el muestrario del sistema de diseño está en /diseno.\n */\nexport default function Inicio() {\n  return null;\n}\n"],"names":["Inicio"],"mappings":"AAAA;;;CAGC;;;;AACc,SAASA;IACtB,OAAO;AACT"}}]
+}

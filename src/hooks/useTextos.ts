@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { getApiUrl } from "@/lib/env";
-import { CLAVES_COLUMNAS_PIE, CLAVES_MENU } from "@/types/textos";
-import type { Idioma, Textos, TextosPie } from "@/types/textos";
+import type { Idioma, Textos } from "@/types/textos";
 
 const LIMITE_MS = 12_000;
 
@@ -11,17 +10,11 @@ function esTexto(valor: unknown): valor is string {
   return typeof valor === "string" && valor.trim().length > 0;
 }
 
-/** El pie es opcional: si viene incompleto se ignora y el sitio sigue funcionando. */
-function pieValido(pie: TextosPie | undefined): pie is TextosPie {
-  return (
-    esTexto(pie?.lema) &&
-    esTexto(pie?.legal?.derechos) &&
-    esTexto(pie?.legal?.aviso) &&
-    CLAVES_COLUMNAS_PIE.every((clave) => esTexto(pie?.columnas?.[clave]?.titulo))
-  );
-}
-
-/** Comprueba que la respuesta trae los textos que el navbar necesita. */
+/**
+ * Comprueba que la respuesta trae los textos que el Navbar necesita para existir.
+ * El resto de textos se pide por ruta con useT() y tiene respaldo, así que una
+ * clave ausente allí no rompe el sitio.
+ */
 function validarTextos(datos: unknown): Textos {
   const textos = (datos as { textos?: Textos } | null)?.textos;
   const nav = textos?.navbar;
@@ -29,8 +22,7 @@ function validarTextos(datos: unknown): Textos {
   const etiquetas: unknown[] = [
     nav?.logo?.texto,
     nav?.logo?.aria,
-    ...CLAVES_MENU.map((clave) => nav?.enlaces?.[clave]),
-    nav?.enlaces?.venderEventos,
+    nav?.enlaces?.explorar,
     nav?.buscador?.placeholder,
     nav?.buscador?.aria,
     nav?.botones?.ingresar,
@@ -44,7 +36,7 @@ function validarTextos(datos: unknown): Textos {
   if (!textos || !etiquetas.every(esTexto)) {
     throw new Error("La respuesta no contiene los textos del navbar.");
   }
-  return { ...textos, footer: pieValido(textos.footer) ? textos.footer : undefined };
+  return textos;
 }
 
 export interface EstadoTextos {

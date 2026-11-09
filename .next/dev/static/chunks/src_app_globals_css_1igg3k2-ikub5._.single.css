@@ -1,0 +1,40 @@
+/* [project]/src/app/globals.css [app-client] (css) */
+*, :before, :after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: var(--espacio-0);
+  background: var(--fondo-pagina);
+  color: var(--texto-principal);
+  font-family: var(--fuente-instrument-sans);
+  font-size: var(--cuerpo-m-tamano);
+  line-height: var(--cuerpo-m-alto);
+}
+
+h1, h2, h3, p {
+  margin: var(--espacio-0);
+}
+
+a {
+  color: inherit;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+img, svg {
+  max-width: 100%;
+}
+
+/*# sourceMappingURL=src_app_globals_css_1igg3k2-ikub5._.single.css.map*/

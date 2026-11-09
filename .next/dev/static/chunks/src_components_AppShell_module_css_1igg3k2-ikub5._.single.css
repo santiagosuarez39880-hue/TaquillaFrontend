@@ -1,0 +1,17 @@
+/* [project]/src/components/AppShell.module.css [app-client] (css) */
+.AppShell-module__zsum4a__estructura {
+  min-height: var(--altura-pantalla);
+  flex-direction: column;
+  display: flex;
+}
+
+.AppShell-module__zsum4a__contenido {
+  flex: 1;
+  min-width: 0;
+}
+
+.AppShell-module__zsum4a__contenido:focus {
+  outline: none;
+}
+
+/*# sourceMappingURL=src_components_AppShell_module_css_1igg3k2-ikub5._.single.css.map*/

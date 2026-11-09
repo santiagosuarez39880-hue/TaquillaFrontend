@@ -2,19 +2,25 @@
   display: flex;
   flex-direction: column;
   gap: var(--espacio-3);
-  padding: var(--espacio-5);
-  border: var(--borde-ancho) solid var(--color-borde);
+  padding: var(--espacio-6);
+  overflow: hidden;
+  border: var(--borde-ancho) solid var(--borde-sutil);
   border-radius: var(--radio-lg);
-  background: var(--color-fondo);
-  box-shadow: var(--sombra-sm);
+  background: var(--fondo-superficie);
+  box-shadow: var(--sombra-tarjeta);
   transition:
     box-shadow var(--transicion),
     border-color var(--transicion);
 }
 
+.sinRelleno {
+  gap: var(--espacio-0);
+  padding: var(--espacio-0);
+}
+
 .interactiva:hover {
-  border-color: var(--color-borde-fuerte);
-  box-shadow: var(--sombra-md);
+  border-color: var(--borde-fuerte);
+  box-shadow: var(--sombra-flotante);
 }
 
 .interactiva:focus-within {

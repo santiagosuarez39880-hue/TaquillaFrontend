@@ -1,16 +1,16 @@
 .pagina {
   display: flex;
   flex-direction: column;
-  gap: var(--espacio-10);
+  gap: var(--espacio-12);
   max-width: var(--ancho-contenido);
   margin-inline: auto;
-  padding: var(--espacio-10) var(--espacio-6) var(--espacio-12);
+  padding: var(--espacio-12) var(--espacio-6) var(--espacio-12);
 }
 
 .titulo {
-  font-size: var(--texto-3xl);
-  font-weight: var(--peso-negrita);
-  line-height: var(--interlineado-ajustado);
+  font-size: var(--h1-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--cuerpo-p-alto);
 }
 
 .seccion {
@@ -20,7 +20,7 @@
 }
 
 .subtitulo {
-  font-size: var(--texto-xl);
+  font-size: var(--h3-tamano);
   font-weight: var(--peso-semibold);
 }
 
@@ -44,6 +44,6 @@
 }
 
 .tituloTarjeta {
-  font-size: var(--texto-lg);
+  font-size: var(--cuerpo-g-tamano);
   font-weight: var(--peso-semibold);
 }
