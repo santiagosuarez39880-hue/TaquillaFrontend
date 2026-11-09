@@ -49,7 +49,6 @@ export interface FooterProps {
 }
 
 export default function Footer({ textos, idioma }: FooterProps) {
-  const ingles = idioma === "en";
   const t = (ruta: string) => traducir(textos, idioma, ruta);
   const anio = new Date().getFullYear();
 
@@ -73,7 +72,7 @@ export default function Footer({ textos, idioma }: FooterProps) {
           <Link
             className={styles.logo}
             href="/"
-            aria-label={textos?.navbar.logo.aria ?? "Taquilla"}
+            aria-label={textos?.navbar.logo.aria ?? t("sitio.nombre")}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/logos/logo-inverso.svg" alt="" width="109" height="32" />
@@ -82,10 +81,7 @@ export default function Footer({ textos, idioma }: FooterProps) {
         </div>
 
         {columnas.length > 0 && (
-          <nav
-            className={styles.columnas}
-            aria-label={ingles ? "Footer navigation" : "Navegación del pie de página"}
-          >
+          <nav className={styles.columnas} aria-label={t("footer.aria.navegacion")}>
             {columnas.map(
               (columna): ReactNode => (
                 <div key={columna.clave} className={styles.columna}>

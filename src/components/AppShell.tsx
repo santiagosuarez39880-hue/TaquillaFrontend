@@ -1,9 +1,13 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { CookieBanner } from "@/components/ui/CookieBanner";
+import type { DecisionCookies } from "@/components/ui/CookieBanner";
 import { useTextos } from "@/hooks/useTextos";
+import type { TextosIniciales } from "@/hooks/useTextos";
+import { aceptoPreferencias, borrarIdioma, esIdioma, guardarIdioma } from "@/lib/idioma";
 import { traducir } from "@/lib/textos";
 import type { Idioma } from "@/types/textos";
 import Footer from "./Footer";
@@ -12,8 +16,10 @@ import SkipLink, { ID_CONTENIDO } from "./SkipLink";
 import { ProveedorTextos } from "./TextosProvider";
 import styles from "./AppShell.module.css";
 
-function aIdioma(valor: string): Idioma {
-  return valor === "en" ? "en" : "es";
+export interface AppShellProps {
+  children: ReactNode;
+  /** Idioma y textos que el servidor ya resolvió (cookie `idioma` + GET /textos). */
+  inicial?: TextosIniciales;
 }
 
 /**
@@ -22,19 +28,39 @@ function aIdioma(valor: string): Idioma {
  * Es un componente cliente porque guarda el idioma y el tamaño del texto, y
  * reparte los textos de la API a toda la interfaz (ver useT en TextosProvider).
  */
-export default function AppShell({ children }: Readonly<{ children: ReactNode }>) {
+export default function AppShell({ children, inicial }: Readonly<AppShellProps>) {
   const router = useRouter();
-  const [idioma, setIdioma] = useState<Idioma>("es");
+  const [idioma, setIdioma] = useState<Idioma>(inicial?.idioma ?? "es");
   const [textoGrande, setTextoGrande] = useState(false);
+  const [aviso, setAviso] = useState("");
 
-  const datos = useTextos(idioma);
-  const textoSalto =
-    traducir(datos.textos, idioma, "general.aria.saltarAlContenido") ||
-    (idioma === "en" ? "Skip to main content" : "Saltar al contenido principal");
+  const datos = useTextos(idioma, inicial);
+  const mostrado = datos.idiomaCargado;
+  const t = (ruta: string) => traducir(datos.textos, mostrado, ruta);
 
+  // <html lang> sigue al idioma de los textos que se ven, no al que se está pidiendo.
   useEffect(() => {
-    document.documentElement.lang = idioma;
-  }, [idioma]);
+    document.documentElement.lang = mostrado;
+  }, [mostrado]);
+
+  // Si el idioma pedido no llegó, la interfaz se queda como estaba (y la cookie también).
+  useEffect(() => {
+    if (datos.error && datos.textos && datos.idiomaCargado !== idioma) {
+      setIdioma(datos.idiomaCargado);
+      guardarIdioma(datos.idiomaCargado);
+    }
+  }, [datos.error, datos.textos, datos.idiomaCargado, idioma]);
+
+  // Anuncia el cambio a lectores de pantalla, ya en el idioma nuevo.
+  const primeraVez = useRef(true);
+  useEffect(() => {
+    if (primeraVez.current) {
+      primeraVez.current = false;
+      return;
+    }
+    if (!datos.cargando && datos.idiomaCargado === idioma) setAviso(t("idioma.cambiado"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [datos.cargando, datos.idiomaCargado, idioma]);
 
   useEffect(() => {
     document.documentElement.style.fontSize = textoGrande ? "112%" : "";
@@ -43,21 +69,43 @@ export default function AppShell({ children }: Readonly<{ children: ReactNode }>
     };
   }, [textoGrande]);
 
+  function cambiarIdioma(valor: string) {
+    if (!esIdioma(valor) || valor === idioma) return;
+    setIdioma(valor);
+    guardarIdioma(valor); // solo escribe la cookie si la persona aceptó las cookies
+  }
+
+  /** Aceptar guarda el idioma de ahora; rechazar o configurar borra el que hubiera. */
+  function alDecidirCookies(decision: DecisionCookies) {
+    if (aceptoPreferencias(decision)) guardarIdioma(idioma);
+    else borrarIdioma();
+  }
+
   /** La búsqueda vive en la URL (/explorar?q=salsa): se puede compartir y recargar. */
   function buscar(valor: string) {
     router.push(`/explorar?q=${encodeURIComponent(valor)}`);
   }
 
-  const contexto = useMemo(() => ({ ...datos, idioma }), [datos, idioma]);
+  const contexto = useMemo(() => ({ ...datos, idioma: mostrado }), [datos, mostrado]);
+  const banner = datos.textos?.cookies as { banner?: Record<string, unknown> } | undefined;
+  const textosBanner = {
+    titulo: t("cookies.banner.titulo"),
+    texto: t("cookies.banner.texto"),
+    politica: t("cookies.banner.enlaces.politica"),
+    configurar: t("cookies.banner.botones.configurar"),
+    rechazarOpcionales: t("cookies.banner.botones.rechazarOpcionales"),
+    aceptarTodas: t("cookies.banner.botones.aceptarTodas"),
+    region: t("cookies.banner.aria.region"),
+  };
 
   return (
     <ProveedorTextos valor={contexto}>
       <div className={styles.estructura}>
-        <SkipLink texto={textoSalto} />
+        <SkipLink texto={t("general.aria.saltarAlContenido")} />
         <Navbar
           {...datos}
           idioma={idioma}
-          cambiarIdioma={(valor) => setIdioma(aIdioma(valor))}
+          cambiarIdioma={cambiarIdioma}
           onBuscar={buscar}
           textoGrande={textoGrande}
           alternarTexto={() => setTextoGrande((valor) => !valor)}
@@ -65,7 +113,17 @@ export default function AppShell({ children }: Readonly<{ children: ReactNode }>
         <main id={ID_CONTENIDO} className={styles.contenido} tabIndex={-1}>
           {children}
         </main>
-        <Footer textos={datos.textos} idioma={idioma} />
+        <Footer textos={datos.textos} idioma={mostrado} />
+        <p className={styles.soloLector} role="status" aria-live="polite">
+          {aviso}
+        </p>
+        {banner?.banner && (
+          <CookieBanner
+            textos={textosBanner}
+            hrefPolitica="/cookies"
+            onDecidir={alDecidirCookies}
+          />
+        )}
       </div>
     </ProveedorTextos>
   );

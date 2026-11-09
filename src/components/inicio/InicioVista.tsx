@@ -28,7 +28,7 @@ function ciudadesDe(eventos: readonly Evento[]): string[] {
 
 /** Vista 1 · Inicio público: hero, categorías y eventos destacados. */
 export function InicioVista({ destacados, categorias }: InicioVistaProps) {
-  const { t, etiquetas, idioma, listo, error, recargar } = useT();
+  const { t, etiquetas, idioma, listo, error, recargar, categoria: etiqueta } = useT();
   const [categoriaActiva, setCategoriaActiva] = useState("");
 
   if (!listo) {
@@ -114,7 +114,7 @@ export function InicioVista({ destacados, categorias }: InicioVistaProps) {
                   aria-pressed={categoriaActiva === categoria.id}
                   onClick={() => setCategoriaActiva(categoria.id)}
                 >
-                  {categoria.nombre}
+                  {etiqueta(categoria.id, categoria.nombre)}
                 </button>
               ))}
             </div>

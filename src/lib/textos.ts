@@ -16,12 +16,27 @@ export function formatear(plantilla: string, valores: Valores = {}): string {
 
 /**
  * Textos que el diseño de Figma muestra y que /textos todavía no trae.
- * Son SOLO textos de interfaz (nunca datos del catálogo). Cuando la API los
- * incorpore, el de la API gana: este respaldo se puede borrar clave por clave.
+ * Son SOLO textos de interfaz (nunca datos del catálogo). El de la API siempre gana:
+ * el respaldo solo se ve si la API no responde o aún no trae la clave. Este archivo es
+ * el ÚNICO lugar con textos escritos a mano; los componentes nunca los llevan dentro.
  */
 export const RESPALDO: Record<Idioma, Record<string, string>> = {
   es: {
+    "sitio.nombre": "Taquilla",
     "navbar.enlaces.inicio": "Inicio",
+    "navbar.aria.principal": "Navegación principal",
+    "navbar.aria.idioma": "Cambiar idioma",
+    "navbar.aria.accesibilidad": "Aumentar texto",
+    "navbar.buscador.aria": "Buscar eventos",
+    "navbar.botones.ingresar": "Ingresar",
+    "navbar.botones.crearCuenta": "Crear cuenta",
+    "menuMovil.abrir": "Abrir menú",
+    "menuMovil.cerrar": "Cerrar menú",
+    "menuMovil.secciones.idioma": "Idioma",
+    "menuMovil.secciones.accesibilidad": "Accesibilidad",
+    "footer.aria.navegacion": "Navegación del pie de página",
+    "general.aria.saltarAlContenido": "Saltar al contenido principal",
+    "idioma.cambiado": "Idioma cambiado a español.",
     "paginas.inicio.botones.verEvento": "Ver evento",
     "paginas.explorar.encabezado.migas": "Ruta de navegación",
     "footer.columnas.explora": "Explora",
@@ -35,7 +50,21 @@ export const RESPALDO: Record<Idioma, Record<string, string>> = {
     "estados.cargando.titulo": "Cargando…",
   },
   en: {
+    "sitio.nombre": "Taquilla",
     "navbar.enlaces.inicio": "Home",
+    "navbar.aria.principal": "Main navigation",
+    "navbar.aria.idioma": "Change language",
+    "navbar.aria.accesibilidad": "Enlarge text",
+    "navbar.buscador.aria": "Search events",
+    "navbar.botones.ingresar": "Log in",
+    "navbar.botones.crearCuenta": "Sign up",
+    "menuMovil.abrir": "Open menu",
+    "menuMovil.cerrar": "Close menu",
+    "menuMovil.secciones.idioma": "Language",
+    "menuMovil.secciones.accesibilidad": "Accessibility",
+    "footer.aria.navegacion": "Footer navigation",
+    "general.aria.saltarAlContenido": "Skip to main content",
+    "idioma.cambiado": "Language changed to English.",
     "paginas.inicio.botones.verEvento": "See event",
     "paginas.explorar.encabezado.migas": "Breadcrumb",
     "footer.columnas.explora": "Explore",

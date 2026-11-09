@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
 import PaginaPendiente from "@/components/PaginaPendiente";
+import { metadatosDe } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Deportes · Taquilla" };
+export function generateMetadata(): Promise<Metadata> {
+  return metadatosDe("deportes");
+}
 
 export default function Pagina() {
-  return <PaginaPendiente titulo="Deportes" texto="Fútbol, baloncesto y voleibol de la región." />;
+  return (
+    <PaginaPendiente
+      titulo="paginas.deportes.hero.titulo"
+      texto="paginas.deportes.hero.subtitulo"
+    />
+  );
 }

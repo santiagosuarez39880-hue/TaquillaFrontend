@@ -54,18 +54,13 @@ export default function Navbar({
   const botonCerrar = useRef<HTMLButtonElement>(null);
 
   const nav = textos?.navbar;
-  const ingles = idioma === "en";
   const t = (ruta: string) => traducir(textos, idioma, ruta);
-  const abrir = textos?.menuMovil.abrir ?? (ingles ? "Open menu" : "Abrir menú");
-  const cerrar = textos?.menuMovil.cerrar ?? (ingles ? "Close menu" : "Cerrar menú");
-  const etiquetaLogo = nav?.logo.aria ?? "Taquilla";
-  const etiquetaBuscar = nav?.buscador.aria ?? (ingles ? "Search events" : "Buscar eventos");
-  const etiquetaIngresar =
-    t("menuMovil.botones.ingresar") || nav?.botones.ingresar || (ingles ? "Log in" : "Ingresar");
-  const etiquetaCrear =
-    t("menuMovil.botones.crearCuenta") ||
-    nav?.botones.crearCuenta ||
-    (ingles ? "Sign up" : "Crear cuenta");
+  const abrir = t("menuMovil.abrir");
+  const cerrar = t("menuMovil.cerrar");
+  const etiquetaLogo = nav?.logo.aria ?? t("sitio.nombre");
+  const etiquetaBuscar = t("navbar.buscador.aria");
+  const etiquetaIngresar = t("menuMovil.botones.ingresar") || t("navbar.botones.ingresar");
+  const etiquetaCrear = t("menuMovil.botones.crearCuenta") || t("navbar.botones.crearCuenta");
 
   const enlaces = [
     {
@@ -112,10 +107,7 @@ export default function Navbar({
 
   return (
     <header className={styles.navbar}>
-      <nav
-        className={styles.interior}
-        aria-label={ingles ? "Main navigation" : "Navegación principal"}
-      >
+      <nav className={styles.interior} aria-label={t("navbar.aria.principal")}>
         <Link className={styles.marca} href={RUTA_INICIO} aria-label={etiquetaLogo}>
           {/* Dos versiones del logo: la clara sobre fondo claro y la inversa sobre el encabezado oscuro del móvil. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -187,14 +179,14 @@ export default function Navbar({
 
           {cargando && (
             <p className={styles.estado} role="status">
-              {ingles ? "Loading navigation…" : "Cargando navegación…"}
+              {t("estados.cargando.titulo")}
             </p>
           )}
           {error && (
             <div className={styles.estado} role="alert">
-              <p>{ingles ? "Navigation could not be loaded." : "No pudimos cargar el menú."}</p>
+              <p>{t("estados.error.titulo")}</p>
               <button type="button" className={styles.reintentar} onClick={recargar}>
-                {ingles ? "Try again" : "Reintentar"}
+                {t("estados.error.botones.reintentar")}
               </button>
             </div>
           )}
@@ -241,14 +233,11 @@ export default function Navbar({
 
           <div className={styles.utilidades}>
             <div className={cx(styles.fila, styles.filaAccesibilidad)}>
-              <span className={styles.etiquetaFila}>
-                {t("menuMovil.secciones.accesibilidad") ||
-                  (ingles ? "Accessibility" : "Accesibilidad")}
-              </span>
+              <span className={styles.etiquetaFila}>{t("menuMovil.secciones.accesibilidad")}</span>
               <button
                 type="button"
                 className={cx(styles.icono, styles.accesibilidad)}
-                aria-label={nav?.aria.accesibilidad ?? (ingles ? "Enlarge text" : "Aumentar texto")}
+                aria-label={t("navbar.aria.accesibilidad")}
                 aria-pressed={textoGrande}
                 onClick={alternarTexto}
               >
@@ -257,13 +246,11 @@ export default function Navbar({
             </div>
 
             <div className={styles.fila}>
-              <span className={styles.etiquetaFila}>
-                {t("menuMovil.secciones.idioma") || (ingles ? "Language" : "Idioma")}
-              </span>
+              <span className={styles.etiquetaFila}>{t("menuMovil.secciones.idioma")}</span>
               <LanguageSelector
                 idioma={idioma}
                 onCambiar={cambiarIdioma}
-                ariaLabel={nav?.aria.idioma ?? (ingles ? "Change language" : "Cambiar idioma")}
+                ariaLabel={t("navbar.aria.idioma")}
               />
             </div>
 

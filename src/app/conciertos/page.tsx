@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import PaginaPendiente from "@/components/PaginaPendiente";
+import { metadatosDe } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Conciertos · Taquilla" };
+export function generateMetadata(): Promise<Metadata> {
+  return metadatosDe("conciertos");
+}
 
 export default function Pagina() {
   return (
     <PaginaPendiente
-      titulo="Conciertos"
-      texto="Los conciertos de las próximas semanas por género y por día."
+      titulo="paginas.conciertos.hero.titulo"
+      texto="paginas.conciertos.seo.descripcion"
     />
   );
 }

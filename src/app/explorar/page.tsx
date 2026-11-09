@@ -4,8 +4,11 @@ import { ExplorarVista } from "@/components/explorar/ExplorarVista";
 import { obtenerCategorias, obtenerCiudades, obtenerEventos } from "@/lib/catalogo";
 import { leerFiltros, urlExplorar } from "@/lib/explorar";
 import type { ParametrosUrl } from "@/lib/explorar";
+import { metadatosDe } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Explorar eventos · Taquilla" };
+export function generateMetadata(): Promise<Metadata> {
+  return metadatosDe("explorar");
+}
 
 /** Los resultados dependen de la URL: se consultan en cada petición. */
 export const dynamic = "force-dynamic";

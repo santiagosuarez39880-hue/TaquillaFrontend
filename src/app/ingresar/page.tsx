@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
 import PaginaPendiente from "@/components/PaginaPendiente";
+import { metadatosDe } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Ingresar · Taquilla" };
+export function generateMetadata(): Promise<Metadata> {
+  return metadatosDe("ingresar");
+}
 
 export default function Pagina() {
   return (
     <PaginaPendiente
-      titulo="Ingresa a tu cuenta"
-      texto="Ingresa a tu cuenta para comprar más rápido y ver tus entradas."
+      titulo="paginas.ingresar.presentacion.lema"
+      texto="paginas.ingresar.seo.descripcion"
     />
   );
 }
