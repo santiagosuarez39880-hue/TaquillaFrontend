@@ -20,9 +20,11 @@ const REVALIDAR_SEGUNDOS = 60;
  * Funciona en el servidor (Server Components) y en el navegador.
  */
 export async function pedir<T>(ruta: string, validar: (datos: unknown) => T): Promise<T> {
+  // Fuera del try: si falta la variable de entorno, el error debe decirlo.
+  const base = getApiUrl();
   let respuesta: Response;
   try {
-    respuesta = await fetch(`${getApiUrl()}${ruta}`, {
+    respuesta = await fetch(`${base}${ruta}`, {
       headers: { accept: "application/json" },
       signal: AbortSignal.timeout(LIMITE_MS),
       next: { revalidate: REVALIDAR_SEGUNDOS },

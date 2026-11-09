@@ -141,6 +141,7 @@
   --alto-hero-tarjeta: 420px;
   --tamano-solo-lector: 1px;
   --ancho-tarjeta-movil: 280px;
+  --ancho-filtros: 240px;
   --gutter-pagina: var(--espacio-6);
 }
 

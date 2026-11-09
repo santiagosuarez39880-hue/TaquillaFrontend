@@ -1,14 +1,26 @@
 import { ErrorApi, pedir } from "@/lib/api";
+import { aParametros } from "@/lib/explorar";
+import type { Filtros } from "@/lib/explorar";
 import type {
   Afiche,
   Categoria,
+  Ciudad,
+  PaginaEventos,
+  Paginacion,
   Disponibilidad,
   Evento,
   PatronAfiche,
   Recinto,
 } from "@/types/catalogo";
 
-const PATRONES: readonly PatronAfiche[] = ["circulos", "ondas", "lineas", "rombos"];
+const PATRONES: readonly PatronAfiche[] = [
+  "circulos",
+  "ondas",
+  "lineas",
+  "rombos",
+  "puntos",
+  "liso",
+];
 const COLOR_HEX = /^#[0-9a-f]{3,8}$/i;
 
 type Objeto = Record<string, unknown>;
@@ -142,4 +154,41 @@ export function obtenerEventosDestacados(): Promise<Evento[]> {
 /** GET /categorias */
 export function obtenerCategorias(): Promise<Categoria[]> {
   return pedir("/categorias", validarCategorias);
+}
+
+export function validarCiudades(respuesta: unknown): Ciudad[] {
+  return lista(objeto(respuesta, "respuesta").datos, "datos").map((valor) => {
+    const c = objeto(valor, "ciudad");
+    return {
+      nombre: texto(c.nombre, "ciudad.nombre"),
+      eventos: numero(c.eventos, "ciudad.eventos"),
+    };
+  });
+}
+
+function validarPaginacion(valor: unknown): Paginacion {
+  const p = objeto(valor, "paginacion");
+  return {
+    pagina: numero(p.pagina, "paginacion.pagina"),
+    porPagina: numero(p.porPagina, "paginacion.porPagina"),
+    total: numero(p.total, "paginacion.total"),
+    paginas: numero(p.paginas, "paginacion.paginas"),
+  };
+}
+
+export function validarPaginaEventos(respuesta: unknown): PaginaEventos {
+  return {
+    eventos: validarEventos(respuesta),
+    paginacion: validarPaginacion(objeto(respuesta, "respuesta").paginacion),
+  };
+}
+
+/** GET /ciudades */
+export function obtenerCiudades(): Promise<Ciudad[]> {
+  return pedir("/ciudades", validarCiudades);
+}
+
+/** GET /eventos con los filtros de la URL. */
+export function obtenerEventos(filtros: Filtros): Promise<PaginaEventos> {
+  return pedir(`/eventos?${aParametros(filtros)}`, validarPaginaEventos);
 }

@@ -1,6 +1,6 @@
 /** Tipos del catálogo, según las respuestas de GET /eventos/destacados y GET /categorias. */
 
-export type PatronAfiche = "circulos" | "ondas" | "lineas" | "rombos";
+export type PatronAfiche = "circulos" | "ondas" | "lineas" | "rombos" | "puntos" | "liso";
 
 export interface Afiche {
   /** Colores del degradado, en hexadecimal (#RRGGBB). */
@@ -51,4 +51,22 @@ export interface Categoria {
   descripcion: string;
   /** Cantidad de eventos publicados en la categoría. */
   eventos: number;
+}
+
+export interface Ciudad {
+  nombre: string;
+  /** Cantidad de eventos publicados en la ciudad. */
+  eventos: number;
+}
+
+export interface Paginacion {
+  pagina: number;
+  porPagina: number;
+  total: number;
+  paginas: number;
+}
+
+export interface PaginaEventos {
+  eventos: Evento[];
+  paginacion: Paginacion;
 }
