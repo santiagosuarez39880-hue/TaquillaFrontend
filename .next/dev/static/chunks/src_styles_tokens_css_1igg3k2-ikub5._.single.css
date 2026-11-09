@@ -1,0 +1,122 @@
+/* [project]/src/styles/tokens.css [app-client] (css) */
+:root {
+  --fondo-pagina: #f7f7f7;
+  --fondo-superficie: #fff;
+  --fondo-sutil: #f0f0f0;
+  --fondo-inverso: #141414;
+  --fondo-inverso-2: #262626;
+  --marca-primario: #141414;
+  --marca-primario-hover: #2e2e2e;
+  --marca-primario-suave: #f0f0f0;
+  --marca-acento: #c9a24d;
+  --texto-principal: #141414;
+  --texto-secundario: #525252;
+  --texto-terciario: #6b6b6b;
+  --texto-inverso: #fff;
+  --texto-inverso-suave: #a8a8a8;
+  --texto-marca: #141414;
+  --borde-sutil: #e5e5e5;
+  --borde-fuerte: #8c8c8c;
+  --borde-inverso: #3a3a3a;
+  --estado-exito: #1a7f4b;
+  --estado-exito-suave: #e8f5ec;
+  --estado-alerta: #9a6700;
+  --estado-alerta-suave: #fff4d6;
+  --estado-error: #c5221f;
+  --estado-error-suave: #fce8e6;
+  --zona-vip: #6f66b0;
+  --zona-platea: #3f78b5;
+  --zona-general: #4c9a76;
+  --asiento-ocupado: #e0e0e0;
+  --asiento-reservado: #e6c36a;
+  --marca-primario-presionado: #000;
+  --fondo-presionado: #e5e5e5;
+  --fondo-inverso-presionado: #3a3a3a;
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 12px;
+  --espacio-4: 16px;
+  --espacio-6: 24px;
+  --espacio-8: 32px;
+  --espacio-12: 48px;
+  --espacio-16: 64px;
+  --radio-sm: 6px;
+  --radio-md: 8px;
+  --radio-lg: 12px;
+  --radio-xl: 16px;
+  --radio-completo: 999px;
+  --fuente-instrument-sans: var(--fuente-next-instrument), "Instrument Sans", system-ui, sans-serif;
+  --sombra-tarjeta: 0px 1px 2px 0px #1414140d;
+  --sombra-flotante: 0px 8px 24px 0px #1414141a;
+  --espacio-0: 0;
+  --peso-normal: 400;
+  --peso-medio: 500;
+  --peso-semibold: 600;
+  --display-tamano: 52px;
+  --display-alto: 56px;
+  --display-tracking: -.025em;
+  --h1-tamano: 34px;
+  --h1-alto: 40px;
+  --h1-tracking: -.02em;
+  --h2-tamano: 24px;
+  --h2-alto: 30px;
+  --h2-tracking: -.015em;
+  --h3-tamano: 20px;
+  --h3-alto: 26px;
+  --h3-tracking: -.01em;
+  --h4-tamano: 16px;
+  --h4-alto: 22px;
+  --h4-tracking: -.005em;
+  --cuerpo-g-tamano: 18px;
+  --cuerpo-g-alto: 28px;
+  --cuerpo-m-tamano: 16px;
+  --cuerpo-m-alto: 24px;
+  --cuerpo-p-tamano: 14px;
+  --cuerpo-p-alto: 20px;
+  --nota-tamano: 12px;
+  --nota-alto: 16px;
+  --color-foco: var(--marca-primario);
+  --color-foco-inverso: var(--texto-inverso);
+  --foco-ancho: 2px;
+  --foco-separacion: 2px;
+  --borde-ancho: 1px;
+  --altura-control-sm: 32px;
+  --altura-control-md: 36px;
+  --altura-control-lg: 44px;
+  --opacidad-deshabilitado: .5;
+  --tamano-icono-sm: 16px;
+  --tamano-icono: 18px;
+  --tamano-icono-lg: 20px;
+  --transicion: .15s ease;
+  --capa-navbar: 50;
+  --capa-menu: 60;
+  --capa-aviso: 100;
+  --scrim: #14141466;
+  --ancho-contenido: 1200px;
+  --ancho-aviso: 640px;
+  --ancho-buscador: 260px;
+  --altura-navbar: 64px;
+  --altura-pantalla: 100dvh;
+  --tamano-logo-alto: 32px;
+  --ancho-lema: 360px;
+  --ancho-texto: 540px;
+  --ancho-hero-tarjeta: 458px;
+  --alto-hero-tarjeta: 420px;
+  --tamano-solo-lector: 1px;
+  --ancho-tarjeta-movil: 280px;
+  --gutter-pagina: var(--espacio-6);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --gutter-pagina: var(--espacio-4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transicion: 0s;
+  }
+}
+
+/*# sourceMappingURL=src_styles_tokens_css_1igg3k2-ikub5._.single.css.map*/

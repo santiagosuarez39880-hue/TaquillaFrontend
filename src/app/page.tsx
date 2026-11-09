@@ -1,11 +1,14 @@
-import PaginaPendiente from "@/components/PaginaPendiente";
+import { InicioVista } from "@/components/inicio/InicioVista";
+import { obtenerCategorias, obtenerEventosDestacados } from "@/lib/catalogo";
 
-/** Inicio provisional. El muestrario del sistema de diseño está en /diseno. */
-export default function Inicio() {
-  return (
-    <PaginaPendiente
-      titulo="Tu próxima noche empieza aquí"
-      texto="Conciertos, teatro, deportes y festivales. Elige tu asiento en el mapa y recibe tu entrada con código QR."
-    />
-  );
+/** El catálogo cambia en la API; se consulta en cada petición (con caché corta en fetch). */
+export const dynamic = "force-dynamic";
+
+/** Vista 1 · Inicio público. Si la API falla, lanza el error y lo recoge error.tsx. */
+export default async function Inicio() {
+  const [destacados, categorias] = await Promise.all([
+    obtenerEventosDestacados(),
+    obtenerCategorias(),
+  ]);
+  return <InicioVista destacados={destacados} categorias={categorias} />;
 }

@@ -1,12 +1,9 @@
 /** Idiomas que acepta la API (`?idioma=`). */
 export type Idioma = "es" | "en";
 
-export const CLAVES_MENU = ["explorar", "conciertos", "teatro", "deportes", "festivales"] as const;
-export type ClaveMenu = (typeof CLAVES_MENU)[number];
-
 export interface TextosNavbar {
   logo: { texto: string; aria: string };
-  enlaces: Record<ClaveMenu, string> & { venderEventos: string };
+  enlaces: { explorar: string; [clave: string]: string | undefined };
   buscador: { placeholder: string; aria: string };
   botones: { ingresar: string; crearCuenta: string };
   aria: { idioma: string; accesibilidad: string };
@@ -15,31 +12,16 @@ export interface TextosNavbar {
 export interface TextosMenuMovil {
   abrir: string;
   cerrar: string;
+  [clave: string]: unknown;
 }
 
-export const CLAVES_COLUMNAS_PIE = ["descubre", "organiza", "ayuda"] as const;
-export type ClaveColumnaPie = (typeof CLAVES_COLUMNAS_PIE)[number];
-
-export interface TextosPie {
-  lema: string;
-  columnas: Record<ClaveColumnaPie, { titulo: string; enlaces: Record<string, string> }>;
-  legal: { derechos: string; aviso: string };
-}
-
-export interface TextosCookiesBanner {
-  titulo: string;
-  texto: string;
-  enlaces: { politica: string };
-  botones: { configurar: string; rechazarOpcionales: string; aceptarTodas: string };
-  aria: { region: string };
-}
-
-/** Parte de la respuesta de /textos que usa hoy la aplicación. */
+/**
+ * Respuesta de GET /textos (la parte `textos`). Solo se tipan las secciones que
+ * el Navbar necesita para existir; el resto se lee con `useT()` por su ruta
+ * («paginas.inicio.hero.titulo») y tiene respaldo si la API no la trae.
+ */
 export interface Textos {
   navbar: TextosNavbar;
   menuMovil: TextosMenuMovil;
-  /** Si la API lo omite o viene incompleto, el pie muestra solo marca y derechos. */
-  footer?: TextosPie;
-  general?: { aria?: { saltarAlContenido?: string } };
-  cookies?: { banner: TextosCookiesBanner };
+  [seccion: string]: unknown;
 }

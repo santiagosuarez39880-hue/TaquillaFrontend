@@ -1,0 +1,84 @@
+.tarjeta {
+  position: relative;
+  width: var(--ancho-hero-tarjeta);
+  max-width: 100%;
+  height: var(--alto-hero-tarjeta);
+  overflow: hidden;
+  border-radius: var(--radio-xl);
+  box-shadow: var(--sombra-flotante);
+  color: var(--texto-principal);
+}
+
+.tarjeta .afiche {
+  position: absolute;
+  inset: 0;
+}
+
+.ficha {
+  position: absolute;
+  right: var(--espacio-4);
+  bottom: var(--espacio-4);
+  left: var(--espacio-4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espacio-4);
+  padding: var(--espacio-4);
+  border-radius: var(--radio-lg);
+  background: var(--fondo-superficie);
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+  min-width: 0;
+}
+
+.etiqueta {
+  flex: none;
+}
+
+.titulo {
+  margin: var(--espacio-0);
+  font-size: var(--h3-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h3-alto);
+  letter-spacing: var(--h3-tracking);
+}
+
+.fecha {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-2);
+  margin: var(--espacio-0);
+  color: var(--texto-secundario);
+  font-size: var(--cuerpo-p-tamano);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.fecha svg {
+  flex: none;
+  margin-top: var(--espacio-1);
+  color: var(--texto-terciario);
+}
+
+.precio {
+  margin: var(--espacio-0);
+  font-size: var(--cuerpo-m-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--cuerpo-m-alto);
+}
+
+.desde {
+  color: var(--texto-terciario);
+  font-size: var(--nota-tamano);
+  font-weight: var(--peso-normal);
+}
+
+@media (max-width: 900px) {
+  .tarjeta {
+    width: 100%;
+  }
+}

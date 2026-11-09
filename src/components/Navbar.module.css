@@ -2,9 +2,9 @@
   position: sticky;
   top: 0;
   z-index: var(--capa-navbar);
-  border-bottom: var(--borde-ancho) solid var(--color-borde);
-  background: var(--color-fondo);
-  color: var(--color-texto);
+  border-bottom: var(--borde-ancho) solid var(--borde-sutil);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
 }
 
 /* :where() deja esta regla con especificidad cero: cualquier clase de enlace la supera. */
@@ -17,34 +17,29 @@
   display: flex;
   align-items: center;
   gap: var(--espacio-6);
-  max-width: var(--ancho-contenido);
+  width: min(100% - 2 * var(--gutter-pagina), var(--ancho-contenido));
   min-height: var(--altura-navbar);
   margin-inline: auto;
-  padding-inline: var(--espacio-6);
 }
 
 /* ---------- Marca ---------- */
 .marca {
   display: inline-flex;
   align-items: center;
-  gap: var(--espacio-2);
-  border-radius: var(--radio-sm);
-  font-size: var(--texto-lg);
-  font-weight: var(--peso-negrita);
-  letter-spacing: var(--tracking-ajustado);
+  border-radius: var(--radio-md);
 }
 
-.simbolo {
-  display: grid;
-  place-items: center;
-  width: var(--tamano-logo);
-  height: var(--tamano-logo);
-  border-radius: var(--radio-sm);
-  background: var(--color-tinta);
-  color: var(--color-texto-inverso);
+.logo {
+  display: block;
+  width: auto;
+  height: var(--tamano-logo-alto);
 }
 
-/* ---------- Acciones solo móvil ---------- */
+.logoOscuro {
+  display: none;
+}
+
+/* ---------- Acciones de la barra móvil (ocultas en escritorio) ---------- */
 .movilAcciones {
   display: none;
   align-items: center;
@@ -52,7 +47,34 @@
   margin-left: auto;
 }
 
-/* ---------- Panel (en línea en escritorio) ---------- */
+.iconoMovil {
+  display: grid;
+  place-items: center;
+  width: var(--altura-control-lg);
+  height: var(--altura-control-lg);
+  padding: var(--espacio-0);
+  border: 0;
+  border-radius: var(--radio-md);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.iconoMovil:hover {
+  background: var(--fondo-inverso-2);
+}
+
+.ingresarMovil {
+  display: inline-flex;
+  align-items: center;
+  height: var(--altura-control-lg);
+  padding-inline: var(--espacio-2);
+  border-radius: var(--radio-md);
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-medio);
+}
+
+/* ---------- Panel: en línea en escritorio, hoja desplegable en móvil ---------- */
 .panel {
   display: flex;
   flex: 1;
@@ -61,9 +83,13 @@
   min-width: 0;
 }
 
+.hojaCabecera {
+  display: none;
+}
+
 .enlaces {
   display: flex;
-  gap: var(--espacio-5);
+  gap: var(--espacio-6);
   margin: var(--espacio-0);
   padding: var(--espacio-0);
   list-style: none;
@@ -71,36 +97,37 @@
 
 .enlace {
   display: inline-block;
-  padding-block: var(--espacio-1);
+  padding-block: var(--espacio-2);
   border-bottom: var(--foco-ancho) solid transparent;
-  font-size: var(--texto-sm);
-  color: var(--color-texto-suave);
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-medio);
+  line-height: var(--cuerpo-p-alto);
+  color: var(--texto-secundario);
   transition: color var(--transicion);
 }
 
 .enlace:hover {
-  color: var(--color-texto);
+  color: var(--texto-principal);
 }
 
 .enlace[aria-current="page"] {
-  border-bottom-color: var(--color-tinta);
-  font-weight: var(--peso-semibold);
-  color: var(--color-texto);
+  border-bottom-color: var(--marca-primario);
+  color: var(--texto-principal);
 }
 
 /* ---------- Buscador ---------- */
 .buscador {
   display: flex;
+  flex: 0 1 var(--ancho-buscador);
   align-items: center;
   gap: var(--espacio-2);
-  flex: 0 1 var(--ancho-buscador);
-  min-width: var(--ancho-buscador-min);
+  min-width: 0;
   height: var(--altura-control-md);
   margin-left: auto;
   padding-inline: var(--espacio-3);
   border-radius: var(--radio-completo);
-  background: var(--color-fondo-suave);
-  color: var(--color-texto-suave);
+  background: var(--fondo-sutil);
+  color: var(--texto-terciario);
 }
 
 .buscador:focus-within {
@@ -124,36 +151,34 @@
   border: 0;
   outline: 0;
   background: transparent;
-  color: var(--color-texto);
+  color: var(--texto-principal);
   font-family: inherit;
-  font-size: var(--texto-sm);
+  font-size: var(--cuerpo-p-tamano);
 }
 
 .campoBuscar::placeholder {
-  color: var(--color-texto-suave);
+  color: var(--texto-terciario);
 }
 
-/* ---------- Utilidades ---------- */
+/* ---------- Utilidades: accesibilidad, idioma, cuenta ---------- */
 .utilidades {
   display: flex;
   align-items: center;
   gap: var(--espacio-3);
 }
 
-.preferencias,
-.cuenta {
+.fila {
   display: flex;
   align-items: center;
-  gap: var(--espacio-2);
+  gap: var(--espacio-3);
 }
 
-.vender {
-  font-size: var(--texto-sm);
-  white-space: nowrap;
+.filaAccesibilidad {
+  order: -1;
 }
 
-.vender:hover {
-  text-decoration: underline;
+.etiquetaFila {
+  display: none;
 }
 
 .icono {
@@ -162,80 +187,30 @@
   width: var(--altura-control-md);
   height: var(--altura-control-md);
   padding: var(--espacio-0);
-  border: var(--borde-ancho) solid var(--color-borde);
+  border: var(--borde-ancho) solid var(--borde-sutil);
   border-radius: var(--radio-completo);
-  background: var(--color-fondo);
-  color: var(--color-texto);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
   cursor: pointer;
   transition:
     background-color var(--transicion),
     border-color var(--transicion);
 }
 
-.icono:hover:not(:disabled) {
-  border-color: var(--color-borde-fuerte);
-  background: var(--color-fondo-suave);
-}
-
-.icono:disabled {
-  opacity: var(--opacidad-deshabilitado);
-  cursor: not-allowed;
-}
-
-.icono svg {
-  width: var(--tamano-icono);
-  height: var(--tamano-icono);
-}
-
-.buscador svg {
-  width: var(--tamano-icono-sm);
-  height: var(--tamano-icono-sm);
+.icono:hover {
+  border-color: var(--borde-fuerte);
+  background: var(--fondo-sutil);
 }
 
 .accesibilidad[aria-pressed="true"] {
-  border-color: var(--color-tinta);
-  background: var(--color-tinta);
-  color: var(--color-texto-inverso);
+  border-color: var(--marca-primario);
+  background: var(--marca-primario);
+  color: var(--texto-inverso);
 }
 
-.accion {
-  display: inline-flex;
-  align-items: center;
-  height: var(--altura-control-md);
-  padding-inline: var(--espacio-4);
-  border-radius: var(--radio-md);
-  background: var(--color-tinta);
-  color: var(--color-texto-inverso);
-  font-size: var(--texto-sm);
-  font-weight: var(--peso-semibold);
-  white-space: nowrap;
-  transition: background-color var(--transicion);
-}
-
-.navbar .accion:hover {
-  background: var(--color-tinta-hover);
-}
-
-.accionSecundaria {
-  display: inline-flex;
-  align-items: center;
-  height: var(--altura-control-md);
-  padding-inline: var(--espacio-4);
-  border: var(--borde-ancho) solid var(--color-borde);
-  border-radius: var(--radio-md);
-  background: var(--color-fondo);
-  color: var(--color-texto);
-  font-size: var(--texto-sm);
-  font-weight: var(--peso-semibold);
-  white-space: nowrap;
-  transition:
-    background-color var(--transicion),
-    border-color var(--transicion);
-}
-
-.navbar .accionSecundaria:hover {
-  border-color: var(--color-borde-fuerte);
-  background: var(--color-fondo-suave);
+.cuenta {
+  display: flex;
+  gap: var(--espacio-2);
 }
 
 /* ---------- Carga y error ---------- */
@@ -244,22 +219,22 @@
   align-items: center;
   gap: var(--espacio-2);
   margin: var(--espacio-0);
-  font-size: var(--texto-sm);
-  color: var(--color-texto-suave);
+  font-size: var(--cuerpo-p-tamano);
+  color: var(--texto-secundario);
 }
 
 .reintentar {
   height: var(--altura-control-sm);
   padding-inline: var(--espacio-3);
-  border: var(--borde-ancho) solid var(--color-borde);
-  border-radius: var(--radio-sm);
-  background: var(--color-fondo);
-  color: var(--color-texto);
+  border: var(--borde-ancho) solid var(--borde-sutil);
+  border-radius: var(--radio-md);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
   cursor: pointer;
 }
 
-.reintentar:hover {
-  background: var(--color-fondo-suave);
+.cortina {
+  display: none;
 }
 
 /* ---------- Foco visible ---------- */
@@ -270,49 +245,92 @@
 }
 
 /* ---------- Móvil y tablet ---------- */
-@media (max-width: 1280px) {
+@media (max-width: 900px) {
+  /* En móvil el encabezado es oscuro y se funde con el hero (Figma: «Menú móvil»). */
+  .navbar {
+    border-bottom-color: transparent;
+    background: var(--fondo-inverso);
+    color: var(--texto-inverso);
+  }
+
   .interior {
-    flex-wrap: wrap;
-    gap: var(--espacio-0) var(--espacio-3);
-    padding: var(--espacio-3) var(--espacio-4);
+    gap: var(--espacio-3);
+  }
+
+  .logoClaro {
+    display: none;
+  }
+
+  .logoOscuro {
+    display: block;
   }
 
   .movilAcciones {
     display: flex;
   }
 
+  .navbar .iconoMovil:focus-visible,
+  .navbar .ingresarMovil:focus-visible {
+    outline-color: var(--color-foco-inverso);
+  }
+
+  .cortina {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: calc(var(--capa-menu) - 1);
+    background: var(--scrim);
+  }
+
   .panel {
     display: none;
-    flex: 0 0 100%;
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: var(--capa-menu);
+    flex: none;
     flex-direction: column;
     align-items: stretch;
     gap: var(--espacio-4);
-    padding-block: var(--espacio-4) var(--espacio-2);
+    max-height: var(--altura-pantalla);
+    padding: var(--espacio-4) var(--gutter-pagina) var(--espacio-6);
+    overflow-y: auto;
+    border-radius: 0 0 var(--radio-xl) var(--radio-xl);
+    background: var(--fondo-superficie);
+    box-shadow: var(--sombra-flotante);
+    color: var(--texto-principal);
   }
 
   .panel.abierto {
     display: flex;
   }
 
+  .hojaCabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--altura-control-lg);
+  }
+
   .enlaces {
     flex-direction: column;
-    gap: var(--espacio-1);
+    gap: var(--espacio-0);
   }
 
   .enlace {
     display: block;
     padding-block: var(--espacio-3);
-    font-size: var(--texto-md);
+    border-bottom: 0;
+    font-size: var(--cuerpo-m-tamano);
+    line-height: var(--cuerpo-m-alto);
+    color: var(--texto-principal);
   }
 
   .enlace[aria-current="page"] {
-    border-bottom-color: transparent;
+    font-weight: var(--peso-semibold);
   }
 
   .buscador {
-    flex: none;
-    width: 100%;
-    margin-left: 0;
+    display: none;
   }
 
   .utilidades {
@@ -321,18 +339,40 @@
     gap: var(--espacio-4);
   }
 
-  .vender {
-    padding-block: var(--espacio-2);
-    font-size: var(--texto-md);
+  .filaAccesibilidad {
+    order: 0;
   }
 
-  .preferencias {
+  .fila {
     justify-content: space-between;
   }
 
-  .cuenta > * {
-    flex: 1;
+  .etiquetaFila {
+    display: block;
+    font-size: var(--cuerpo-p-tamano);
+    font-weight: var(--peso-medio);
+  }
+
+  .cuenta {
+    flex-direction: column;
+  }
+
+  /* En la hoja móvil «Ingresar» es el botón principal y «Crear cuenta» el secundario (Figma). */
+  .cuenta > a {
     justify-content: center;
     height: var(--altura-control-lg);
+  }
+
+  .cuenta > a[data-rol="ingresar"] {
+    order: -1;
+    border-color: var(--marca-primario);
+    background: var(--marca-primario);
+    color: var(--texto-inverso);
+  }
+
+  .cuenta > a[data-rol="crear"] {
+    border-color: var(--borde-fuerte);
+    background: var(--fondo-superficie);
+    color: var(--texto-principal);
   }
 }

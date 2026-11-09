@@ -1,0 +1,18 @@
+.icono {
+  flex: none;
+}
+
+.sm {
+  width: var(--tamano-icono-sm);
+  height: var(--tamano-icono-sm);
+}
+
+.md {
+  width: var(--tamano-icono);
+  height: var(--tamano-icono);
+}
+
+.lg {
+  width: var(--tamano-icono-lg);
+  height: var(--tamano-icono-lg);
+}

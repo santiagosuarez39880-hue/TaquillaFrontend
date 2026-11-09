@@ -1,0 +1,48 @@
+/* [project]/src/components/ui/LanguageSelector.module.css [app-client] (css) */
+.LanguageSelector-module__Ne0R5q__selector {
+  align-items: center;
+  gap: var(--espacio-1);
+  height: var(--altura-control-md);
+  padding: var(--espacio-1);
+  border: var(--borde-ancho) solid var(--borde-sutil);
+  border-radius: var(--radio-completo);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
+  display: inline-flex;
+}
+
+.LanguageSelector-module__Ne0R5q__opcion {
+  height: 100%;
+  padding-inline: var(--espacio-3);
+  border-radius: var(--radio-completo);
+  color: inherit;
+  font-family: inherit;
+  font-size: var(--nota-tamano);
+  font-weight: var(--peso-medio);
+  cursor: pointer;
+  transition: background-color var(--transicion),
+    color var(--transicion);
+  background: none;
+  border: 0;
+}
+
+.LanguageSelector-module__Ne0R5q__opcion:hover:not(:disabled):not([aria-pressed="true"]) {
+  background: var(--fondo-sutil);
+}
+
+.LanguageSelector-module__Ne0R5q__opcion[aria-pressed="true"] {
+  background: var(--marca-primario);
+  color: var(--texto-inverso);
+}
+
+.LanguageSelector-module__Ne0R5q__opcion:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.LanguageSelector-module__Ne0R5q__opcion:disabled {
+  opacity: var(--opacidad-deshabilitado);
+  cursor: not-allowed;
+}
+
+/*# sourceMappingURL=src_components_ui_LanguageSelector_module_css_1igg3k2-ikub5._.single.css.map*/

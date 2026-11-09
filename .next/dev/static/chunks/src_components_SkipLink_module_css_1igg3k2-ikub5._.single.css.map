@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/components/SkipLink.module.css"],"sourcesContent":["/* Fuera de pantalla hasta que recibe foco con el teclado. */\n.salto {\n  position: absolute;\n  top: var(--espacio-2);\n  left: var(--espacio-2);\n  z-index: var(--capa-aviso);\n  padding: var(--espacio-2) var(--espacio-4);\n  border-radius: var(--radio-md);\n  background: var(--marca-primario);\n  color: var(--texto-inverso);\n  font-size: var(--cuerpo-p-tamano);\n  font-weight: var(--peso-semibold);\n  text-decoration: none;\n  transform: translateY(-200%);\n}\n\n.salto:focus-visible {\n  transform: none;\n  outline: var(--foco-ancho) solid var(--color-foco);\n  outline-offset: var(--foco-separacion);\n}\n"],"names":[],"mappings":"AACA;;;;;;;;;;;;;;;AAeA"}}]
+}

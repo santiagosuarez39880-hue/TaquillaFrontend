@@ -2,106 +2,153 @@
  * Tokens de diseño de Taquilla.
  *
  * ÚNICA fuente de valores visuales: los componentes solo usan var(--token).
- * `npm run check:tokens` falla si un .module.css escribe colores, tamaños o
- * tiempos a mano.
+ * `npm run check:tokens` falla si un .css escribe colores, medidas o tiempos a
+ * mano, o si usa una variable que no está definida aquí.
  *
- * IMPORTANTE: estos valores salen de la captura del navbar de Taquilla y de
- * escalas estándar. No tuve acceso al archivo de Figma: compara cada token con
- * Figma (Variables / Styles) y corrige aquí; no hace falta tocar componentes.
+ * PARTE 1 — Exportada de Figma (recursos-taquilla/tokens.css), sin cambios.
+ *   Si el diseño cambia, se vuelve a exportar y se reemplaza este bloque.
+ * PARTE 2 — Derivados: escala tipográfica (de los estilos de texto de Figma),
+ *   layout, foco y capas. Se apoyan en la parte 1 siempre que se puede.
  */
 
 :root {
-  /* ---------- Color: marca y texto ---------- */
-  --color-tinta: #111827;
-  --color-tinta-hover: #030712;
-  --color-texto: #111827;
-  --color-texto-suave: #4b5563;
-  --color-texto-inverso: #ffffff;
+  /* ============ PARTE 1 · Figma ============ */
 
-  /* ---------- Color: superficies y bordes ---------- */
-  --color-fondo: #ffffff;
-  --color-fondo-suave: #f3f4f6;
-  --color-fondo-pagina: #f9fafb;
-  --color-borde: #e5e7eb;
-  --color-borde-fuerte: #9ca3af;
-  --color-foco: #111827;
+  /* Color */
+  --fondo-pagina: #f7f7f7;
+  --fondo-superficie: #ffffff;
+  --fondo-sutil: #f0f0f0;
+  --fondo-inverso: #141414;
+  --fondo-inverso-2: #262626;
+  --marca-primario: #141414;
+  --marca-primario-hover: #2e2e2e;
+  --marca-primario-suave: #f0f0f0;
+  --marca-acento: #c9a24d;
+  --texto-principal: #141414;
+  --texto-secundario: #525252;
+  --texto-terciario: #6b6b6b;
+  --texto-inverso: #ffffff;
+  --texto-inverso-suave: #a8a8a8;
+  --texto-marca: #141414;
+  --borde-sutil: #e5e5e5;
+  --borde-fuerte: #8c8c8c;
+  --borde-inverso: #3a3a3a;
+  --estado-exito: #1a7f4b;
+  --estado-exito-suave: #e8f5ec;
+  --estado-alerta: #9a6700;
+  --estado-alerta-suave: #fff4d6;
+  --estado-error: #c5221f;
+  --estado-error-suave: #fce8e6;
+  --zona-vip: #6f66b0;
+  --zona-platea: #3f78b5;
+  --zona-general: #4c9a76;
+  --asiento-ocupado: #e0e0e0;
+  --asiento-reservado: #e6c36a;
+  --marca-primario-presionado: #000000;
+  --fondo-presionado: #e5e5e5;
+  --fondo-inverso-presionado: #3a3a3a;
 
-  /* ---------- Color: estados ---------- */
-  --color-exito: #166534;
-  --color-exito-fondo: #dcfce7;
-  --color-aviso: #92400e;
-  --color-aviso-fondo: #fef3c7;
-  --color-peligro: #b91c1c;
-  --color-peligro-fondo: #fee2e2;
-  --color-info: #1e40af;
-  --color-info-fondo: #dbeafe;
+  /* Medidas */
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 12px;
+  --espacio-4: 16px;
+  --espacio-6: 24px;
+  --espacio-8: 32px;
+  --espacio-12: 48px;
+  --espacio-16: 64px;
+  --radio-sm: 6px;
+  --radio-md: 8px;
+  --radio-lg: 12px;
+  --radio-xl: 16px;
+  --radio-completo: 999px;
 
-  /* ---------- Tipografía ---------- */
-  --fuente-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Familia tipográfica. Next.js la carga con next/font (ver layout.tsx) y
+     expone --fuente-next-instrument; el resto es el respaldo de Figma. */
+  --fuente-instrument-sans: var(--fuente-next-instrument), "Instrument Sans", system-ui, sans-serif;
 
-  --texto-xs: 0.75rem;
-  --texto-sm: 0.875rem;
-  --texto-md: 1rem;
-  --texto-lg: 1.125rem;
-  --texto-xl: 1.25rem;
-  --texto-2xl: 1.5rem;
-  --texto-3xl: 2rem;
+  /* Sombras */
+  --sombra-tarjeta: 0px 1px 2px 0px #1414140d;
+  --sombra-flotante: 0px 8px 24px 0px #1414141a;
 
+  /* ============ PARTE 2 · Derivados ============ */
+
+  --espacio-0: 0;
+
+  /* Pesos de los estilos de texto de Figma (Regular, Medium, SemiBold) */
   --peso-normal: 400;
   --peso-medio: 500;
   --peso-semibold: 600;
-  --peso-negrita: 700;
 
-  --interlineado-ajustado: 1.25;
-  --interlineado-normal: 1.5;
-  --tracking-ajustado: -0.01em;
+  /* Estilos de texto de Figma: tamaño / alto de línea / espaciado entre letras */
+  --display-tamano: 52px;
+  --display-alto: 56px;
+  --display-tracking: -0.025em;
+  --h1-tamano: 34px;
+  --h1-alto: 40px;
+  --h1-tracking: -0.02em;
+  --h2-tamano: 24px;
+  --h2-alto: 30px;
+  --h2-tracking: -0.015em;
+  --h3-tamano: 20px;
+  --h3-alto: 26px;
+  --h3-tracking: -0.01em;
+  --h4-tamano: 16px;
+  --h4-alto: 22px;
+  --h4-tracking: -0.005em;
+  --cuerpo-g-tamano: 18px;
+  --cuerpo-g-alto: 28px;
+  --cuerpo-m-tamano: 16px;
+  --cuerpo-m-alto: 24px;
+  --cuerpo-p-tamano: 14px;
+  --cuerpo-p-alto: 20px;
+  --nota-tamano: 12px;
+  --nota-alto: 16px;
 
-  /* ---------- Espaciado (base 4 px) ---------- */
-  --espacio-0: 0;
-  --espacio-1: 0.25rem;
-  --espacio-2: 0.5rem;
-  --espacio-3: 0.75rem;
-  --espacio-4: 1rem;
-  --espacio-5: 1.25rem;
-  --espacio-6: 1.5rem;
-  --espacio-8: 2rem;
-  --espacio-10: 2.5rem;
-  --espacio-12: 3rem;
-
-  /* ---------- Radios ---------- */
-  --radio-sm: 0.5rem;
-  --radio-md: 0.625rem;
-  --radio-lg: 1rem;
-  --radio-completo: 999px;
-
-  /* ---------- Bordes, foco y controles ---------- */
-  --borde-ancho: 1px;
+  /* Foco visible */
+  --color-foco: var(--marca-primario);
+  --color-foco-inverso: var(--texto-inverso);
   --foco-ancho: 2px;
   --foco-separacion: 2px;
-  --altura-control-sm: 2rem;
-  --altura-control-md: 2.25rem;
-  --altura-control-lg: 2.75rem;
 
-  /* ---------- Sombras ---------- */
-  --sombra-sm: 0 1px 2px rgb(17 24 39 / 8%);
-  --sombra-md: 0 4px 12px rgb(17 24 39 / 12%);
-
-  /* ---------- Movimiento, opacidad y capas ---------- */
-  --transicion: 150ms ease;
+  /* Controles */
+  --borde-ancho: 1px;
+  --altura-control-sm: 32px;
+  --altura-control-md: 36px;
+  --altura-control-lg: 44px;
   --opacidad-deshabilitado: 0.5;
-  --capa-navbar: 50;
-  --capa-aviso: 100;
+  --tamano-icono-sm: 16px;
+  --tamano-icono: 18px;
+  --tamano-icono-lg: 20px;
 
-  /* ---------- Anchos y tamaños de layout ---------- */
-  --ancho-contenido: 90rem;
-  --ancho-aviso: 40rem;
-  --ancho-buscador: 16.25rem;
-  --ancho-buscador-min: 11rem;
-  --altura-navbar: 4rem;
+  /* Movimiento y capas */
+  --transicion: 150ms ease;
+  --capa-navbar: 50;
+  --capa-menu: 60;
+  --capa-aviso: 100;
+  --scrim: #14141466;
+
+  /* Layout */
+  --ancho-contenido: 1200px;
+  --ancho-aviso: 640px;
+  --ancho-buscador: 260px;
+  --altura-navbar: 64px;
   --altura-pantalla: 100dvh;
-  --tamano-logo: 1.75rem;
-  --tamano-icono-sm: 1rem;
-  --tamano-icono: 1.125rem;
+  --tamano-logo-alto: 32px;
+  --ancho-lema: 360px;
+  --ancho-texto: 540px;
+  --ancho-hero-tarjeta: 458px;
+  --alto-hero-tarjeta: 420px;
+  --tamano-solo-lector: 1px;
+  --ancho-tarjeta-movil: 280px;
+  --gutter-pagina: var(--espacio-6);
+}
+
+/* En móvil el margen lateral es de 16 px. */
+@media (max-width: 600px) {
+  :root {
+    --gutter-pagina: var(--espacio-4);
+  }
 }
 
 /* Quien pide menos movimiento no ve transiciones. */

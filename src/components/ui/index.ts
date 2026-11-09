@@ -1,4 +1,4 @@
-export { Button } from "./Button";
+export { Button, clasesBoton } from "./Button";
 export type { ButtonProps, ButtonTamano, ButtonVariante } from "./Button";
 export { Card } from "./Card";
 export type { CardProps } from "./Card";
@@ -6,7 +6,11 @@ export { CookieBanner } from "./CookieBanner";
 export type { CookieBannerProps, DecisionCookies, TextosCookieBanner } from "./CookieBanner";
 export { Field } from "./Field";
 export type { FieldProps } from "./Field";
+export { Icon } from "./Icon";
+export type { IconProps, NombreIcono } from "./Icon";
 export { LanguageSelector } from "./LanguageSelector";
 export type { LanguageSelectorProps, OpcionIdioma } from "./LanguageSelector";
+export { LinkButton } from "./LinkButton";
+export type { LinkButtonProps } from "./LinkButton";
 export { Tag } from "./Tag";
 export type { TagProps, TagVariante } from "./Tag";

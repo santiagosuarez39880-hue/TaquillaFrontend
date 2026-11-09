@@ -4,15 +4,15 @@
   gap: var(--espacio-3);
   max-width: var(--ancho-contenido);
   margin-inline: auto;
-  padding: var(--espacio-10) var(--espacio-6);
+  padding: var(--espacio-12) var(--espacio-6);
 }
 
 .titulo {
-  font-size: var(--texto-3xl);
-  font-weight: var(--peso-negrita);
-  line-height: var(--interlineado-ajustado);
+  font-size: var(--h1-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h1-alto);
 }
 
 .texto {
-  color: var(--color-texto-suave);
+  color: var(--texto-secundario);
 }

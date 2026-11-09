@@ -1,0 +1,14 @@
+/* Los dos colores llegan de la API como --afiche-1 y --afiche-2 (style en línea). */
+.afiche {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--afiche-1), var(--afiche-2));
+}
+
+.patron {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--texto-inverso);
+}

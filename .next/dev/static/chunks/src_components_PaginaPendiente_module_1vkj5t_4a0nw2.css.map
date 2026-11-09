@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/cuent/OneDrive/Documentos/Frontend/TaquillaSantiagoSuarez/src/components/PaginaPendiente.module.css"],"sourcesContent":[".pagina {\n  display: flex;\n  flex-direction: column;\n  gap: var(--espacio-3);\n  max-width: var(--ancho-contenido);\n  margin-inline: auto;\n  padding: var(--espacio-12) var(--espacio-6);\n}\n\n.titulo {\n  font-size: var(--h1-tamano);\n  font-weight: var(--peso-semibold);\n  line-height: var(--h1-alto);\n}\n\n.texto {\n  color: var(--texto-secundario);\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;;;AAMA"}}]
+}

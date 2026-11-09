@@ -6,9 +6,9 @@
   z-index: var(--capa-aviso);
   padding: var(--espacio-2) var(--espacio-4);
   border-radius: var(--radio-md);
-  background: var(--color-tinta);
-  color: var(--color-texto-inverso);
-  font-size: var(--texto-sm);
+  background: var(--marca-primario);
+  color: var(--texto-inverso);
+  font-size: var(--cuerpo-p-tamano);
   font-weight: var(--peso-semibold);
   text-decoration: none;
   transform: translateY(-200%);

@@ -1,0 +1,21 @@
+/* [project]/src/components/PaginaPendiente.module.css [app-client] (css) */
+.PaginaPendiente-module__KCtyua__pagina {
+  gap: var(--espacio-3);
+  max-width: var(--ancho-contenido);
+  padding: var(--espacio-12) var(--espacio-6);
+  flex-direction: column;
+  margin-inline: auto;
+  display: flex;
+}
+
+.PaginaPendiente-module__KCtyua__titulo {
+  font-size: var(--h1-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h1-alto);
+}
+
+.PaginaPendiente-module__KCtyua__texto {
+  color: var(--texto-secundario);
+}
+
+/*# sourceMappingURL=src_components_PaginaPendiente_module_1vkj5t_4a0nw2.css.map*/
