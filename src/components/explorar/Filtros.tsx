@@ -27,7 +27,7 @@ export function Filtros({
   onCategoria,
   onCiudad,
 }: FiltrosProps) {
-  const { t } = useT();
+  const { t, categoria } = useT();
   const id = useId();
 
   return (
@@ -46,7 +46,7 @@ export function Filtros({
                     checked={categoriasActivas.includes(c.id)}
                     onChange={() => onCategoria(c.id)}
                   />
-                  <span className={styles.nombre}>{c.nombre}</span>
+                  <span className={styles.nombre}>{categoria(c.id, c.nombre)}</span>
                   <span className={styles.conteo}>{c.eventos}</span>
                 </label>
               </li>
@@ -62,7 +62,7 @@ export function Filtros({
                   aria-pressed={categoriasActivas.includes(c.id)}
                   onClick={() => onCategoria(c.id)}
                 >
-                  {c.nombre}
+                  {categoria(c.id, c.nombre)}
                 </button>
               </li>
             ))}

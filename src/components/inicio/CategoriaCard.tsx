@@ -22,7 +22,7 @@ export interface CategoriaCardProps {
 }
 
 export function CategoriaCard({ categoria }: CategoriaCardProps) {
-  const { plural } = useT();
+  const { plural, categoria: etiqueta } = useT();
   const conteo = plural("paginas.inicio.categorias.conteo", categoria.eventos);
 
   return (
@@ -34,7 +34,7 @@ export function CategoriaCard({ categoria }: CategoriaCardProps) {
         <Icon name={ICONO_POR_CATEGORIA[categoria.id] ?? "ticket"} tamano="lg" />
       </span>
       <span className={styles.texto}>
-        <span className={styles.nombre}>{categoria.nombre}</span>
+        <span className={styles.nombre}>{etiqueta(categoria.id, categoria.nombre)}</span>
         <span className={styles.conteo}>{conteo}</span>
       </span>
     </Link>

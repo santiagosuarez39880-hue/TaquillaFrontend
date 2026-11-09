@@ -32,7 +32,7 @@ export function ExplorarVista({
   categorias,
   ciudades,
 }: ExplorarVistaProps) {
-  const { t, plural, listo } = useT();
+  const { t, plural, listo, categoria } = useT();
   const router = useRouter();
   const [pendiente, iniciar] = useTransition();
   const [panelAbierto, setPanelAbierto] = useState(false);
@@ -80,7 +80,8 @@ export function ExplorarVista({
     ir({ q: busqueda.trim() });
   }
 
-  const nombreCategoria = (c: string) => categorias.find((x) => x.id === c)?.nombre ?? c;
+  const nombreCategoria = (c: string) =>
+    categoria(c, categorias.find((x) => x.id === c)?.nombre ?? c);
   const activos = [
     ...filtros.categorias.map((c) => ({
       clave: `c-${c}`,

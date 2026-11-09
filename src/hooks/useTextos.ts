@@ -1,74 +1,59 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getApiUrl } from "@/lib/env";
+import { validarTextos } from "@/lib/textos-api";
 import type { Idioma, Textos } from "@/types/textos";
 
 const LIMITE_MS = 12_000;
 
-function esTexto(valor: unknown): valor is string {
-  return typeof valor === "string" && valor.trim().length > 0;
-}
-
-/**
- * Comprueba que la respuesta trae los textos que el Navbar necesita para existir.
- * El resto de textos se pide por ruta con useT() y tiene respaldo, así que una
- * clave ausente allí no rompe el sitio.
- */
-function validarTextos(datos: unknown): Textos {
-  const textos = (datos as { textos?: Textos } | null)?.textos;
-  const nav = textos?.navbar;
-
-  const etiquetas: unknown[] = [
-    nav?.logo?.texto,
-    nav?.logo?.aria,
-    nav?.enlaces?.explorar,
-    nav?.buscador?.placeholder,
-    nav?.buscador?.aria,
-    nav?.botones?.ingresar,
-    nav?.botones?.crearCuenta,
-    nav?.aria?.idioma,
-    nav?.aria?.accesibilidad,
-    textos?.menuMovil?.abrir,
-    textos?.menuMovil?.cerrar,
-  ];
-
-  if (!textos || !etiquetas.every(esTexto)) {
-    throw new Error("La respuesta no contiene los textos del navbar.");
-  }
-  return textos;
+export interface TextosIniciales {
+  idioma: Idioma;
+  textos: Textos | null;
 }
 
 export interface EstadoTextos {
   textos: Textos | null;
+  /** Idioma de los textos que se están mostrando (puede ir un paso detrás del elegido). */
+  idiomaCargado: Idioma;
   cargando: boolean;
   error: boolean;
   recargar: () => void;
 }
 
-export function useTextos(idioma: Idioma): EstadoTextos {
-  const [textos, setTextos] = useState<Textos | null>(null);
-  const [cargando, setCargando] = useState(true);
+/**
+ * Pide GET /textos?idioma=… Al cambiar de idioma conserva los textos anteriores
+ * hasta que llegan los nuevos, así la interfaz no parpadea ni se vacía.
+ */
+export function useTextos(idioma: Idioma, iniciales?: TextosIniciales): EstadoTextos {
+  const [cargado, setCargado] = useState<TextosIniciales>(iniciales ?? { idioma, textos: null });
+  const [cargando, setCargando] = useState(!(iniciales?.textos && iniciales.idioma === idioma));
   const [error, setError] = useState(false);
   const [intento, setIntento] = useState(0);
+  const ultimo = useRef(cargado);
+  ultimo.current = cargado;
 
   useEffect(() => {
+    // Ya hay textos de este idioma (los del servidor o los de una visita anterior).
+    if (ultimo.current.textos && ultimo.current.idioma === idioma && intento === 0) {
+      setCargando(false);
+      return;
+    }
     const controlador = new AbortController();
     const limite = setTimeout(() => controlador.abort(), LIMITE_MS);
     let vigente = true;
 
     setCargando(true);
     setError(false);
-    setTextos(null);
 
-    async function cargarTextosNavbar() {
+    async function cargarTextos() {
       try {
         const respuesta = await fetch(`${getApiUrl()}/textos?idioma=${idioma}`, {
           signal: controlador.signal,
         });
         if (!respuesta.ok) throw new Error(`HTTP ${respuesta.status}`);
-        const nuevosTextos = validarTextos(await respuesta.json());
-        if (vigente) setTextos(nuevosTextos);
+        const textos = validarTextos(await respuesta.json());
+        if (vigente) setCargado({ idioma, textos });
       } catch (fallo) {
         if (vigente) {
           console.error("Error al cargar los textos:", fallo);
@@ -80,7 +65,7 @@ export function useTextos(idioma: Idioma): EstadoTextos {
       }
     }
 
-    void cargarTextosNavbar();
+    void cargarTextos();
     return () => {
       vigente = false;
       clearTimeout(limite);
@@ -89,7 +74,8 @@ export function useTextos(idioma: Idioma): EstadoTextos {
   }, [idioma, intento]);
 
   return {
-    textos,
+    textos: cargado.textos,
+    idiomaCargado: cargado.idioma,
     cargando,
     error,
     recargar: () => setIntento((valor) => valor + 1),

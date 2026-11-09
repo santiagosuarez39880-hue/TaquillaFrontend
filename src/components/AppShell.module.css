@@ -14,3 +14,12 @@
 .contenido:focus {
   outline: none;
 }
+
+.soloLector {
+  position: absolute;
+  width: var(--tamano-solo-lector);
+  height: var(--tamano-solo-lector);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

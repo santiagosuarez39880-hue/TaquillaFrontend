@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import type { ReactNode } from "react";
 import AppShell from "@/components/AppShell";
+import { idiomaDeLaVisita, textosDeLaVisita } from "@/lib/idioma-servidor";
+import { metadatosDe } from "@/lib/seo";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -11,17 +13,20 @@ const instrumentSans = Instrument_Sans({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Taquilla",
-  description:
-    "Entradas para conciertos, teatro, deportes y festivales. Elige tu asiento y recibe tu entrada con código QR.",
-};
+/** Título y descripción por defecto: `paginas.inicio.seo` de la API, en el idioma de la visita. */
+export function generateMetadata(): Promise<Metadata> {
+  return metadatosDe("inicio");
+}
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  // La cookie `idioma` solo se lee si la persona aceptó las cookies (ver lib/idioma.ts).
+  const idioma = await idiomaDeLaVisita();
+  const textos = await textosDeLaVisita(idioma);
+
   return (
-    <html lang="es" className={instrumentSans.variable}>
+    <html lang={idioma} className={instrumentSans.variable}>
       <body>
-        <AppShell>{children}</AppShell>
+        <AppShell inicial={{ idioma, textos }}>{children}</AppShell>
       </body>
     </html>
   );

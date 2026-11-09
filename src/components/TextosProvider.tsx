@@ -45,6 +45,9 @@ export function useT() {
       plural: (ruta: string, cantidad: number, valores?: Valores) =>
         traducirPlural(textos, idioma, ruta, cantidad, valores),
       etiquetas: (ruta: string) => leerEtiquetas(textos, ruta),
+      /** Nombre de una categoría para la interfaz: el de /textos y, si no lo trae, el de /categorias. */
+      categoria: (id: string, nombre: string) =>
+        traducir(textos, idioma, `general.categorias.${id}`) || nombre,
     }),
     [textos, idioma, cargando, error, recargar],
   );
