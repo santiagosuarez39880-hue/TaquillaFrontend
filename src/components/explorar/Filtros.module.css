@@ -1,0 +1,110 @@
+.filtros {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-6);
+}
+
+.grupo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  min-width: 0;
+  margin: var(--espacio-0);
+  padding: var(--espacio-0);
+  border: none;
+}
+
+.titulo {
+  padding: var(--espacio-0);
+  margin-bottom: var(--espacio-3);
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.casillas,
+.chips {
+  margin: var(--espacio-0);
+  padding: var(--espacio-0);
+  list-style: none;
+}
+
+.casillas {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.casilla {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  cursor: pointer;
+  font-size: var(--cuerpo-p-tamano);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.casilla input {
+  flex: none;
+  width: var(--tamano-icono-sm);
+  height: var(--tamano-icono-sm);
+  margin: var(--espacio-0);
+  accent-color: var(--fondo-inverso);
+  cursor: pointer;
+}
+
+.casilla input:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.nombre {
+  flex: 1;
+}
+
+.conteo {
+  color: var(--texto-terciario);
+  font-size: var(--nota-tamano);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacio-2);
+}
+
+.chip {
+  padding: var(--espacio-2) var(--espacio-4);
+  border: var(--borde-ancho) solid var(--borde-sutil);
+  border-radius: var(--radio-completo);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
+  font: inherit;
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-medio);
+  line-height: var(--cuerpo-p-alto);
+  cursor: pointer;
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--fondo-inverso);
+  background: var(--fondo-inverso);
+  color: var(--texto-inverso);
+}
+
+.chip:focus-visible,
+.select:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.select {
+  height: var(--altura-control-lg);
+  padding: var(--espacio-0) var(--espacio-3);
+  border: var(--borde-ancho) solid var(--borde-fuerte);
+  border-radius: var(--radio-md);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
+  font: inherit;
+  font-size: var(--cuerpo-p-tamano);
+}

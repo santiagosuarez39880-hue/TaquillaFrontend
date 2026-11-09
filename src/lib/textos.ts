@@ -23,6 +23,7 @@ export const RESPALDO: Record<Idioma, Record<string, string>> = {
   es: {
     "navbar.enlaces.inicio": "Inicio",
     "paginas.inicio.botones.verEvento": "Ver evento",
+    "paginas.explorar.encabezado.migas": "Ruta de navegación",
     "footer.columnas.explora": "Explora",
     "footer.columnas.cuenta": "Tu cuenta",
     "footer.columnas.legal": "Legal",
@@ -36,6 +37,7 @@ export const RESPALDO: Record<Idioma, Record<string, string>> = {
   en: {
     "navbar.enlaces.inicio": "Home",
     "paginas.inicio.botones.verEvento": "See event",
+    "paginas.explorar.encabezado.migas": "Breadcrumb",
     "footer.columnas.explora": "Explore",
     "footer.columnas.cuenta": "Your account",
     "footer.columnas.legal": "Legal",
