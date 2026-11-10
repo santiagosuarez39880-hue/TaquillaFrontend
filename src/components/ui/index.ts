@@ -2,6 +2,8 @@ export { Button, clasesBoton } from "./Button";
 export type { ButtonProps, ButtonTamano, ButtonVariante } from "./Button";
 export { Card } from "./Card";
 export type { CardProps } from "./Card";
+export { BannerCookies } from "./BannerCookies";
+export type { BannerCookiesProps, TextosBannerCookies } from "./BannerCookies";
 export { CookieBanner } from "./CookieBanner";
 export type { CookieBannerProps, DecisionCookies, TextosCookieBanner } from "./CookieBanner";
 export { Field } from "./Field";

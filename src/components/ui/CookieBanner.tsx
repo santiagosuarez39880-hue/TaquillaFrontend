@@ -1,51 +1,39 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button } from "./Button";
-import styles from "./CookieBanner.module.css";
+import { guardarConsentimiento, yaDecidio } from "@/lib/idioma";
+import type { Decision } from "@/lib/idioma";
+import { BannerCookies } from "./BannerCookies";
+import type { TextosBannerCookies } from "./BannerCookies";
 
-export type DecisionCookies = "todas" | "necesarias" | "configurar";
-
-/** Textos del aviso. Vienen de la API: textos.cookies.banner. */
-export interface TextosCookieBanner {
-  titulo: string;
-  texto: string;
-  politica: string;
-  configurar: string;
-  rechazarOpcionales: string;
-  aceptarTodas: string;
-  /** Nombre accesible de la región (textos.cookies.banner.aria.region). */
-  region: string;
-}
+export type DecisionCookies = Decision;
+export type TextosCookieBanner = TextosBannerCookies;
 
 export interface CookieBannerProps {
-  textos: TextosCookieBanner;
+  textos: TextosBannerCookies;
   hrefPolitica: string;
-  /** Se llama una vez que la persona decide. */
+  /** Se llama una vez que la persona decide y la cookie quedó guardada. */
   onDecidir?: (decision: DecisionCookies) => void;
 }
 
-const NOMBRE_COOKIE = "cookies_consentimiento";
-const SEGUNDOS_POR_ANIO = 60 * 60 * 24 * 365;
-
-function yaDecidio(): boolean {
-  return document.cookie.split("; ").some((par) => par.startsWith(`${NOMBRE_COOKIE}=`));
-}
-
-function guardarDecision(decision: DecisionCookies): void {
-  document.cookie = `${NOMBRE_COOKIE}=${decision}; max-age=${SEGUNDOS_POR_ANIO}; path=/; SameSite=Lax`;
-}
-
+/**
+ * Decide si el aviso se muestra (primera visita) y guarda la cookie `consentimiento`.
+ * Equivale al GestorCookies del diseño de referencia, sin panel de preferencias.
+ */
 export function CookieBanner({ textos, hrefPolitica, onDecidir }: CookieBannerProps) {
   // Empieza oculto: el servidor no sabe si ya hubo decisión y así se evita el parpadeo.
   const [visible, setVisible] = useState(false);
+  const [fallo, setFallo] = useState(false);
 
   useEffect(() => {
     setVisible(!yaDecidio());
   }, []);
 
   function decidir(decision: DecisionCookies) {
-    guardarDecision(decision);
+    if (!guardarConsentimiento(decision)) {
+      setFallo(true); // el aviso se queda: sin cookie no hay decisión guardada
+      return;
+    }
     setVisible(false);
     onDecidir?.(decision);
   }
@@ -53,27 +41,12 @@ export function CookieBanner({ textos, hrefPolitica, onDecidir }: CookieBannerPr
   if (!visible) return null;
 
   return (
-    <section className={styles.aviso} aria-label={textos.region}>
-      <div className={styles.contenido}>
-        <h2 className={styles.titulo}>{textos.titulo}</h2>
-        <p className={styles.texto}>
-          {textos.texto}{" "}
-          <a className={styles.enlace} href={hrefPolitica}>
-            {textos.politica}
-          </a>
-        </p>
-      </div>
-      <div className={styles.acciones}>
-        <Button variante="fantasma" tamano="sm" onClick={() => decidir("configurar")}>
-          {textos.configurar}
-        </Button>
-        <Button variante="secundario" tamano="sm" onClick={() => decidir("necesarias")}>
-          {textos.rechazarOpcionales}
-        </Button>
-        <Button variante="primario" tamano="sm" onClick={() => decidir("todas")}>
-          {textos.aceptarTodas}
-        </Button>
-      </div>
-    </section>
+    <BannerCookies
+      textos={textos}
+      hrefPolitica={hrefPolitica}
+      fallo={fallo}
+      onAceptar={() => decidir("aceptado")}
+      onRechazar={() => decidir("rechazado")}
+    />
   );
 }

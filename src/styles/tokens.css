@@ -113,6 +113,7 @@
 
   /* Controles */
   --borde-ancho: 1px;
+  --borde-ancho-fuerte: 2px;
   --altura-control-sm: 32px;
   --altura-control-md: 36px;
   --altura-control-lg: 44px;
@@ -130,7 +131,7 @@
 
   /* Layout */
   --ancho-contenido: 1200px;
-  --ancho-aviso: 640px;
+  --ancho-aviso: 760px;
   --ancho-buscador: 260px;
   --altura-navbar: 64px;
   --altura-pantalla: 100dvh;
