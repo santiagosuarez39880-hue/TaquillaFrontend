@@ -15,9 +15,9 @@ const TEXTOS_COOKIES: TextosCookieBanner = {
   texto:
     "Las necesarias mantienen tu sesión, tu carrito y tu idioma. Las de análisis y marketing solo se activan si las aceptas.",
   politica: "Política de cookies",
-  configurar: "Configurar",
-  rechazarOpcionales: "Rechazar opcionales",
-  aceptarTodas: "Aceptar todas",
+  rechazar: "Rechazar opcionales",
+  aceptar: "Aceptar todas",
+  error: "No pudimos guardar tu decisión.",
   region: "Aviso de cookies",
 };
 

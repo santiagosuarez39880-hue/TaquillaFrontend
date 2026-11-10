@@ -37,6 +37,19 @@ export const RESPALDO: Record<Idioma, Record<string, string>> = {
     "footer.aria.navegacion": "Navegación del pie de página",
     "general.aria.saltarAlContenido": "Saltar al contenido principal",
     "idioma.cambiado": "Idioma cambiado a español.",
+    "cookies.banner.botones.aceptarTodas": "Aceptar",
+    "cookies.banner.botones.rechazarOpcionales": "Rechazar",
+    "paginas.inicio.buscador.etiquetas.que": "Qué",
+    "paginas.inicio.buscador.etiquetas.donde": "Dónde",
+    "paginas.inicio.buscador.etiquetas.cuando": "Cuándo",
+    "paginas.inicio.buscador.etiquetas.cualquierFecha": "Cualquier fecha",
+    "paginas.inicio.buscador.placeholder": "Evento o artista",
+    "paginas.inicio.buscador.botones.buscar": "Buscar",
+    "paginas.explorar.filtros.etiquetas.hoy": "Hoy",
+    "paginas.explorar.filtros.etiquetas.esteFinDeSemana": "Este fin de semana",
+    "paginas.explorar.filtros.etiquetas.esteMes": "Este mes",
+    "cookies.banner.mensajes.error":
+      "No pudimos guardar tu decisión. Revisa que tu navegador permita cookies e inténtalo de nuevo.",
     "paginas.inicio.botones.verEvento": "Ver evento",
     "paginas.explorar.encabezado.migas": "Ruta de navegación",
     "footer.columnas.explora": "Explora",
@@ -65,6 +78,19 @@ export const RESPALDO: Record<Idioma, Record<string, string>> = {
     "footer.aria.navegacion": "Footer navigation",
     "general.aria.saltarAlContenido": "Skip to main content",
     "idioma.cambiado": "Language changed to English.",
+    "cookies.banner.botones.aceptarTodas": "Accept",
+    "cookies.banner.botones.rechazarOpcionales": "Reject",
+    "paginas.inicio.buscador.etiquetas.que": "What",
+    "paginas.inicio.buscador.etiquetas.donde": "Where",
+    "paginas.inicio.buscador.etiquetas.cuando": "When",
+    "paginas.inicio.buscador.etiquetas.cualquierFecha": "Any date",
+    "paginas.inicio.buscador.placeholder": "Event or artist",
+    "paginas.inicio.buscador.botones.buscar": "Search",
+    "paginas.explorar.filtros.etiquetas.hoy": "Today",
+    "paginas.explorar.filtros.etiquetas.esteFinDeSemana": "This weekend",
+    "paginas.explorar.filtros.etiquetas.esteMes": "This month",
+    "cookies.banner.mensajes.error":
+      "We could not save your choice. Check that your browser allows cookies and try again.",
     "paginas.inicio.botones.verEvento": "See event",
     "paginas.explorar.encabezado.migas": "Breadcrumb",
     "footer.columnas.explora": "Explore",
@@ -98,7 +124,20 @@ export function traducir(
 ): string {
   const delApi = leerRuta(textos, ruta);
   const plantilla = typeof delApi === "string" && delApi.trim() ? delApi : RESPALDO[idioma][ruta];
+  if (!plantilla) avisarClaveFaltante(textos, ruta);
   return plantilla ? formatear(plantilla, valores) : "";
+}
+
+const avisadas = new Set<string>();
+
+/**
+ * Solo en desarrollo: una clave que la API no trae se vería como un hueco en pantalla
+ * (un botón sin texto). La consola dice cuál es, una vez, para corregir el nombre.
+ */
+function avisarClaveFaltante(textos: Textos | null, ruta: string): void {
+  if (process.env.NODE_ENV === "production" || !textos || avisadas.has(ruta)) return;
+  avisadas.add(ruta);
+  console.warn(`[textos] Falta la clave «${ruta}» en GET /textos.`);
 }
 
 /** Plurales de la API: la ruta apunta a { uno, otro }. */

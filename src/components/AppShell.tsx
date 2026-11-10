@@ -75,10 +75,13 @@ export default function AppShell({ children, inicial }: Readonly<AppShellProps>)
     guardarIdioma(valor); // solo escribe la cookie si la persona aceptó las cookies
   }
 
-  /** Aceptar guarda el idioma de ahora; rechazar o configurar borra el que hubiera. */
+  /** Aceptar guarda el idioma de ahora; rechazar borra el que hubiera. */
   function alDecidirCookies(decision: DecisionCookies) {
     if (aceptoPreferencias(decision)) guardarIdioma(idioma);
     else borrarIdioma();
+    setAviso(t("cookies.preferencias.mensajes.guardada"));
+    // El aviso desaparece: el foco pasa al contenido para no perderlo en el <body>.
+    document.getElementById(ID_CONTENIDO)?.focus();
   }
 
   /** La búsqueda vive en la URL (/explorar?q=salsa): se puede compartir y recargar. */
@@ -92,9 +95,10 @@ export default function AppShell({ children, inicial }: Readonly<AppShellProps>)
     titulo: t("cookies.banner.titulo"),
     texto: t("cookies.banner.texto"),
     politica: t("cookies.banner.enlaces.politica"),
-    configurar: t("cookies.banner.botones.configurar"),
-    rechazarOpcionales: t("cookies.banner.botones.rechazarOpcionales"),
-    aceptarTodas: t("cookies.banner.botones.aceptarTodas"),
+    rechazar:
+      t("cookies.banner.botones.rechazar") || t("cookies.banner.botones.rechazarOpcionales"),
+    aceptar: t("cookies.banner.botones.aceptar") || t("cookies.banner.botones.aceptarTodas"),
+    error: t("cookies.banner.mensajes.error"),
     region: t("cookies.banner.aria.region"),
   };
 
@@ -102,6 +106,14 @@ export default function AppShell({ children, inicial }: Readonly<AppShellProps>)
     <ProveedorTextos valor={contexto}>
       <div className={styles.estructura}>
         <SkipLink texto={t("general.aria.saltarAlContenido")} />
+        {/* Va justo después del enlace de salto: con teclado se llega al aviso sin recorrer toda la página. */}
+        {banner?.banner && (
+          <CookieBanner
+            textos={textosBanner}
+            hrefPolitica="/cookies"
+            onDecidir={alDecidirCookies}
+          />
+        )}
         <Navbar
           {...datos}
           idioma={idioma}
@@ -117,13 +129,6 @@ export default function AppShell({ children, inicial }: Readonly<AppShellProps>)
         <p className={styles.soloLector} role="status" aria-live="polite">
           {aviso}
         </p>
-        {banner?.banner && (
-          <CookieBanner
-            textos={textosBanner}
-            hrefPolitica="/cookies"
-            onDecidir={alDecidirCookies}
-          />
-        )}
       </div>
     </ProveedorTextos>
   );
