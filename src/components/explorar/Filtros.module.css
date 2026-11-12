@@ -4,6 +4,17 @@
   gap: var(--espacio-6);
 }
 
+/* En el panel lateral los grupos se separan con una línea, como en Figma. */
+.filtros[data-variante="lateral"] {
+  gap: var(--espacio-0);
+}
+
+.filtros[data-variante="lateral"] > .grupo + .grupo {
+  margin-top: var(--espacio-4);
+  padding-top: var(--espacio-4);
+  border-top: var(--borde-ancho) solid var(--borde-sutil);
+}
+
 .grupo {
   display: flex;
   flex-direction: column;
@@ -16,7 +27,6 @@
 
 .titulo {
   padding: var(--espacio-0);
-  margin-bottom: var(--espacio-3);
   font-size: var(--cuerpo-p-tamano);
   font-weight: var(--peso-semibold);
   line-height: var(--cuerpo-p-alto);
@@ -107,4 +117,36 @@
   color: var(--texto-principal);
   font: inherit;
   font-size: var(--cuerpo-p-tamano);
+}
+
+.fechas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--espacio-2);
+}
+
+.campoFecha {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-1);
+  min-width: 0;
+  color: var(--texto-secundario);
+  font-size: var(--nota-tamano);
+}
+
+.entradaFecha {
+  min-width: 0;
+  height: var(--altura-control-md);
+  padding: var(--espacio-0) var(--espacio-2);
+  border: var(--borde-ancho) solid var(--borde-fuerte);
+  border-radius: var(--radio-md);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
+  font: inherit;
+  font-size: var(--nota-tamano);
+}
+
+.entradaFecha:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
 }

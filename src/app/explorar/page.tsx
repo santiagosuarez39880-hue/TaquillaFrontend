@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { ExplorarVista } from "@/components/explorar/ExplorarVista";
-import { obtenerCategorias, obtenerCiudades, obtenerEventos } from "@/lib/catalogo";
+import {
+  obtenerCategorias,
+  obtenerCiudades,
+  obtenerEventos,
+  obtenerRangoPrecio,
+} from "@/lib/catalogo";
 import { leerFiltros, urlExplorar } from "@/lib/explorar";
 import type { ParametrosUrl } from "@/lib/explorar";
 import { metadatosDe } from "@/lib/seo";
@@ -20,10 +25,11 @@ interface ExplorarProps {
 /** Vista 2 · Explorar eventos. Lee los filtros de la URL y consulta la API en el servidor. */
 export default async function Explorar({ searchParams }: ExplorarProps) {
   const filtros = leerFiltros(await searchParams);
-  const [resultado, categorias, ciudades] = await Promise.all([
+  const [resultado, categorias, ciudades, extremosPrecio] = await Promise.all([
     obtenerEventos(filtros),
     obtenerCategorias(),
     obtenerCiudades(),
+    obtenerRangoPrecio(),
   ]);
 
   // Un enlace con una página que ya no existe (por ejemplo ?pagina=99) vuelve a la última.
@@ -39,6 +45,7 @@ export default async function Explorar({ searchParams }: ExplorarProps) {
       paginacion={resultado.paginacion}
       categorias={categorias}
       ciudades={ciudades}
+      extremosPrecio={extremosPrecio}
     />
   );
 }
