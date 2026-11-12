@@ -1,0 +1,92 @@
+.rango {
+  position: relative;
+  display: grid;
+  gap: var(--espacio-3);
+  padding-top: var(--espacio-1);
+}
+
+/* Los dos <input type=range> se apilan sobre la misma pista; solo sus tiradores reciben el puntero. */
+.pista {
+  position: absolute;
+  top: calc(var(--espacio-3) - var(--espacio-1) / 2);
+  inset-inline: var(--espacio-2);
+  height: var(--espacio-1);
+  border-radius: var(--radio-completo);
+  background: var(--borde-sutil);
+}
+
+.relleno {
+  position: absolute;
+  top: var(--espacio-0);
+  bottom: var(--espacio-0);
+  background: var(--fondo-inverso);
+}
+
+.control {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: var(--espacio-6);
+  margin: var(--espacio-0);
+  background: transparent;
+  pointer-events: none;
+  appearance: none;
+}
+
+.control[data-arriba="true"] {
+  z-index: var(--capa-control);
+}
+
+.control::-webkit-slider-runnable-track {
+  height: var(--espacio-6);
+  background: transparent;
+}
+
+.control::-moz-range-track {
+  height: var(--espacio-6);
+  background: transparent;
+}
+
+.control::-webkit-slider-thumb {
+  width: var(--espacio-4);
+  height: var(--espacio-4);
+  margin-top: var(--espacio-1);
+  border: var(--borde-ancho-fuerte) solid var(--fondo-inverso);
+  border-radius: var(--radio-completo);
+  background: var(--fondo-superficie);
+  pointer-events: auto;
+  cursor: grab;
+  appearance: none;
+}
+
+.control::-moz-range-thumb {
+  box-sizing: border-box;
+  width: var(--espacio-4);
+  height: var(--espacio-4);
+  border: var(--borde-ancho-fuerte) solid var(--fondo-inverso);
+  border-radius: var(--radio-completo);
+  background: var(--fondo-superficie);
+  pointer-events: auto;
+  cursor: grab;
+}
+
+.control:focus-visible {
+  outline: none;
+}
+
+.control:focus-visible::-webkit-slider-thumb {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.control:focus-visible::-moz-range-thumb {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.valores {
+  display: flex;
+  justify-content: space-between;
+  color: var(--texto-secundario);
+  font-size: var(--nota-tamano);
+  line-height: var(--nota-alto);
+}

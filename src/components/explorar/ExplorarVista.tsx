@@ -10,11 +10,21 @@ import { LinkButton } from "@/components/ui/LinkButton";
 import { useT } from "@/components/TextosProvider";
 import { cx } from "@/lib/cx";
 import { ORDENES, conCambio, hayFiltros, urlExplorar } from "@/lib/explorar";
+import { diaCorto } from "@/lib/fechas";
+import type { PresetFecha } from "@/lib/fechas";
+import type { RangoPrecio } from "@/lib/catalogo";
+import { formatearPrecio } from "@/lib/formato";
 import type { Filtros as DatosFiltros, Orden } from "@/lib/explorar";
 import type { Categoria, Ciudad, Evento, Paginacion as DatosPaginacion } from "@/types/catalogo";
 import { Filtros } from "./Filtros";
 import { Paginacion } from "./Paginacion";
 import styles from "./ExplorarVista.module.css";
+
+const TEXTO_PRESET: Record<PresetFecha, string> = {
+  hoy: "paginas.explorar.filtros.etiquetas.hoy",
+  "fin-de-semana": "paginas.explorar.filtros.etiquetas.esteFinDeSemana",
+  mes: "paginas.explorar.filtros.etiquetas.esteMes",
+};
 
 export interface ExplorarVistaProps {
   filtros: DatosFiltros;
@@ -22,6 +32,8 @@ export interface ExplorarVistaProps {
   paginacion: DatosPaginacion;
   categorias: readonly Categoria[];
   ciudades: readonly Ciudad[];
+  /** Extremos de precio del catálogo; null si la API no los dio. */
+  extremosPrecio: RangoPrecio | null;
 }
 
 /** Vista 2 · Explorar eventos. Los filtros viven en la URL; cada cambio navega. */
@@ -31,8 +43,9 @@ export function ExplorarVista({
   paginacion,
   categorias,
   ciudades,
+  extremosPrecio,
 }: ExplorarVistaProps) {
-  const { t, plural, listo, categoria } = useT();
+  const { t, plural, listo, categoria, idioma } = useT();
   const router = useRouter();
   const [pendiente, iniciar] = useTransition();
   const [panelAbierto, setPanelAbierto] = useState(false);
@@ -88,8 +101,43 @@ export function ExplorarVista({
       texto: nombreCategoria(c),
       quitar: () => alternarCategoria(c),
     })),
+    ...(filtros.fecha
+      ? [
+          {
+            clave: "fecha",
+            texto: t(TEXTO_PRESET[filtros.fecha]),
+            quitar: () => ir({ fecha: "" }),
+          },
+        ]
+      : []),
+    ...(filtros.desde || filtros.hasta
+      ? [
+          {
+            clave: "rango",
+            texto: [filtros.desde, filtros.hasta]
+              .map((d) => (d ? diaCorto(d, idioma) : "…"))
+              .join(" – "),
+            quitar: () => ir({ desde: "", hasta: "" }),
+          },
+        ]
+      : []),
     ...(filtros.ciudad
       ? [{ clave: "ciudad", texto: filtros.ciudad, quitar: () => ir({ ciudad: "" }) }]
+      : []),
+    ...(filtros.precioMin !== null || filtros.precioMax !== null
+      ? [
+          {
+            clave: "precio",
+            texto: `${formatearPrecio(filtros.precioMin ?? extremosPrecio?.min ?? 0, idioma)} – ${
+              filtros.precioMax !== null
+                ? formatearPrecio(filtros.precioMax, idioma)
+                : extremosPrecio
+                  ? formatearPrecio(extremosPrecio.max, idioma)
+                  : "…"
+            }`,
+            quitar: () => ir({ precioMin: null, precioMax: null }),
+          },
+        ]
       : []),
     ...(filtros.q ? [{ clave: "q", texto: `«${filtros.q}»`, quitar: () => ir({ q: "" }) }] : []),
   ];
@@ -100,6 +148,15 @@ export function ExplorarVista({
       variante="lateral"
       categorias={categorias}
       ciudades={ciudades}
+      extremosPrecio={extremosPrecio}
+      fecha={filtros.fecha}
+      desde={filtros.desde}
+      hasta={filtros.hasta}
+      precioMin={filtros.precioMin}
+      precioMax={filtros.precioMax}
+      onFecha={(fecha) => ir({ fecha, desde: "", hasta: "" })}
+      onRangoFechas={(desde, hasta) => ir({ desde, hasta, fecha: "" })}
+      onPrecio={(precioMin, precioMax) => ir({ precioMin, precioMax })}
       categoriasActivas={filtros.categorias}
       ciudadActiva={filtros.ciudad}
       onCategoria={alternarCategoria}
@@ -275,6 +332,15 @@ export function ExplorarVista({
                 variante="hoja"
                 categorias={categorias}
                 ciudades={ciudades}
+                extremosPrecio={extremosPrecio}
+                fecha={filtros.fecha}
+                desde={filtros.desde}
+                hasta={filtros.hasta}
+                precioMin={filtros.precioMin}
+                precioMax={filtros.precioMax}
+                onFecha={(fecha) => ir({ fecha, desde: "", hasta: "" })}
+                onRangoFechas={(desde, hasta) => ir({ desde, hasta, fecha: "" })}
+                onPrecio={(precioMin, precioMax) => ir({ precioMin, precioMax })}
                 categoriasActivas={filtros.categorias}
                 ciudadActiva={filtros.ciudad}
                 onCategoria={alternarCategoria}

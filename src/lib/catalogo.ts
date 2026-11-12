@@ -192,3 +192,30 @@ export function obtenerCiudades(): Promise<Ciudad[]> {
 export function obtenerEventos(filtros: Filtros): Promise<PaginaEventos> {
   return pedir(`/eventos?${aParametros(filtros)}`, validarPaginaEventos);
 }
+
+export interface RangoPrecio {
+  min: number;
+  max: number;
+}
+
+/**
+ * Precio mínimo y máximo del catálogo, para los extremos del control de precio.
+ * Sale de la propia API: el evento más barato y el más caro de GET /eventos?orden=precio.
+ * Devuelve null si no hay eventos o la API falla: el control simplemente no se muestra.
+ */
+export async function obtenerRangoPrecio(): Promise<RangoPrecio | null> {
+  try {
+    const primera = await pedir("/eventos?orden=precio&pagina=1&porPagina=1", validarPaginaEventos);
+    const a = primera.eventos[0]?.precioDesde;
+    if (a === undefined) return null;
+    const { total } = primera.paginacion;
+    const ultima =
+      total > 1
+        ? await pedir(`/eventos?orden=precio&pagina=${total}&porPagina=1`, validarPaginaEventos)
+        : primera;
+    const b = ultima.eventos[0]?.precioDesde ?? a;
+    return { min: Math.min(a, b), max: Math.max(a, b) };
+  } catch {
+    return null;
+  }
+}
