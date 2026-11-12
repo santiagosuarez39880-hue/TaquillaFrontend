@@ -14,4 +14,13 @@
   outline: none;
 }
 
+.AppShell-module__zsum4a__soloLector {
+  width: var(--tamano-solo-lector);
+  height: var(--tamano-solo-lector);
+  clip-path: inset(50%);
+  white-space: nowrap;
+  position: absolute;
+  overflow: hidden;
+}
+
 /*# sourceMappingURL=src_components_AppShell_module_css_1igg3k2-ikub5._.single.css.map*/

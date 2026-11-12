@@ -1,3 +1,62 @@
-{"timestamp":"00:00:01.104","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:02.545","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:00:02.714","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:05.475","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:16.987","source":"Server","level":"WARN","message":"[textos] Falta la clave «cookies.banner.enlaces.politica» en GET /textos."}
+{"timestamp":"00:00:16.987","source":"Server","level":"WARN","message":"[textos] Falta la clave «cookies.banner.aria.region» en GET /textos."}
+{"timestamp":"00:00:17.007","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.busquedasPopulares.titulo» en GET /textos."}
+{"timestamp":"00:00:17.008","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.etiquetas.categoria» en GET /textos."}
+{"timestamp":"00:00:17.010","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.destacados.tituloMovil» en GET /textos."}
+{"timestamp":"00:00:17.012","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.buscador.resumenMovil» en GET /textos."}
+{"timestamp":"00:00:17.013","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.botones.abrir» en GET /textos."}
+{"timestamp":"00:00:17.016","source":"Server","level":"WARN","message":"[textos] Falta la clave «precio.desde» en GET /textos."}
+{"timestamp":"00:00:17.022","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.categorias.conteo.otro» en GET /textos."}
+{"timestamp":"00:00:17.043","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.encabezado.titulo» en GET /textos."}
+{"timestamp":"00:00:17.043","source":"Server","level":"WARN","message":"[textos] Falta la clave «footer.legal.aviso» en GET /textos."}
+{"timestamp":"00:00:17.292","source":"Server","level":"WARN","message":"⚠ Blocked cross-origin request to Next.js dev resource /_next/hmr from \"192.168.20.25\".\nCross-origin access to Next.js dev resources is blocked by default for safety.\n\nTo allow this host in development, add it to \"allowedDevOrigins\" in next.config.js and restart the dev server:\n\n// next.config.js\nmodule.exports = {\n  allowedDevOrigins: ['192.168.20.25'],\n}\n\nRead more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins"}
+{"timestamp":"00:00:28.911","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.encabezado.conteo.otro» en GET /textos."}
+{"timestamp":"00:00:28.912","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.buscador.placeholder» en GET /textos."}
+{"timestamp":"00:00:28.912","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.encabezado.conteoMovil.otro» en GET /textos."}
+{"timestamp":"00:00:28.913","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.orden.titulo» en GET /textos."}
+{"timestamp":"00:00:28.915","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.etiquetas.ciudad» en GET /textos."}
+{"timestamp":"00:00:28.915","source":"Server","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.etiquetas.todasLasCiudades» en GET /textos."}
+{"timestamp":"00:02:14.079","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:02:14.129","source":"Browser","level":"WARN","message":"[textos] Falta la clave «cookies.banner.enlaces.politica» en GET /textos."}
+{"timestamp":"00:02:14.145","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.buscador.resumenMovil» en GET /textos."}
+{"timestamp":"00:02:14.155","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «cookies.banner.enlaces.politica» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.156","source":"Browser","level":"WARN","message":"[textos] Falta la clave «cookies.banner.aria.region» en GET /textos."}
+{"timestamp":"00:02:14.162","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «cookies.banner.aria.region» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.163","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.busquedasPopulares.titulo» en GET /textos."}
+{"timestamp":"00:02:14.166","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.inicio.buscador.resumenMovil» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.166","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.botones.abrir» en GET /textos."}
+{"timestamp":"00:02:14.172","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.encabezado.titulo» en GET /textos."}
+{"timestamp":"00:02:14.182","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.filtros.botones.abrir» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.183","source":"Browser","level":"WARN","message":"[textos] Falta la clave «precio.desde» en GET /textos."}
+{"timestamp":"00:02:14.187","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.inicio.busquedasPopulares.titulo» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.187","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.etiquetas.categoria» en GET /textos."}
+{"timestamp":"00:02:14.194","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.encabezado.titulo» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.194","source":"Browser","level":"WARN","message":"[textos] Falta la clave «footer.legal.aviso» en GET /textos."}
+{"timestamp":"00:02:14.200","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.filtros.etiquetas.categoria» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.200","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.destacados.tituloMovil» en GET /textos."}
+{"timestamp":"00:02:14.206","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «precio.desde» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.206","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.inicio.categorias.conteo.otro» en GET /textos."}
+{"timestamp":"00:02:14.212","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «footer.legal.aviso» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.213","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.inicio.destacados.tituloMovil» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:14.217","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.inicio.categorias.conteo.otro» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:16.126","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.encabezado.conteo.otro» en GET /textos."}
+{"timestamp":"00:02:16.134","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.encabezado.conteo.otro» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:16.134","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.buscador.placeholder» en GET /textos."}
+{"timestamp":"00:02:16.137","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.buscador.placeholder» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:16.138","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.encabezado.conteoMovil.otro» en GET /textos."}
+{"timestamp":"00:02:16.142","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.encabezado.conteoMovil.otro» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:16.143","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.orden.titulo» en GET /textos."}
+{"timestamp":"00:02:16.152","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.orden.titulo» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:16.154","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.etiquetas.ciudad» en GET /textos."}
+{"timestamp":"00:02:16.168","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.filtros.etiquetas.ciudad» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:16.169","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.etiquetas.todasLasCiudades» en GET /textos."}
+{"timestamp":"00:02:16.179","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.filtros.etiquetas.todasLasCiudades» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:17.700","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.cargando.texto» en GET /textos."}
+{"timestamp":"00:02:17.747","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.cargando.texto» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:17.782","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.filtros.aria.quitarFiltro» en GET /textos."}
+{"timestamp":"00:02:17.784","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.filtros.aria.quitarFiltro» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:18.850","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.vacio.botones.limpiarFiltros» en GET /textos."}
+{"timestamp":"00:02:18.855","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.vacio.botones.limpiarFiltros» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
+{"timestamp":"00:02:18.855","source":"Browser","level":"WARN","message":"[textos] Falta la clave «paginas.explorar.vacio.botones.verTodos» en GET /textos."}
+{"timestamp":"00:02:18.858","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33m[textos] Falta la clave «paginas.explorar.vacio.botones.verTodos» en GET /textos.\\u001b[39m\" \"\\u001b[2m(src/lib/textos.ts:140:11)\\u001b[22m\""}
