@@ -1,0 +1,132 @@
+.raiz {
+  position: relative;
+}
+
+.disparador {
+  display: grid;
+  place-items: center;
+  padding: var(--espacio-0);
+  border: var(--borde-ancho) solid transparent;
+  border-radius: var(--radio-completo);
+  background: transparent;
+  cursor: pointer;
+}
+
+.disparador:hover .avatar,
+.disparador[aria-expanded="true"] .avatar {
+  border-color: var(--borde-fuerte);
+}
+
+.disparador:focus-visible,
+.accion:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: var(--altura-control-md);
+  height: var(--altura-control-md);
+  border: var(--borde-ancho) solid var(--borde-sutil);
+  border-radius: var(--radio-completo);
+  background: var(--fondo-sutil);
+  color: var(--texto-principal);
+  font-size: var(--nota-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.desplegable {
+  position: absolute;
+  inset-block-start: calc(100% + var(--espacio-2));
+  inset-inline-end: var(--espacio-0);
+  z-index: var(--capa-menu);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  min-width: var(--ancho-menu-cuenta);
+  padding: var(--espacio-3);
+  border: var(--borde-ancho) solid var(--borde-sutil);
+  border-radius: var(--radio-md);
+  background: var(--fondo-superficie);
+  box-shadow: var(--sombra-flotante);
+}
+
+.datos {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+  min-width: 0;
+}
+
+.textos {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nombre {
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-medio);
+  overflow-wrap: anywhere;
+}
+
+.correo {
+  color: var(--texto-secundario);
+  font-size: var(--nota-tamano);
+  overflow-wrap: anywhere;
+}
+
+.separador {
+  height: var(--borde-ancho);
+  background: var(--borde-sutil);
+}
+
+.accion {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  width: 100%;
+  min-height: var(--altura-control-md);
+  padding: var(--espacio-0) var(--espacio-2);
+  border: none;
+  border-radius: var(--radio-sm);
+  background: transparent;
+  color: var(--texto-principal);
+  font: inherit;
+  font-size: var(--cuerpo-p-tamano);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.accion:hover {
+  background: var(--fondo-sutil);
+}
+
+.accion[aria-disabled="true"] {
+  opacity: var(--opacidad-deshabilitado);
+  cursor: progress;
+}
+
+/* Hoja del menú móvil: avatar, nombre y correo, y «Cerrar sesión» como botón con borde (Figma). */
+.hoja {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+}
+
+.hoja .accion {
+  justify-content: center;
+  height: var(--altura-control-lg);
+  border: var(--borde-ancho) solid var(--borde-fuerte);
+  border-radius: var(--radio-md);
+  background: var(--fondo-superficie);
+  font-weight: var(--peso-medio);
+}
+
+.hoja .accion:hover {
+  background: var(--fondo-sutil);
+}

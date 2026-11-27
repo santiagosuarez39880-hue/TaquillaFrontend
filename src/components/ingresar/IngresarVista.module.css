@@ -1,0 +1,385 @@
+/* Dos columnas en web (presentación + formulario) y una en móvil. */
+.pagina {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  min-height: var(--altura-pantalla);
+}
+
+/* ---------- Presentación (solo web) ---------- */
+.presentacion {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--espacio-12);
+  padding: var(--espacio-8) var(--espacio-12);
+  background: var(--fondo-inverso);
+  color: var(--texto-inverso);
+}
+
+.logoPresentacion,
+.logoMovil {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: var(--radio-sm);
+}
+
+.logoPresentacion:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco-inverso);
+  outline-offset: var(--foco-separacion);
+}
+
+.logoMovil:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.lema {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-6);
+}
+
+.lemaTexto {
+  max-width: var(--ancho-lema);
+  margin: var(--espacio-0);
+  font-size: var(--h1-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h1-alto);
+  letter-spacing: var(--h1-tracking);
+}
+
+.beneficios {
+  display: grid;
+  gap: var(--espacio-3);
+  margin: var(--espacio-0);
+  padding: var(--espacio-0);
+  list-style: none;
+  color: var(--texto-inverso-suave);
+  font-size: var(--cuerpo-p-tamano);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.beneficios li {
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-3);
+}
+
+.beneficioIcono {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--altura-control-sm);
+  height: var(--altura-control-sm);
+  border: var(--borde-ancho) solid var(--borde-inverso);
+  border-radius: var(--radio-completo);
+  color: var(--texto-inverso);
+}
+
+/* ---------- Formulario ---------- */
+.lado {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espacio-12) var(--gutter-pagina);
+  background: var(--fondo-superficie);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--ancho-formulario);
+}
+
+.logoMovil {
+  display: none;
+  margin-bottom: var(--espacio-6);
+}
+
+.titulo {
+  margin: var(--espacio-0);
+  font-size: var(--h2-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h2-alto);
+  letter-spacing: var(--h2-tracking);
+}
+
+.subtitulo {
+  margin: var(--espacio-2) var(--espacio-0) var(--espacio-6);
+  color: var(--texto-secundario);
+  font-size: var(--cuerpo-p-tamano);
+  line-height: var(--cuerpo-p-alto);
+}
+
+/* ---------- Alerta ---------- */
+.alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: var(--borde-ancho) solid var(--estado-error);
+  border-radius: var(--radio-md);
+  background: var(--estado-error-suave);
+  color: var(--estado-error);
+}
+
+/* Aviso informativo (no es un error de la persona): sesión vencida o página que pide sesión. */
+.motivo {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espacio-3);
+  margin-bottom: var(--espacio-4);
+  padding: var(--espacio-3) var(--espacio-4);
+  border: var(--borde-ancho) solid var(--borde-fuerte);
+  border-radius: var(--radio-md);
+  background: var(--fondo-sutil);
+  color: var(--texto-principal);
+}
+
+.alertaIcono {
+  margin-top: var(--espacio-1);
+}
+
+.alertaTitulo {
+  margin: var(--espacio-0);
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--cuerpo-p-alto);
+}
+
+.alertaTexto {
+  margin: var(--espacio-1) var(--espacio-0) var(--espacio-0);
+  font-size: var(--nota-tamano);
+  line-height: var(--nota-alto);
+}
+
+/* ---------- Campos ---------- */
+.campos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+  min-width: 0;
+  margin: var(--espacio-0);
+  padding: var(--espacio-0);
+  border: none;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+}
+
+.etiqueta {
+  font-size: var(--nota-tamano);
+  font-weight: var(--peso-medio);
+  line-height: var(--nota-alto);
+}
+
+.entrada {
+  width: 100%;
+  height: var(--altura-control-lg);
+  padding-inline: var(--espacio-3);
+  border: var(--borde-ancho) solid var(--borde-fuerte);
+  border-radius: var(--radio-md);
+  background: var(--fondo-superficie);
+  color: var(--texto-principal);
+  font: inherit;
+  font-size: var(--cuerpo-p-tamano);
+}
+
+.entrada::placeholder {
+  color: var(--texto-terciario);
+}
+
+.entrada:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.entradaError {
+  border-color: var(--estado-error);
+  border-width: var(--borde-ancho-fuerte);
+}
+
+.errorCampo {
+  margin: var(--espacio-0);
+  color: var(--estado-error);
+  font-size: var(--nota-tamano);
+  line-height: var(--nota-alto);
+}
+
+.conBoton {
+  position: relative;
+}
+
+.conBoton .entrada {
+  padding-right: var(--altura-control-lg);
+}
+
+.ojo {
+  position: absolute;
+  top: var(--espacio-0);
+  right: var(--espacio-0);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--altura-control-lg);
+  height: var(--altura-control-lg);
+  padding: var(--espacio-0);
+  border: none;
+  border-radius: var(--radio-md);
+  background: none;
+  color: var(--texto-secundario);
+  cursor: pointer;
+}
+
+.ojo:hover {
+  color: var(--texto-principal);
+}
+
+.ojo:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: calc(var(--foco-separacion) * -1);
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espacio-2) var(--espacio-4);
+  font-size: var(--nota-tamano);
+  line-height: var(--nota-alto);
+}
+
+.recordar {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  cursor: pointer;
+}
+
+.enlace,
+.enlaceFuerte {
+  color: var(--texto-principal);
+  text-decoration: underline;
+}
+
+.enlaceFuerte {
+  font-weight: var(--peso-semibold);
+}
+
+.enlace:focus-visible,
+.enlaceFuerte:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+/* ---------- Botón ---------- */
+.enviar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espacio-2);
+  width: 100%;
+  height: var(--altura-control-lg);
+  border: var(--borde-ancho) solid transparent;
+  border-radius: var(--radio-md);
+  background: var(--marca-primario);
+  color: var(--texto-inverso);
+  font: inherit;
+  font-size: var(--cuerpo-p-tamano);
+  font-weight: var(--peso-medio);
+  cursor: pointer;
+}
+
+.enviar:hover {
+  background: var(--marca-primario-hover);
+}
+
+.enviar:focus-visible {
+  outline: var(--foco-ancho) solid var(--color-foco);
+  outline-offset: var(--foco-separacion);
+}
+
+.enviar:disabled,
+.campos:disabled .enviar {
+  opacity: var(--opacidad-deshabilitado);
+  cursor: not-allowed;
+}
+
+/* Enviando: más claro y sin cursor de clic, como en Figma. */
+.enviando,
+.enviando:hover {
+  background: var(--fondo-inverso-presionado);
+  cursor: progress;
+}
+
+.rueda {
+  width: var(--tamano-icono-sm);
+  height: var(--tamano-icono-sm);
+  border: var(--borde-ancho-fuerte) solid var(--texto-inverso-suave);
+  border-top-color: var(--texto-inverso);
+  border-radius: var(--radio-completo);
+  animation: girar var(--duracion-rueda) linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rueda {
+    animation: none;
+  }
+}
+
+.pie {
+  margin: var(--espacio-6) var(--espacio-0) var(--espacio-0);
+  color: var(--texto-secundario);
+  font-size: var(--nota-tamano);
+  line-height: var(--nota-alto);
+  text-align: center;
+}
+
+.soloLector {
+  position: absolute;
+  width: var(--tamano-solo-lector);
+  height: var(--tamano-solo-lector);
+  margin: var(--espacio-0);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Móvil ---------- */
+@media (max-width: 900px) {
+  .pagina {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .presentacion {
+    display: none;
+  }
+
+  .lado {
+    align-items: flex-start;
+    padding-top: var(--espacio-6);
+  }
+
+  .logoMovil {
+    display: inline-flex;
+  }
+
+  .titulo {
+    font-size: var(--h1-tamano);
+    line-height: var(--h1-alto);
+    letter-spacing: var(--h1-tracking);
+  }
+}

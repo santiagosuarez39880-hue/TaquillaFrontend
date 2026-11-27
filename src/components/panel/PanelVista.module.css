@@ -1,0 +1,16 @@
+.pagina {
+  max-width: var(--ancho-contenido);
+  margin-inline: auto;
+  padding: var(--espacio-12) var(--espacio-4);
+}
+
+.titulo {
+  margin: var(--espacio-0);
+  font-size: var(--h2-tamano);
+  line-height: var(--h2-alto);
+}
+
+.texto {
+  margin: var(--espacio-2) var(--espacio-0) var(--espacio-0);
+  color: var(--texto-secundario);
+}

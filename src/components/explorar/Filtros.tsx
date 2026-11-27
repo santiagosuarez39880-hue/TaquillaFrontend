@@ -11,9 +11,9 @@ import { RangoPrecio } from "./RangoPrecio";
 import styles from "./Filtros.module.css";
 
 const TEXTO_PRESET: Record<PresetFecha, string> = {
-  hoy: "paginas.explorar.filtros.etiquetas.hoy",
-  "fin-de-semana": "paginas.explorar.filtros.etiquetas.esteFinDeSemana",
-  mes: "paginas.explorar.filtros.etiquetas.esteMes",
+  hoy: "paginas.explorar.filtros.fecha.hoy",
+  "fin-de-semana": "paginas.explorar.filtros.fecha.finDeSemana",
+  mes: "paginas.explorar.filtros.fecha.mes",
 };
 
 export interface FiltrosProps {
@@ -66,7 +66,7 @@ export function Filtros({
     <div className={styles.filtros} data-variante={variante}>
       <div className={styles.grupo} role="group" aria-labelledby={`${id}-cat`}>
         <span id={`${id}-cat`} className={styles.titulo}>
-          {t("paginas.explorar.filtros.etiquetas.categoria")}
+          {t("paginas.explorar.filtros.categoria")}
         </span>
         {variante === "lateral" ? (
           <ul className={styles.casillas}>
@@ -104,7 +104,7 @@ export function Filtros({
 
       <div className={styles.grupo} role="group" aria-labelledby={`${id}-fecha`}>
         <span id={`${id}-fecha`} className={styles.titulo}>
-          {t("paginas.explorar.filtros.etiquetas.fecha")}
+          {t("paginas.explorar.filtros.fecha.titulo")}
         </span>
         <ul className={styles.chips}>
           {PRESETS_FECHA.map((preset) => (
@@ -139,7 +139,7 @@ export function Filtros({
                 }
               }}
             >
-              {t("paginas.explorar.filtros.etiquetas.elegirFechas")}
+              {t("paginas.explorar.filtros.fecha.elegir")}
             </button>
           </li>
         </ul>
@@ -171,7 +171,7 @@ export function Filtros({
 
       <div className={styles.grupo}>
         <label className={styles.titulo} htmlFor={`${id}-ciudad`}>
-          {t("paginas.explorar.filtros.etiquetas.ciudad")}
+          {t("paginas.explorar.filtros.ciudad")}
         </label>
         <select
           id={`${id}-ciudad`}
@@ -191,7 +191,7 @@ export function Filtros({
       {extremosPrecio && extremosPrecio.max > extremosPrecio.min && (
         <div className={styles.grupo} role="group" aria-labelledby={`${id}-fecha`}>
           <span id={`${id}-fecha`} className={styles.titulo}>
-            {t("paginas.explorar.filtros.etiquetas.precio")}
+            {t("paginas.explorar.filtros.precio")}
           </span>
           <RangoPrecio
             min={Math.floor(extremosPrecio.min / PASO_PRECIO) * PASO_PRECIO}

@@ -7,10 +7,15 @@ import type {
   Ciudad,
   PaginaEventos,
   Paginacion,
+  CupoLocalidad,
   Disponibilidad,
   Evento,
+  EventoDetalle,
+  Funcion,
+  Localidad,
   PatronAfiche,
   Recinto,
+  RecintoDetalle,
 } from "@/types/catalogo";
 
 const PATRONES: readonly PatronAfiche[] = [
@@ -128,6 +133,104 @@ export function validarEvento(valor: unknown): Evento {
   };
 }
 
+function textoOpcional(valor: unknown): string | null {
+  return typeof valor === "string" && valor.trim() !== "" ? valor : null;
+}
+
+function numeroOpcional(valor: unknown): number | null {
+  return typeof valor === "number" && Number.isFinite(valor) ? valor : null;
+}
+
+/** Lista de textos; lo que no sea texto se descarta. Acepta null (la API lo usa cuando no aplica). */
+function textos(valor: unknown): string[] {
+  if (!Array.isArray(valor)) return [];
+  return valor.filter((x): x is string => typeof x === "string" && x.trim() !== "");
+}
+
+function fechaOpcional(valor: unknown): string | null {
+  return typeof valor === "string" && !Number.isNaN(Date.parse(valor)) ? valor : null;
+}
+
+function validarRecintoDetalle(valor: unknown): RecintoDetalle {
+  const r = objeto(valor, "recinto");
+  const u =
+    typeof r.ubicacion === "object" && r.ubicacion !== null ? (r.ubicacion as Objeto) : null;
+  const lat = u ? numeroOpcional(u.lat) : null;
+  const lng = u ? numeroOpcional(u.lng) : null;
+  return {
+    ...validarRecinto(r),
+    parqueadero: textoOpcional(r.parqueadero),
+    ubicacion: lat !== null && lng !== null ? { lat, lng } : null,
+  };
+}
+
+function validarLocalidad(valor: unknown): Localidad {
+  const l = objeto(valor, "localidad");
+  return {
+    id: texto(l.id, "localidad.id"),
+    nombre: texto(l.nombre, "localidad.nombre"),
+    precio: numero(l.precio, "localidad.precio"),
+    cupo: numero(l.cupo, "localidad.cupo"),
+    disponibles: numero(l.disponibles, "localidad.disponibles"),
+    agotada: booleano(l.agotada, "localidad.agotada"),
+  };
+}
+
+function validarCupo(valor: unknown): CupoLocalidad {
+  const c = objeto(valor, "funcion.localidades");
+  return {
+    localidadId: texto(c.localidadId, "funcion.localidades.localidadId"),
+    cupo: numero(c.cupo, "funcion.localidades.cupo"),
+    disponibles: numero(c.disponibles, "funcion.localidades.disponibles"),
+  };
+}
+
+function validarFuncion(valor: unknown): Funcion {
+  const f = objeto(valor, "funcion");
+  return {
+    id: texto(f.id, "funcion.id"),
+    fecha: fechaIso(f.fecha, "funcion.fecha"),
+    puertas: fechaOpcional(f.puertas),
+    disponibles: numero(f.disponibles, "funcion.disponibles"),
+    agotada: booleano(f.agotada, "funcion.agotada"),
+    localidades: lista(f.localidades, "funcion.localidades").map(validarCupo),
+  };
+}
+
+/**
+ * GET /eventos/:slug. A diferencia de los listados, el evento llega sin envoltorio `datos`.
+ * Si algún día lo trajera, se acepta también.
+ */
+export function validarEventoDetalle(respuesta: unknown): EventoDetalle {
+  const cruda = objeto(respuesta, "respuesta");
+  const e =
+    cruda.id === undefined && cruda.datos !== undefined ? objeto(cruda.datos, "datos") : cruda;
+  const base = validarEvento({ ...e, recinto: validarRecinto(e.recinto) });
+  const organizador =
+    e.organizador === null || e.organizador === undefined
+      ? null
+      : objeto(e.organizador, "organizador");
+  return {
+    ...base,
+    recinto: validarRecintoDetalle(e.recinto),
+    puertas: fechaOpcional(e.puertas),
+    descripcion: texto(e.descripcion, "evento.descripcion"),
+    duracionMin: numeroOpcional(e.duracionMin),
+    edadMinima: numeroOpcional(e.edadMinima),
+    etiquetas: textos(e.etiquetas),
+    // Conciertos y teatro traen `artistas`; los deportes, `equipos`.
+    participantes: textos(e.artistas).length ? textos(e.artistas) : textos(e.equipos),
+    organizador: organizador
+      ? {
+          id: texto(organizador.id, "organizador.id"),
+          nombre: texto(organizador.nombre, "organizador.nombre"),
+        }
+      : null,
+    funciones: lista(e.funciones, "evento.funciones").map(validarFuncion),
+    localidades: lista(e.localidades, "evento.localidades").map(validarLocalidad),
+  };
+}
+
 export function validarEventos(respuesta: unknown): Evento[] {
   return lista(objeto(respuesta, "respuesta").datos, "datos").map(validarEvento);
 }
@@ -217,5 +320,37 @@ export async function obtenerRangoPrecio(): Promise<RangoPrecio | null> {
     return { min: Math.min(a, b), max: Math.max(a, b) };
   } catch {
     return null;
+  }
+}
+
+/**
+ * GET /eventos/:slug. Devuelve null si el evento no existe (404 `no_encontrado`):
+ * la página responde entonces con notFound(). Cualquier otro fallo sí se propaga.
+ */
+export async function obtenerEvento(slug: string): Promise<EventoDetalle | null> {
+  try {
+    return await pedir(`/eventos/${encodeURIComponent(slug)}`, validarEventoDetalle);
+  } catch (error) {
+    if (error instanceof ErrorApi && error.estado === 404) return null;
+    throw error;
+  }
+}
+
+/** Cuántos eventos relacionados se muestran como máximo. */
+export const MAXIMO_RELACIONADOS = 4;
+
+/**
+ * GET /eventos/:slug/relacionados. Es un añadido: si falla, el detalle se muestra igual,
+ * solo sin la sección «También te puede interesar».
+ */
+export async function obtenerRelacionados(slug: string): Promise<Evento[]> {
+  try {
+    const eventos = await pedir(
+      `/eventos/${encodeURIComponent(slug)}/relacionados`,
+      validarEventos,
+    );
+    return eventos.slice(0, MAXIMO_RELACIONADOS);
+  } catch {
+    return [];
   }
 }

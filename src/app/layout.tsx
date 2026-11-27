@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import AppShell from "@/components/AppShell";
 import { idiomaDeLaVisita, textosDeLaVisita } from "@/lib/idioma-servidor";
 import { metadatosDe } from "@/lib/seo";
+import { usuarioDeLaVisita } from "@/lib/sesion-servidor";
 import "./globals.css";
 
 const instrumentSans = Instrument_Sans({
@@ -22,11 +23,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   // La cookie `idioma` solo se lee si la persona aceptó las cookies (ver lib/idioma.ts).
   const idioma = await idiomaDeLaVisita();
   const textos = await textosDeLaVisita(idioma);
+  const usuario = await usuarioDeLaVisita();
 
   return (
     <html lang={idioma} className={instrumentSans.variable}>
       <body>
-        <AppShell inicial={{ idioma, textos }}>{children}</AppShell>
+        <AppShell inicial={{ idioma, textos }} usuario={usuario}>
+          {children}
+        </AppShell>
       </body>
     </html>
   );

@@ -70,3 +70,52 @@ export interface PaginaEventos {
   eventos: Evento[];
   paginacion: Paginacion;
 }
+
+/** Recinto del detalle: además del básico trae cómo llegar. */
+export interface RecintoDetalle extends Recinto {
+  parqueadero: string | null;
+  ubicacion: { lat: number; lng: number } | null;
+}
+
+/** Tipo de entrada de un evento («VIP», «Platea», «General»), con su precio. */
+export interface Localidad {
+  id: string;
+  nombre: string;
+  /** Precio en pesos colombianos. */
+  precio: number;
+  cupo: number;
+  disponibles: number;
+  agotada: boolean;
+}
+
+/** Cupo de una localidad en una función concreta. `localidadId` apunta a EventoDetalle.localidades. */
+export interface CupoLocalidad {
+  localidadId: string;
+  cupo: number;
+  disponibles: number;
+}
+
+/** Una fecha y hora en la que se presenta el evento. */
+export interface Funcion {
+  id: string;
+  fecha: string;
+  puertas: string | null;
+  disponibles: number;
+  agotada: boolean;
+  localidades: CupoLocalidad[];
+}
+
+/** GET /eventos/:slug */
+export interface EventoDetalle extends Omit<Evento, "recinto"> {
+  recinto: RecintoDetalle;
+  puertas: string | null;
+  descripcion: string;
+  duracionMin: number | null;
+  edadMinima: number | null;
+  etiquetas: string[];
+  /** Artistas o equipos; el subtítulo del evento los une con « · ». */
+  participantes: string[];
+  organizador: { id: string; nombre: string } | null;
+  funciones: Funcion[];
+  localidades: Localidad[];
+}

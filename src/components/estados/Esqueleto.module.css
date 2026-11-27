@@ -1,0 +1,40 @@
+/* Bloque gris que «respira» mientras llegan los datos. */
+.bloque {
+  display: block;
+  border-radius: var(--radio-md);
+  background: linear-gradient(
+    90deg,
+    var(--fondo-sutil) 25%,
+    var(--fondo-presionado) 50%,
+    var(--fondo-sutil) 75%
+  );
+  background-size: 200% 100%;
+  animation: brillo var(--duracion-esqueleto) ease-in-out infinite;
+}
+
+@keyframes brillo {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+/* Quien pide menos movimiento ve los bloques quietos. */
+@media (prefers-reduced-motion: reduce) {
+  .bloque {
+    animation: none;
+  }
+}
+
+.soloLector {
+  position: absolute;
+  width: var(--tamano-solo-lector);
+  height: var(--tamano-solo-lector);
+  margin: var(--espacio-0);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

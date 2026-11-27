@@ -1,0 +1,26 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espacio-4);
+  max-width: var(--ancho-contenido);
+  margin-inline: auto;
+  padding: var(--espacio-16) var(--gutter-pagina);
+  text-align: center;
+}
+
+.titulo {
+  margin: var(--espacio-0);
+  font-size: var(--h1-tamano);
+  font-weight: var(--peso-semibold);
+  line-height: var(--h1-alto);
+  letter-spacing: var(--h1-tracking);
+}
+
+.texto {
+  max-width: var(--ancho-texto);
+  margin: var(--espacio-0);
+  color: var(--texto-secundario);
+  font-size: var(--cuerpo-m-tamano);
+  line-height: var(--cuerpo-m-alto);
+}

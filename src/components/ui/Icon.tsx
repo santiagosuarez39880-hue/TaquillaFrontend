@@ -1,9 +1,11 @@
 import { cx } from "@/lib/cx";
-import { ICONOS } from "./iconos.generated";
-import type { NombreIcono } from "./iconos.generated";
+import { ICONOS as GENERADOS } from "./iconos.generated";
+import { ICONOS_EXTRA } from "./iconos-extra";
+import type { NombreIcono as NombreGenerado } from "./iconos.generated";
 import styles from "./Icon.module.css";
 
-export type { NombreIcono };
+const ICONOS = { ...GENERADOS, ...ICONOS_EXTRA };
+export type NombreIcono = NombreGenerado | keyof typeof ICONOS_EXTRA;
 
 export interface IconProps {
   name: NombreIcono;

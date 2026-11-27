@@ -89,6 +89,8 @@
   --tamano-icono: 18px;
   --tamano-icono-lg: 20px;
   --transicion: .15s ease;
+  --duracion-esqueleto: 1.4s;
+  --duracion-rueda: .8s;
   --capa-navbar: 50;
   --capa-menu: 60;
   --capa-control: 1;
@@ -102,6 +104,9 @@
   --tamano-logo-alto: 32px;
   --ancho-lema: 360px;
   --ancho-texto: 540px;
+  --ancho-formulario: 400px;
+  --ancho-menu-cuenta: 240px;
+  --alto-mapa: 200px;
   --ancho-hero-tarjeta: 458px;
   --alto-hero-tarjeta: 420px;
   --tamano-solo-lector: 1px;

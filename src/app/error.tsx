@@ -1,24 +1,20 @@
 "use client";
 
-import { useT } from "@/components/TextosProvider";
+import { useEffect } from "react";
+import { ErrorVista } from "@/components/estados/ErrorVista";
 
 interface ErrorPaginaProps {
   error: Error & { digest?: string };
   reset: () => void;
 }
 
-export default function ErrorPagina({ reset }: ErrorPaginaProps) {
-  const { t } = useT();
-  return (
-    <div
-      role="alert"
-      style={{ padding: "var(--espacio-16) var(--gutter-pagina)", textAlign: "center" }}
-    >
-      <h1>{t("estados.error.titulo")}</h1>
-      <p>{t("estados.error.texto")}</p>
-      <button type="button" onClick={reset}>
-        {t("estados.error.botones.reintentar")}
-      </button>
-    </div>
-  );
+/**
+ * Cualquier error inesperado de una vista. Los fallos de la API se muestran antes, en cada
+ * página, con el mensaje de su código; aquí llega el resto.
+ */
+export default function ErrorPagina({ error, reset }: ErrorPaginaProps) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+  return <ErrorVista alReintentar={reset} />;
 }
