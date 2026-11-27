@@ -1,5 +1,38 @@
 {
-  "node": {},
+  "node": {
+    "00417906cf4d03588e6d32b46ec0780b3108a94cd7": {
+      "workers": {
+        "app/eventos/[slug]/page": {
+          "moduleId": "[project]/.next-internal/server/app/eventos/[slug]/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/ingresar/acciones.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        },
+        "app/ingresar/page": {
+          "moduleId": "[project]/.next-internal/server/app/ingresar/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/ingresar/acciones.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        },
+        "app/page": {
+          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/ingresar/acciones.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        },
+        "app/registro/page": {
+          "moduleId": "[project]/.next-internal/server/app/registro/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/ingresar/acciones.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "filename": "src/app/ingresar/acciones.ts",
+      "exportedName": "cerrarSesion"
+    },
+    "40153ce95fcae49671d6ebf19c3a84927217dc54a0": {
+      "workers": {
+        "app/ingresar/page": {
+          "moduleId": "[project]/.next-internal/server/app/ingresar/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/ingresar/acciones.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "filename": "src/app/ingresar/acciones.ts",
+      "exportedName": "ingresar"
+    }
+  },
   "edge": {},
   "encryptionKey": "ByHRHrJ4h6UhN8rJUStxYsz6NVeQSm7BvzUr7mmx8eU="
 }

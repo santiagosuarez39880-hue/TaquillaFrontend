@@ -1,0 +1,97 @@
+.pagina {
+  display: flex;
+  flex-direction: column;
+  max-width: var(--ancho-contenido);
+  margin-inline: auto;
+  padding: var(--espacio-6) var(--gutter-pagina) var(--espacio-16);
+}
+
+.migas {
+  width: var(--ancho-lema);
+  max-width: 50%;
+  height: var(--espacio-4);
+  margin-bottom: var(--espacio-4);
+}
+
+.afiche {
+  aspect-ratio: 19 / 5;
+  border-radius: var(--radio-xl);
+}
+
+.etiqueta {
+  width: var(--ancho-filtros);
+  max-width: 40%;
+  height: var(--espacio-6);
+  margin-top: var(--espacio-6);
+}
+
+.titulo {
+  width: var(--ancho-hero-tarjeta);
+  max-width: 80%;
+  height: var(--display-alto);
+  margin-top: var(--espacio-3);
+}
+
+.subtitulo {
+  width: var(--ancho-texto);
+  max-width: 60%;
+  height: var(--espacio-4);
+  margin-top: var(--espacio-3);
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--espacio-4);
+  margin-top: var(--espacio-6);
+}
+
+.dato {
+  height: var(--altura-control-lg);
+}
+
+.texto {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-3);
+  max-width: var(--ancho-texto);
+  margin-top: var(--espacio-8);
+}
+
+.linea {
+  height: var(--espacio-4);
+}
+
+.lineaCorta {
+  width: 60%;
+  height: var(--espacio-4);
+}
+
+.funcion {
+  height: var(--ancho-lema);
+  margin-top: var(--espacio-8);
+  border-radius: var(--radio-lg);
+}
+
+@media (max-width: 900px) {
+  .pagina {
+    padding-top: var(--espacio-4);
+  }
+
+  .migas {
+    display: none;
+  }
+
+  .afiche {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radio-lg);
+  }
+
+  .datos {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .etiqueta {
+    margin-top: var(--espacio-4);
+  }
+}

@@ -19,26 +19,26 @@ interface EnlacePie {
 const COLUMNAS: Array<{ clave: string; titulo: string; enlaces: EnlacePie[] }> = [
   {
     clave: "explora",
-    titulo: "footer.columnas.explora",
+    titulo: "footer.columnas.explora.titulo",
     enlaces: [
-      { clave: "inicio", texto: "navbar.enlaces.inicio", ruta: "/" },
-      { clave: "explorar", texto: "paginas.explorar.encabezado.titulo", ruta: "/explorar" },
+      { clave: "inicio", texto: "footer.columnas.explora.enlaces.inicio", ruta: "/" },
+      { clave: "explorar", texto: "footer.columnas.explora.enlaces.explorar", ruta: "/explorar" },
     ],
   },
   {
     clave: "cuenta",
-    titulo: "footer.columnas.cuenta",
+    titulo: "footer.columnas.cuenta.titulo",
     enlaces: [
-      { clave: "ingresar", texto: "footer.enlaces.iniciarSesion", ruta: "/ingresar" },
-      { clave: "registro", texto: "navbar.botones.crearCuenta", ruta: "/registro" },
+      { clave: "ingresar", texto: "footer.columnas.cuenta.enlaces.ingresar", ruta: "/ingresar" },
+      { clave: "registro", texto: "footer.columnas.cuenta.enlaces.crearCuenta", ruta: "/registro" },
     ],
   },
   {
     clave: "legal",
-    titulo: "footer.columnas.legal",
+    titulo: "footer.columnas.legal.titulo",
     enlaces: [
-      { clave: "terminos", texto: "footer.enlaces.terminos", ruta: null },
-      { clave: "accesibilidad", texto: "accesibilidad.titulo", ruta: null },
+      { clave: "terminos", texto: "footer.columnas.legal.enlaces.terminos", ruta: null },
+      { clave: "accesibilidad", texto: "footer.columnas.legal.enlaces.accesibilidad", ruta: null },
     ],
   },
 ];
@@ -46,24 +46,30 @@ const COLUMNAS: Array<{ clave: string; titulo: string; enlaces: EnlacePie[] }> =
 export interface FooterProps {
   textos: Textos | null;
   idioma: Idioma;
+  /** Con la sesión iniciada, la columna «Tu cuenta» (Iniciar sesión / Crear cuenta) no aplica. */
+  conSesion?: boolean;
 }
 
-export default function Footer({ textos, idioma }: FooterProps) {
+export default function Footer({ textos, idioma, conSesion = false }: FooterProps) {
   const t = (ruta: string) => traducir(textos, idioma, ruta);
   const anio = new Date().getFullYear();
 
-  const columnas = COLUMNAS.map((columna) => ({
-    ...columna,
-    titulo: t(columna.titulo),
-    enlaces: columna.enlaces.flatMap((enlace) => {
-      const etiqueta = t(enlace.texto);
-      return enlace.ruta && etiqueta ? [{ clave: enlace.clave, href: enlace.ruta, etiqueta }] : [];
-    }),
-  })).filter((columna) => columna.titulo && columna.enlaces.length > 0);
+  const columnas = COLUMNAS.filter((c) => !(conSesion && c.clave === "cuenta"))
+    .map((columna) => ({
+      ...columna,
+      titulo: t(columna.titulo),
+      enlaces: columna.enlaces.flatMap((enlace) => {
+        const etiqueta = t(enlace.texto);
+        return enlace.ruta && etiqueta
+          ? [{ clave: enlace.clave, href: enlace.ruta, etiqueta }]
+          : [];
+      }),
+    }))
+    .filter((columna) => columna.titulo && columna.enlaces.length > 0);
 
   const derechos = t("footer.legal.derechos");
   const lema = t("footer.lema") || t("sitio.lema");
-  const aviso = t("footer.legal.aviso");
+  const aviso = t("footer.legal.nota");
 
   return (
     <footer className={styles.pie}>

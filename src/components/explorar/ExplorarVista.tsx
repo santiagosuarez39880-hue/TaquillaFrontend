@@ -21,9 +21,9 @@ import { Paginacion } from "./Paginacion";
 import styles from "./ExplorarVista.module.css";
 
 const TEXTO_PRESET: Record<PresetFecha, string> = {
-  hoy: "paginas.explorar.filtros.etiquetas.hoy",
-  "fin-de-semana": "paginas.explorar.filtros.etiquetas.esteFinDeSemana",
-  mes: "paginas.explorar.filtros.etiquetas.esteMes",
+  hoy: "paginas.explorar.filtros.fecha.hoy",
+  "fin-de-semana": "paginas.explorar.filtros.fecha.finDeSemana",
+  mes: "paginas.explorar.filtros.fecha.mes",
 };
 
 export interface ExplorarVistaProps {
@@ -177,8 +177,8 @@ export function ExplorarVista({
       </nav>
 
       <header className={styles.encabezado}>
-        <h1 className={styles.titulo}>{t("paginas.explorar.encabezado.titulo")}</h1>
-        <p className={styles.conteo}>{plural("paginas.explorar.encabezado.conteo", total)}</p>
+        <h1 className={styles.titulo}>{t("navbar.enlaces.explorar")}</h1>
+        <p className={styles.conteo}>{plural("paginas.explorar.resultados", total)}</p>
       </header>
 
       {/* Solo móvil: búsqueda y botón de filtros. En web la búsqueda está en la barra superior. */}
@@ -190,7 +190,7 @@ export function ExplorarVista({
             type="search"
             value={busqueda}
             onChange={(e) => setBusqueda(e.target.value)}
-            placeholder={t("paginas.explorar.buscador.placeholder")}
+            placeholder={t("navbar.buscador.placeholder")}
           />
         </label>
         <button
@@ -242,10 +242,10 @@ export function ExplorarVista({
               </ul>
             )}
             <p className={styles.conteoMovil}>
-              {plural("paginas.explorar.encabezado.conteoMovil", total)}
+              {plural("paginas.explorar.resultadosCorto", total)}
             </p>
             <label className={styles.orden}>
-              <span>{t("paginas.explorar.orden.titulo")}</span>
+              <span>{t("paginas.explorar.orden.etiqueta")}</span>
               <select
                 value={filtros.orden}
                 onChange={(e) => ir({ orden: e.target.value as Orden })}
@@ -260,7 +260,7 @@ export function ExplorarVista({
           </div>
 
           <p className={styles.soloLector} role="status">
-            {pendiente ? t("paginas.explorar.cargando.texto") : ""}
+            {pendiente ? t("estados.cargando.indicador") : ""}
           </p>
 
           {eventos.length > 0 ? (
@@ -278,11 +278,11 @@ export function ExplorarVista({
               <div className={styles.accionesVacio}>
                 {hayFiltros(filtros) && (
                   <button type="button" className={styles.limpiar} onClick={limpiar}>
-                    {t("paginas.explorar.vacio.botones.limpiarFiltros")}
+                    {t("paginas.explorar.vacio.botones.limpiar")}
                   </button>
                 )}
                 <LinkButton href="/explorar" variante="secundario">
-                  {t("paginas.explorar.vacio.botones.verTodos")}
+                  {t("general.acciones.verTodos")}
                 </LinkButton>
               </div>
             </div>

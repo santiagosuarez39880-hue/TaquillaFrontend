@@ -1,4 +1,15 @@
 {
-  "node": {},
+  "node": {
+    "00417906cf4d03588e6d32b46ec0780b3108a94cd7": {
+      "workers": {
+        "app/page": {
+          "moduleId": "[project]/.next-internal/server/app/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/app/ingresar/acciones.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "exportedName": "cerrarSesion",
+      "filename": "src/app/ingresar/acciones.ts"
+    }
+  },
   "edge": {}
 }

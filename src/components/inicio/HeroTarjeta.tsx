@@ -17,7 +17,7 @@ export interface HeroTarjetaProps {
 /** El evento destacado del hero: afiche grande con una ficha encima. */
 export function HeroTarjeta({ evento }: HeroTarjetaProps) {
   const { t, idioma } = useT();
-  const verEvento = t("paginas.inicio.botones.verEvento");
+  const verEvento = t("paginas.inicio.hero.destacado.botones.verEvento");
   const fechaYLugar = formatear(t("general.formatos.fechaYLugar"), {
     fecha: formatearFecha(evento.fecha, idioma),
     lugar: evento.recinto.nombre,
@@ -35,7 +35,7 @@ export function HeroTarjeta({ evento }: HeroTarjetaProps) {
             <span>{fechaYLugar}</span>
           </p>
           <p className={styles.precio}>
-            <span className={styles.desde}>{t("precio.desde")}</span>{" "}
+            <span className={styles.desde}>{t("componentes.precio.desde")}</span>{" "}
             {formatearPrecio(evento.precioDesde, idioma)}
           </p>
         </div>

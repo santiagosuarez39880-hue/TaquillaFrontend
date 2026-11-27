@@ -28,7 +28,7 @@ export function EventCard({ evento }: EventCardProps) {
     lugar: evento.recinto.nombre,
     ciudad: evento.recinto.ciudad,
   });
-  const verEvento = t("paginas.inicio.botones.verEvento");
+  const verEvento = t("paginas.inicio.tarjeta.botones.verEvento");
 
   return (
     <Card interactiva relleno="ninguno" className={styles.tarjeta}>
@@ -48,7 +48,7 @@ export function EventCard({ evento }: EventCardProps) {
         </ul>
         <div className={styles.pie}>
           <p className={styles.precio}>
-            <span className={styles.desde}>{t("precio.desde")}</span>
+            <span className={styles.desde}>{t("componentes.precio.desde")}</span>
             <span className={styles.valor}>{formatearPrecio(evento.precioDesde, idioma)}</span>
           </p>
           <LinkButton

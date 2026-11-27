@@ -6,7 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { cx } from "@/lib/cx";
 import { traducir } from "@/lib/textos";
+import type { Usuario } from "@/types/sesion";
 import type { Idioma, Textos } from "@/types/textos";
+import { MenuCuenta } from "./MenuCuenta";
 import { Icon } from "./ui/Icon";
 import { LanguageSelector } from "./ui/LanguageSelector";
 import { LinkButton } from "./ui/LinkButton";
@@ -27,6 +29,9 @@ export interface NavbarProps {
   onBuscar: (consulta: string) => void;
   textoGrande: boolean;
   alternarTexto: () => void;
+  /** Quien tiene la sesión iniciada; null si nadie. */
+  usuario?: Usuario | null;
+  alCerrarSesion?: () => void | Promise<void>;
 }
 
 export default function Navbar({
@@ -39,6 +44,8 @@ export default function Navbar({
   onBuscar,
   textoGrande,
   alternarTexto,
+  usuario = null,
+  alCerrarSesion,
 }: NavbarProps) {
   const [abierto, setAbierto] = useState(false);
   const [busqueda, setBusqueda] = useState("");
@@ -132,9 +139,11 @@ export default function Navbar({
           <Link className={styles.iconoMovil} href={RUTA_EXPLORAR} aria-label={etiquetaBuscar}>
             <Icon name="search" tamano="lg" />
           </Link>
-          <Link className={styles.ingresarMovil} href={RUTA_INGRESAR}>
-            {etiquetaIngresar}
-          </Link>
+          {!usuario && (
+            <Link className={styles.ingresarMovil} href={RUTA_INGRESAR}>
+              {etiquetaIngresar}
+            </Link>
+          )}
           <button
             ref={botonMenu}
             type="button"
@@ -254,24 +263,48 @@ export default function Navbar({
               />
             </div>
 
-            <div className={styles.cuenta}>
-              <LinkButton
-                className={styles.botonIngresar}
-                href={RUTA_INGRESAR}
-                variante="secundario"
-                data-rol="ingresar"
-              >
-                {etiquetaIngresar}
-              </LinkButton>
-              <LinkButton
-                className={styles.botonCrear}
-                href={RUTA_REGISTRO}
-                variante="primario"
-                data-rol="crear"
-              >
-                {etiquetaCrear}
-              </LinkButton>
-            </div>
+            {usuario ? (
+              <>
+                {/* Escritorio: avatar con desplegable. Móvil: bloque fijo al pie de la hoja. Solo uno se ve. */}
+                <div className={styles.cuentaEscritorio}>
+                  <MenuCuenta
+                    usuario={usuario}
+                    textos={textos}
+                    idioma={idioma}
+                    variante="escritorio"
+                    alCerrarSesion={alCerrarSesion}
+                  />
+                </div>
+                <div className={styles.cuentaHoja}>
+                  <MenuCuenta
+                    usuario={usuario}
+                    textos={textos}
+                    idioma={idioma}
+                    variante="hoja"
+                    alCerrarSesion={alCerrarSesion}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className={styles.cuenta}>
+                <LinkButton
+                  className={styles.botonIngresar}
+                  href={RUTA_INGRESAR}
+                  variante="secundario"
+                  data-rol="ingresar"
+                >
+                  {etiquetaIngresar}
+                </LinkButton>
+                <LinkButton
+                  className={styles.botonCrear}
+                  href={RUTA_REGISTRO}
+                  variante="primario"
+                  data-rol="crear"
+                >
+                  {etiquetaCrear}
+                </LinkButton>
+              </div>
+            )}
           </div>
         </div>
       </nav>

@@ -28,7 +28,7 @@ function ciudadesDe(eventos: readonly Evento[]): string[] {
 
 /** Vista 1 · Inicio público: hero, categorías y eventos destacados. */
 export function InicioVista({ destacados, categorias }: InicioVistaProps) {
-  const { t, etiquetas, idioma, listo, error, recargar, categoria: etiqueta } = useT();
+  const { t, idioma, listo, error, recargar, categoria: etiqueta } = useT();
   const [categoriaActiva, setCategoriaActiva] = useState("");
 
   if (!listo) {
@@ -75,20 +75,19 @@ export function InicioVista({ destacados, categorias }: InicioVistaProps) {
             <BuscadorHero ciudades={ciudadesDe(destacados)} />
 
             <div className={styles.populares}>
-              <span>{t("paginas.inicio.busquedasPopulares.titulo")}</span>
+              <span>{t("paginas.inicio.hero.buscador.populares")}</span>
+              {/* Las búsquedas populares son las categorías: /textos no trae otras palabras. */}
               <ul className={styles.listaPopulares}>
-                {etiquetas("paginas.inicio.busquedasPopulares.etiquetas").map(
-                  ([clave, etiqueta]) => (
-                    <li key={clave}>
-                      <Link
-                        className={styles.popular}
-                        href={`/explorar?q=${encodeURIComponent(etiqueta)}`}
-                      >
-                        {etiqueta}
-                      </Link>
-                    </li>
-                  ),
-                )}
+                {categorias.slice(0, 3).map((categoria) => (
+                  <li key={categoria.id}>
+                    <Link
+                      className={styles.popular}
+                      href={`/explorar?categoria=${encodeURIComponent(categoria.id)}`}
+                    >
+                      {etiqueta(categoria.id, categoria.nombre)}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -96,7 +95,7 @@ export function InicioVista({ destacados, categorias }: InicioVistaProps) {
             <div
               className={styles.chips}
               role="group"
-              aria-label={t("paginas.explorar.filtros.etiquetas.categoria")}
+              aria-label={t("paginas.explorar.filtros.categoria")}
             >
               <button
                 type="button"
@@ -124,10 +123,7 @@ export function InicioVista({ destacados, categorias }: InicioVistaProps) {
         </div>
       </section>
 
-      <nav
-        className={styles.categorias}
-        aria-label={t("paginas.explorar.filtros.etiquetas.categoria")}
-      >
+      <nav className={styles.categorias} aria-label={t("paginas.explorar.filtros.categoria")}>
         <ul className={styles.listaCategorias}>
           {categorias.map((categoria) => (
             <li key={categoria.id}>
@@ -141,8 +137,7 @@ export function InicioVista({ destacados, categorias }: InicioVistaProps) {
         <header className={styles.seccionCabecera}>
           <div>
             <h2 id="destacados-titulo" className={styles.seccionTitulo}>
-              <span className={styles.soloEscritorio}>{t("paginas.inicio.destacados.titulo")}</span>
-              <span className={styles.soloMovil}>{t("paginas.inicio.destacados.tituloMovil")}</span>
+              {t("paginas.inicio.destacados.titulo")}
             </h2>
             <p className={cx(styles.seccionSubtitulo, styles.soloEscritorio)}>
               {t("paginas.inicio.destacados.subtitulo")}
@@ -163,7 +158,7 @@ export function InicioVista({ destacados, categorias }: InicioVistaProps) {
             ))}
           </ul>
         ) : (
-          <p className={styles.vacio}>{t("paginas.explorar.vacio.mensajes.ningunoCoincide")}</p>
+          <p className={styles.vacio}>{t("paginas.explorar.vacio.titulo")}</p>
         )}
       </section>
     </>

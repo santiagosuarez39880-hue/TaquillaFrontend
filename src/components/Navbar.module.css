@@ -213,6 +213,14 @@
   gap: var(--espacio-2);
 }
 
+.cuenta {
+  align-items: center;
+}
+
+.cuentaHoja {
+  display: none;
+}
+
 /* ---------- Carga y error ---------- */
 .estado {
   display: flex;
@@ -357,8 +365,19 @@
     flex-direction: column;
   }
 
+  .cuentaEscritorio {
+    display: none;
+  }
+
+  .cuentaHoja {
+    display: block;
+    padding-top: var(--espacio-4);
+    border-top: var(--borde-ancho) solid var(--borde-sutil);
+  }
+
   /* En la hoja móvil «Ingresar» es el botón principal y «Crear cuenta» el secundario (Figma). */
-  .cuenta > a {
+  .cuenta > a,
+  .cuenta > button {
     justify-content: center;
     height: var(--altura-control-lg);
   }

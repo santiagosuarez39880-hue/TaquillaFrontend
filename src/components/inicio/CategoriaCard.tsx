@@ -23,7 +23,7 @@ export interface CategoriaCardProps {
 
 export function CategoriaCard({ categoria }: CategoriaCardProps) {
   const { plural, categoria: etiqueta } = useT();
-  const conteo = plural("paginas.inicio.categorias.conteo", categoria.eventos);
+  const conteo = plural("paginas.inicio.categorias.eventos", categoria.eventos);
 
   return (
     <Link

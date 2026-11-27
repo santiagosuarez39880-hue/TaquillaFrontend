@@ -18,10 +18,10 @@ export interface BuscadorHeroProps {
 
 /** Valores de «Cuándo» → clave del texto en /textos. «» = cualquier fecha. */
 const FECHAS: Array<{ valor: string; texto: string }> = [
-  { valor: "", texto: "paginas.inicio.buscador.etiquetas.cualquierFecha" },
-  { valor: "hoy", texto: "paginas.explorar.filtros.etiquetas.hoy" },
-  { valor: "fin-de-semana", texto: "paginas.explorar.filtros.etiquetas.esteFinDeSemana" },
-  { valor: "mes", texto: "paginas.explorar.filtros.etiquetas.esteMes" },
+  { valor: "", texto: "paginas.inicio.hero.buscador.placeholders.cuando" },
+  { valor: "hoy", texto: "paginas.explorar.filtros.fecha.hoy" },
+  { valor: "fin-de-semana", texto: "paginas.explorar.filtros.fecha.finDeSemana" },
+  { valor: "mes", texto: "paginas.explorar.filtros.fecha.mes" },
 ];
 
 /** Qué · Dónde · Cuándo. Envía a Explorar eventos con los filtros en la URL. */
@@ -35,7 +35,7 @@ export function BuscadorHero({ ciudades }: BuscadorHeroProps) {
 
   const opcionesFecha = FECHAS.map((f) => ({ valor: f.valor, etiqueta: t(f.texto) }));
   const etiquetaFecha = opcionesFecha.find((o) => o.valor === fecha)?.etiqueta ?? "";
-  const resumen = formatear(t("paginas.inicio.buscador.resumenMovil"), {
+  const resumen = formatear(t("paginas.inicio.hero.buscador.resumenMovil"), {
     ciudad,
     fecha: etiquetaFecha,
   });
@@ -58,7 +58,7 @@ export function BuscadorHero({ ciudades }: BuscadorHeroProps) {
       onSubmit={enviar}
     >
       <label className={cx(styles.campo, styles.campoQue)} htmlFor={`${id}-q`}>
-        <span className={styles.etiqueta}>{t("paginas.inicio.buscador.etiquetas.que")}</span>
+        <span className={styles.etiqueta}>{t("paginas.inicio.hero.buscador.etiquetas.que")}</span>
         <span className={styles.control}>
           <Icon name="search" tamano="sm" />
           <input
@@ -68,13 +68,13 @@ export function BuscadorHero({ ciudades }: BuscadorHeroProps) {
             name="q"
             value={consulta}
             onChange={(e) => setConsulta(e.target.value)}
-            placeholder={t("paginas.inicio.buscador.placeholder")}
+            placeholder={t("paginas.inicio.hero.buscador.placeholders.que")}
           />
         </span>
       </label>
 
       <label className={cx(styles.campo, styles.campoSecundario)} htmlFor={`${id}-ciudad`}>
-        <span className={styles.etiqueta}>{t("paginas.inicio.buscador.etiquetas.donde")}</span>
+        <span className={styles.etiqueta}>{t("paginas.inicio.hero.buscador.etiquetas.donde")}</span>
         <span className={styles.control}>
           <Icon name="pin" tamano="sm" />
           <select
@@ -94,7 +94,9 @@ export function BuscadorHero({ ciudades }: BuscadorHeroProps) {
       </label>
 
       <label className={cx(styles.campo, styles.campoSecundario)} htmlFor={`${id}-fecha`}>
-        <span className={styles.etiqueta}>{t("paginas.inicio.buscador.etiquetas.cuando")}</span>
+        <span className={styles.etiqueta}>
+          {t("paginas.inicio.hero.buscador.etiquetas.cuando")}
+        </span>
         <span className={styles.control}>
           <Icon name="calendar" tamano="sm" />
           <select
@@ -114,7 +116,7 @@ export function BuscadorHero({ ciudades }: BuscadorHeroProps) {
       </label>
 
       <Button type="submit" tamano="lg" className={styles.boton}>
-        {t("paginas.inicio.buscador.botones.buscar")}
+        {t("paginas.inicio.hero.buscador.botones.buscar")}
       </Button>
 
       {/* Solo móvil: resumen de ciudad y fecha, y acceso a los filtros de Explorar. */}

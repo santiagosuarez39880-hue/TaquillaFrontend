@@ -25,7 +25,7 @@ export function ProveedorTextos({
  * Acceso a los textos desde cualquier componente cliente:
  *   const { t, plural } = useT();
  *   t("paginas.inicio.hero.titulo");
- *   plural("paginas.inicio.categorias.conteo", 42);   // «42 eventos»
+ *   plural("paginas.inicio.categorias.eventos", 42);   // «42 eventos»
  */
 export function useT() {
   const contexto = useContext(Contexto);

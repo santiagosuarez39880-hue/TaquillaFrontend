@@ -72,3 +72,19 @@ export function formatearTemporada(fechas: readonly string[], idioma: Idioma): s
   }
   return `${desde.mes} ${desde.anio} – ${hasta.mes} ${hasta.anio}`;
 }
+
+/** «Sáb 14 nov 2026» (es) o «Sat Nov 14, 2026» (en), en hora de Colombia. */
+export function formatearFechaLarga(iso: string, idioma: Idioma): string {
+  const anio = new Intl.DateTimeFormat(LOCALE[idioma], {
+    timeZone: ZONA_HORARIA,
+    year: "numeric",
+  }).format(new Date(iso));
+  return idioma === "es"
+    ? `${formatearFecha(iso, idioma)} ${anio}`
+    : `${formatearFecha(iso, idioma)}, ${anio}`;
+}
+
+/** 180 → { horas: 3, minutos: 0 }. La frase («3 h») la arma el texto de la API. */
+export function partirDuracion(minutos: number): { horas: number; minutos: number } {
+  return { horas: Math.floor(minutos / 60), minutos: minutos % 60 };
+}

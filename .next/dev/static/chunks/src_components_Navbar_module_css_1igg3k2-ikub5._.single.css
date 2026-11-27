@@ -198,7 +198,12 @@
 
 .Navbar-module__cJzEcG__cuenta {
   gap: var(--espacio-2);
+  align-items: center;
   display: flex;
+}
+
+.Navbar-module__cJzEcG__cuentaHoja {
+  display: none;
 }
 
 .Navbar-module__cJzEcG__estado {
@@ -339,7 +344,17 @@
     flex-direction: column;
   }
 
-  .Navbar-module__cJzEcG__cuenta > a {
+  .Navbar-module__cJzEcG__cuentaEscritorio {
+    display: none;
+  }
+
+  .Navbar-module__cJzEcG__cuentaHoja {
+    padding-top: var(--espacio-4);
+    border-top: var(--borde-ancho) solid var(--borde-sutil);
+    display: block;
+  }
+
+  .Navbar-module__cJzEcG__cuenta > a, .Navbar-module__cJzEcG__cuenta > button {
     height: var(--altura-control-lg);
     justify-content: center;
   }
